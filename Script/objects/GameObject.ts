@@ -63,7 +63,7 @@ module objects
         set isColliding(newState:boolean)
         {
             this._isColliding = newState;
-        }
+        } 
 
 
         // CONSTRUCTOR
@@ -73,7 +73,7 @@ module objects
             super(imageString);
 
             // initialization
-            this._width = 0;
+            this._width = 0; 
             this._height = 0;
             this._halfWidth = 0;
             this._halfHeight = 0;

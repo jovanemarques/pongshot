@@ -4,7 +4,8 @@ let game =(function(){
 
     let canvas:HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage:createjs.Stage;
-    let helloLabel:objects.Label;
+    let player1:objects.Player;
+    let player2:objects.Player;
 
     
 /**
@@ -27,7 +28,7 @@ function Start():void
  */
 function Update():void
     {
-        helloLabel.rotation += 3;
+        //helloLabel.rotation += 3;
         stage.update();
     }
 
@@ -35,16 +36,14 @@ function Update():void
     {
         console.log(`%c Main Started`,"color: green; font-size: 16px;")
 
-        helloLabel = new objects.Label("HelloWorld", "40px", "Consolas","#000000",320,240,true);
+        //helloLabel = new objects.Label("HelloWorld", "40px", "Consolas","#000000",320,240,true);
+        player1 = new objects.Player();
+        player2 = new objects.Player();
 
         // set the pivot point to the center
 
-
-        stage.addChild(helloLabel);
-
-
-      
-
+        stage.addChild(player1);
+        stage.addChild(player2);
     }
     window.addEventListener("load", Start);
 
