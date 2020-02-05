@@ -17,9 +17,19 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         // constuctor 
-        function Player() {
-            return _super.call(this) || this;
+        function Player(x) {
+            var _this = _super.call(this) || this;
+            _this.VELOCITY = 3;
+            _this.isMoving = false;
+            _this.direction = 'U'; // U - Up, D - Down
+            if (x == 2) {
+                _this.x = 735;
+            }
+            return _this;
         }
+        // constructor(playerImage?:string, x: number, y: number) {
+        //     super(playerImage, x);
+        // }
         Player.prototype._checkBounds = function () {
             throw new Error("Method not implemented.");
         };
@@ -27,10 +37,28 @@ var objects;
             throw new Error("Method not implemented.");
         };
         Player.prototype.Update = function () {
-            throw new Error("Method not implemented.");
+            if (this.isMoving) {
+                if (this.direction == 'U') {
+                    this.y -= this.VELOCITY;
+                }
+                else {
+                    this.y += this.VELOCITY;
+                }
+            }
         };
         Player.prototype.Reset = function () {
             throw new Error("Method not implemented.");
+        };
+        Player.prototype.StartMoveUp = function () {
+            this.direction = 'U';
+            this.isMoving = true;
+        };
+        Player.prototype.StartMoveDown = function () {
+            this.direction = 'D';
+            this.isMoving = true;
+        };
+        Player.prototype.StopMove = function () {
+            this.isMoving = false;
         };
         return Player;
     }(objects.GameObject));
