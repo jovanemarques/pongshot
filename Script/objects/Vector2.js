@@ -2,25 +2,21 @@
 var objects;
 (function (objects) {
     var Vector2 = /** @class */ (function () {
-        //CONSTRUCTOR
+        // CONSTRUCTOR
         function Vector2(x, y, displayObject) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
-            // PRIVATE INSTANCE MEMBERS
+            // Initialize member variables
             this._x = 0;
             this._y = 0;
             this._magnitude = 0;
             this._sqrMagnitude = 0;
-            this.x = x;
-            this.y = y;
-            //this._displaObject = displayObject ? displayObject : undefined;
             if (displayObject != undefined) {
                 this._displayObject = displayObject;
             }
-            // this.sqrMagnitude = this.x * this.x + this.y * this.y;
-            // this.magnitude = Math.sqrt(this.sqrMagnitude);
-            this.magnitude = this._computeMagnitude();
-            this.sqrMagnitude = this._computeSqrMagnitude();
+            // set x and y
+            this.x = x;
+            this.y = y;
         }
         Object.defineProperty(Vector2.prototype, "x", {
             // PUBLIC PROPERTIES
@@ -73,30 +69,14 @@ var objects;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Vector2.prototype, "normalized", {
-            /**
-             * Computes the current vector direction w/o change it
-             *
-             * @readonly
-             * @type {Vector2}
-             * @memberof Vector2
-             */
-            get: function () {
-                var vector2 = new Vector2(this.x, this.y);
-                vector2.normalize();
-                return vector2;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        //PRIVATE METHODS
+        // PRIVATE METHODS
         Vector2.prototype._computeSqrMagnitude = function () {
             return (this._x * this._x) + (this._y * this._y);
         };
         Vector2.prototype._computeMagnitude = function () {
             return Math.sqrt(this._computeSqrMagnitude());
         };
-        //PUBLIC METHODS
+        // PUBLIC METHODS
         Vector2.prototype.add = function (rhs) {
             this.x += rhs.x;
             this.y += rhs.y;
@@ -109,21 +89,32 @@ var objects;
             this.x *= scalar;
             this.y *= scalar;
         };
-        Vector2.prototype.normalize = function () {
-            var magnitude = this.magnitude;
-            if (magnitude > 9.99999974737875E-06) {
-                this.x = this.x / magnitude;
-                this.y = this.y / magnitude;
-            }
-            else {
-                this.x = 0;
-                this.y = 0;
-            }
-        };
         Vector2.prototype.toString = function () {
-            return '{' + this.x + ', ' + this.y + '}';
+            return "(" + this.x + ", " + this.y + ")";
         };
-        //PUBLIC STATIC METHODS
+        /**
+         * This method sets the current vector to a magnitude of 1 (the unit vector)
+         *
+         * @memberof Vector2
+         */
+        Vector2.prototype.normalize = function () {
+            var tempX = this.x / this.magnitude;
+            var tempY = this.y / this.magnitude;
+            this.x = tempX;
+            this.y = tempY;
+        };
+        /**
+         * Computes the current vector's direction without changing it
+         *
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
+        Vector2.prototype.normalized = function () {
+            var vector = new Vector2(this.x, this.y);
+            vector.normalize();
+            return vector;
+        };
+        // PUBLIC STATIC METHODS
         Vector2.zero = function () {
             return new Vector2(0, 0);
         };
@@ -143,35 +134,17 @@ var objects;
             return new Vector2(1, 0);
         };
         Vector2.dot = function (lhs, rhs) {
-            return lhs.x * rhs.x + lhs.y * rhs.y;
+            return (lhs.x * rhs.x) + (lhs.y * rhs.y);
         };
-        /**
-         * This returns the Pythogorean distance between P1 and P2
-         *
-         * @static
-         * @param {Vector2} P1
-         * @param {Vector2} P2
-         * @returns {number}
-         * @memberof Vector2
-         */
         Vector2.distance = function (P1, P2) {
-            var diffXs = (P2.x - P1.x);
-            var diffYs = (P2.y - P1.y);
-            return Math.sqrt(diffXs * diffXs + diffYs * diffYs);
+            var diffXs = P2.x - P1.x;
+            var diffYs = P2.y - P1.y;
+            return Math.sqrt((diffXs * diffXs) + (diffYs * diffYs));
         };
-        /**
-         * Returns the square distance between p1 and p2
-         *
-         * @static
-         * @param {Vector2} P1
-         * @param {Vector2} P2
-         * @returns {number}
-         * @memberof Vector2
-         */
         Vector2.sqrDistance = function (P1, P2) {
-            var diffXs = (P2.x - P1.x);
-            var diffYs = (P2.y - P1.y);
-            return (diffXs * diffXs + diffYs * diffYs);
+            var diffXs = P2.x - P1.x;
+            var diffYs = P2.y - P1.y;
+            return (diffXs * diffXs) + (diffYs * diffYs);
         };
         return Vector2;
     }());
