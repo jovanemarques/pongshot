@@ -1,32 +1,32 @@
 //IIFE
 
-let game =(function(){
+let game = (function()
+{
 
     let canvas:HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage:createjs.Stage;
     let player1:objects.Player;
     let player2:objects.Player;
 
-    
-/**
- * perform initialization in the start function
- *
- */
-function Start():void
+    /**
+     * perform initialization in the start function
+     *
+     */
+    function Start():void
     {
         console.log(`%c Game Started`,"color: blue; font-size: 20px;")
         stage =  new createjs.Stage(canvas);
         createjs.Ticker.framerate = 60;
-        createjs.Ticker.on('tick',Update);
+        createjs.Ticker.on('tick', Update);
         Main();
 
     }
     
-/**
- *this function trigers the events to update 
- *
- */
-function Update():void
+    /**
+     *this function trigers the events to update 
+    *
+    */
+    function Update():void
     {
         //helloLabel.rotation += 3;
         stage.update();
