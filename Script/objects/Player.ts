@@ -1,12 +1,12 @@
 module objects {
     export class Player extends objects.GameObject {
-        private VELOCITY:number = 3;
+        private velocity:number = 3;
         private isMoving:boolean = false;
         private direction:string = 'U';// U - Up, D - Down
         // constuctor 
 
         constructor(x?:number) {
-            super();
+            super(); 
             if (x == 2){
                 this.x = 735;
             }
@@ -23,9 +23,9 @@ module objects {
         public Update(): void {
             if (this.isMoving){
                 if (this.direction == 'U'){
-                    this.y -= this.VELOCITY;
+                    this.y -= this.velocity;
                 } else {
-                    this.y += this.VELOCITY;
+                    this.y += this.velocity;
                 }
             }
         }
