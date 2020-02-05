@@ -10,6 +10,7 @@ module objects {
             if (x == 2){
                 this.x = 735;
             }
+            this.y = 80;
         }
         // constructor(playerImage?:string, x: number, y: number) {
         //     super(playerImage, x);
@@ -28,6 +29,14 @@ module objects {
                     this.y += this.VELOCITY;
                 }
             }
+
+            if (this.y < 80) {
+                this.y = 80;
+            } else if (this.y > 535) {
+                this.y = 535;
+            }
+
+
         }
         public Reset(): void {
             throw new Error("Method not implemented.");
