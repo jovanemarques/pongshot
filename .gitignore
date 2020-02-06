@@ -1,4 +1,4 @@
 node_modules/
 **/Script/**/*.js
-**/Script/**/*.map
+**/Script/**/*.js.map
 .DS_Store

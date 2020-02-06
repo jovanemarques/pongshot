@@ -13,6 +13,7 @@ module objects
         // PUBLIC PROPERTIES
         get width():number
         {
+            this._width = this._width;
             return this._width;
         }
 
