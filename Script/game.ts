@@ -8,6 +8,7 @@ let game = (function()
     let player1:objects.Player;
     let player2:objects.Player;
     let bullet1:objects.Bullet;
+    let gameBar:objects.GameBar;
 
     /**
      * perform initialization in the start function
@@ -97,6 +98,7 @@ let game = (function()
 
         stage.addChild(player1);
         stage.addChild(player2);
+        gameBar = new objects.GameBar(stage);
     }
     window.addEventListener("keyup", e => KeyUp(e));
     window.addEventListener("keydown", e => KeyDown(e));

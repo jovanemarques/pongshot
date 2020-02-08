@@ -6,12 +6,15 @@ module objects {
         // private bullet1?:objects.Bullet;
         // constuctor 
 
-        constructor(x?:number) {
-            super(); 
-            if (x == 2){
-                this.x = 735;
+        constructor(plr?:number) {
+            super();
+            let x:number = 0;
+            let y:number = 80;
+
+            if (plr == 2){
+                x = 1215;
             }
-            this.y = 80;
+            this.position = new Vector2(x, y);
         }
         // constructor(playerImage?:string, x: number, y: number) {
         //     super(playerImage, x);
@@ -29,19 +32,22 @@ module objects {
         //     //bullet1.move();
         // }
         public Update(): void {
+            let y = this.position.y;
+
             if (this.isMoving){
                 if (this.direction == 'U'){
-                    this.y -= this.velocity;
+                    y -= this.velocity;
                 } else {
-                    this.y += this.velocity;
+                    y += this.velocity;
                 }
             }
 
-            if (this.y < 80) {
-                this.y = 80;
-            } else if (this.y > 535) {
-                this.y = 535;
+            if (y < 80) {
+                y = 80;
+            } else if (y > 655) {
+                y = 655;
             }
+            this.position = new Vector2(this.position.x, y);
             // if (this.bullet1){
             //     this.bullet1.Update();
             //     if (this.bullet1.isOutOfBounds()){

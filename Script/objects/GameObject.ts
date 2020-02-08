@@ -94,7 +94,6 @@ module objects
             });
 
             this.position = new Vector2(x, y, this);
-
         }
 
         // PRIVATE METHODS
