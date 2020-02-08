@@ -57,6 +57,10 @@ let game = (function()
                 player2.StartMoveDown();
                 break;
             case 87:
+                if ((bullet1 != null) && (bullet1.active)) {
+                    stage.removeChild(bullet1);
+                    bullet1.active = false;
+                }
                 bullet1 = new objects.Bullet(player1.position);
                 stage.addChild(bullet1);
                 break;
@@ -81,7 +85,8 @@ let game = (function()
         player2.Update();
         if (bullet1 && bullet1.isOutOfBounds()){
             stage.removeChild(bullet1);
-        } else if (bullet1){
+            bullet1.active = false;
+        } else if ((bullet1 != null) && (bullet1.active)) {
             bullet1.Update();
         }
     }
