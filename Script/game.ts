@@ -7,6 +7,7 @@ let game = (function()
     let stage:createjs.Stage;
     let player1:objects.Player;
     let player2:objects.Player;
+    let bullet1:objects.Bullet;
 
     /**
      * perform initialization in the start function
@@ -55,7 +56,8 @@ let game = (function()
                 player2.StartMoveDown();
                 break;
             case 87:
-                player1.Shot(stage);
+                bullet1 = new objects.Bullet(player1.position);
+                stage.addChild(bullet1);
                 break;
             default:
                 break;
@@ -76,6 +78,11 @@ let game = (function()
         stage.update();
         player1.Update();
         player2.Update();
+        if (bullet1 && bullet1.isOutOfBounds()){
+            stage.removeChild(bullet1);
+        } else if (bullet1){
+            bullet1.Update();
+        }
     }
 
     function Main():void

@@ -6,9 +6,13 @@ module objects {
         constructor(startPosition:Vector2) {
             super(); 
             this.x = startPosition.x;
+            this.y = startPosition.y;
         }
         protected _checkBounds(): void {
             throw new Error("Method not implemented.");
+        }
+        public isOutOfBounds():boolean{
+            return this.x > 700;
         }
         public Start(): void {
             throw new Error("Method not implemented.");

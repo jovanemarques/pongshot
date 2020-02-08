@@ -3,7 +3,7 @@ module objects {
         private velocity:number = 3;
         private isMoving:boolean = false;
         private direction:string = 'U';// U - Up, D - Down
-        private bullet1?:objects.Bullet;
+        // private bullet1?:objects.Bullet;
         // constuctor 
 
         constructor(x?:number) {
@@ -22,12 +22,12 @@ module objects {
         public Start(): void {
             throw new Error("Method not implemented.");
         }
-        public Shot(stage:createjs.Stage): void {
-            console.log("Shot");
-            this.bullet1 = new objects.Bullet(this.position);
-            stage.addChild(this.bullet1);
-            //bullet1.move();
-        }
+        // public Shot(stage:createjs.Stage): void {
+        //     //console.log("Shot");
+        //     this.bullet1 = new objects.Bullet(this.position);
+        //     stage.addChild(this.bullet1);
+        //     //bullet1.move();
+        // }
         public Update(): void {
             if (this.isMoving){
                 if (this.direction == 'U'){
@@ -42,14 +42,12 @@ module objects {
             } else if (this.y > 535) {
                 this.y = 535;
             }
-            if (this.bullet1){
-                this.bullet1.Update();
-            } 
-            // bullets.forEach(element => {
-            //     let bullet1 = new objects.Bullet(this.position);
-            //     this.stage.addChild(bullet1);
-            //     delete element;
-            // });
+            // if (this.bullet1){
+            //     this.bullet1.Update();
+            //     if (this.bullet1.isOutOfBounds()){
+            //         this.bullet1 = undefined;
+            //     }
+            // } 
         }
         public Reset(): void {
             throw new Error("Method not implemented.");
