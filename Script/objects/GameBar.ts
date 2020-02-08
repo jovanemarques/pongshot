@@ -7,7 +7,7 @@ module objects
         private _plrTwoLife:number;
         private _plrOneXp:number;
         private _plrTwoXp:number;
-        private _gameStart:Date;
+        private _gameStart:number;
 
         private _plrOneLifeBar:createjs.Graphics;
         private _plrTwoLifeBar:createjs.Graphics;
@@ -29,16 +29,25 @@ module objects
             this._plrTwoLife = 100;
             this._plrOneXp = 0;
             this._plrTwoXp = 0;
-            this._gameStart = new Date();
+            this._gameStart = (new Date()).getTime();
 
             this._plrOneLifeBar = new createjs.Graphics();
             this._plrTwoLifeBar = new createjs.Graphics();
             this._plrOneXpBar = new createjs.Graphics();
             this._plrTwoXpBar = new createjs.Graphics();
             this._timerLabel = new objects.Label("000:00", "48px", "Consolas",
-              "#000000", 400, 40, true);
+              "#000000", 640, 40, true);
 
             stage.addChild(this._timerLabel);
         }
+
+        public Update(): void {
+          let curMilis:number = (new Date).getTime();
+          let secondsDiff:number = (curMilis - this._gameStart) / 1000;
+          let seconds:string = ("00" + Math.floor(secondsDiff) % 60).substr(-2);
+          let minutes:string = ("000" + Math.floor(secondsDiff / 60)).substr(-3);          
+          
+          this._timerLabel.text = `${minutes}:${seconds}`
+      }
     }
 }

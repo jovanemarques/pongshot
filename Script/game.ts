@@ -83,6 +83,7 @@ let game = (function()
         stage.update();
         player1.Update();
         player2.Update();
+        gameBar.Update();
         if (bullet1 && bullet1.isOutOfBounds()){
             stage.removeChild(bullet1);
             bullet1.active = false;
