@@ -54,6 +54,9 @@ let game = (function()
             case 39:
                 player2.StartMoveDown();
                 break;
+            case 87:
+                player1.Shot(stage);
+                break;
             default:
                 break;
         }
