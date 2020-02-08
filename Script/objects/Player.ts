@@ -3,7 +3,7 @@ module objects {
         private velocity:number = 3;
         private isMoving:boolean = false;
         private direction:string = 'U';// U - Up, D - Down
-        private bullet1:objects.Bullet;
+        private bullet1?:objects.Bullet;
         // constuctor 
 
         constructor(x?:number) {
