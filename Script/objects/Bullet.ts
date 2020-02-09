@@ -16,7 +16,8 @@ module objects {
         // constuctor 
 
         constructor(startPosition:Vector2, isPlayer2:boolean = false) {
-            super(); 
+            // from https://opengameart.org/content/bullets-game-asset
+            super('./Assets/images/bullet4-16.png'); 
             this.position = new Vector2(startPosition.x, startPosition.y, this);
             //this.x = startPosition.x;
             //this.y = startPosition.y;

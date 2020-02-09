@@ -3,21 +3,20 @@ module objects {
         private velocity:number = 3;
         private isMoving:boolean = false;
         private direction:string = 'U';// U - Up, D - Down
+        private _playerWidth:number = 137;
+        private _playerHeight:number = 87;
         
         // constuctor 
-        constructor(plr?:number) {
-            super();
+        constructor(img:string, plr?:number) {
+            super(img);
             let x:number = 0;
             let y:number = 80;
 
             if (plr == 2){
-                x = 1215;
+                x = GameObject.GetCanvasSize().x - this._playerWidth;
             }
             this.position = new Vector2(x, y);
         }
-        // constructor(playerImage?:string, x: number, y: number) {
-        //     super(playerImage, x);
-        // }
         protected _checkBounds(): void {
             throw new Error("Method not implemented.");
         }
@@ -35,10 +34,10 @@ module objects {
                 }
             }
 
-            if (y < 80) {
+            if (y < 80) {// game bar
                 y = 80;
-            } else if (y > GameObject.GetCanvasSize().y - 65) {
-                y = GameObject.GetCanvasSize().y - 65; //65 is the player size
+            } else if (y > GameObject.GetCanvasSize().y - this._playerHeight) {
+                y = GameObject.GetCanvasSize().y - this._playerHeight;
             }
             this.position = new Vector2(this.position.x, y);
         }

@@ -5,6 +5,7 @@ let game = (function()
 
     let canvas:HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage:createjs.Stage;
+    let bg:objects.Button;
     let player1:objects.Player;
     let player2:objects.Player;
     let bullets:Array<objects.Bullet> = [];
@@ -106,11 +107,13 @@ let game = (function()
     {
         console.log(`%c Main Started`,"color: green; font-size: 16px;")
 
-        //helloLabel = new objects.Label("HelloWorld", "40px", "Consolas","#000000",320,240,true);
-        player1 = new objects.Player();
-        player2 = new objects.Player(2);
+        // TODO: need to create a new object to use as backgroung
+        // bg =  new objects.Button('./Assets/images/bg-sand-1.png', 0, 0, false);
+        // stage.addChild(bg);
 
-        // set the pivot point to the center
+        //assets from https://opengameart.org/content/tank-set-2
+        player1 = new objects.Player('./Assets/images/tank1.png');
+        player2 = new objects.Player('./Assets/images/tank1-p2.png', 2);
 
         stage.addChild(player1);
         stage.addChild(player2);
