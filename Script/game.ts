@@ -60,6 +60,12 @@ let game = (function()
                 let bullet = new objects.Bullet(player1.position);
                 bullets.push(bullet);
                 stage.addChild(bullet);
+                // if ((bullet1 != null) && (bullet1.active)) {
+                //     stage.removeChild(bullet1);
+                //     bullet1.active = false;
+                // }
+                // bullet1 = new objects.Bullet(player1.position);
+                // stage.addChild(bullet1);
                 break;
             case 38:
                 let bullet2 = new objects.Bullet(player2.position, true);
@@ -85,19 +91,15 @@ let game = (function()
         stage.update();
         player1.Update();
         player2.Update();
+        gameBar.Update();
         bullets.forEach((e, index) => {
             if (e && e.isOutOfBounds()){
                 stage.removeChild(e);
-                //delete bullets[index];
+                delete bullets[index];
             } else if (e){
                 e.Update();
             }    
         });
-        // if (bullet1 && bullet1.isOutOfBounds()){
-        //     stage.removeChild(bullet1);
-        // } else if (bullet1){
-        //     bullet1.Update();
-        // }
     }
 
     function Main():void

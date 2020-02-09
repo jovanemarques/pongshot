@@ -2,6 +2,17 @@ module objects {
     export class Bullet extends objects.GameObject {
         private velocity:number = 10;
         private isPlayer2:boolean;
+        //private _active:boolean;
+
+        // PUBLIC PROPERTIES
+        // get active():boolean 
+        // {
+        //     return this._active;
+        // }
+        // set active(value:boolean)
+        // {
+        //     this._active = value;
+        // }
         // constuctor 
 
         constructor(startPosition:Vector2, isPlayer2:boolean = false) {
@@ -10,7 +21,9 @@ module objects {
             //this.x = startPosition.x;
             //this.y = startPosition.y;
             this.isPlayer2 = isPlayer2;
+            //this._active = true;
         }
+
         protected _checkBounds(): void {
             throw new Error("Method not implemented.");
         }
