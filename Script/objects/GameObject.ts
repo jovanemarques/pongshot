@@ -118,6 +118,11 @@ module objects
         
         public abstract Reset():void;
 
+        public static GetCanvasSize():Vector2{
+            let canvas:HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
+            return new Vector2(canvas.width, canvas.height);
+        }
+
     }
 
 }

@@ -57,9 +57,14 @@ let game = (function()
                 player2.StartMoveDown();
                 break;
             case 87:
-                let bullet = new objects.Bullet(player1.position)
+                let bullet = new objects.Bullet(player1.position);
                 bullets.push(bullet);
                 stage.addChild(bullet);
+                break;
+            case 38:
+                let bullet2 = new objects.Bullet(player2.position, true);
+                bullets.push(bullet2);
+                stage.addChild(bullet2);
                 break;
             default:
                 break;
@@ -80,9 +85,10 @@ let game = (function()
         stage.update();
         player1.Update();
         player2.Update();
-        bullets.forEach(e => {
+        bullets.forEach((e, index) => {
             if (e && e.isOutOfBounds()){
                 stage.removeChild(e);
+                //delete bullets[index];
             } else if (e){
                 e.Update();
             }    

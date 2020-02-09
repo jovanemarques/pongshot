@@ -3,9 +3,8 @@ module objects {
         private velocity:number = 3;
         private isMoving:boolean = false;
         private direction:string = 'U';// U - Up, D - Down
-        // private bullet1?:objects.Bullet;
+        
         // constuctor 
-
         constructor(plr?:number) {
             super();
             let x:number = 0;
@@ -25,12 +24,6 @@ module objects {
         public Start(): void {
             throw new Error("Method not implemented.");
         }
-        // public Shot(stage:createjs.Stage): void {
-        //     //console.log("Shot");
-        //     this.bullet1 = new objects.Bullet(this.position);
-        //     stage.addChild(this.bullet1);
-        //     //bullet1.move();
-        // }
         public Update(): void {
             let y = this.position.y;
 
@@ -44,16 +37,10 @@ module objects {
 
             if (y < 80) {
                 y = 80;
-            } else if (y > 655) {
-                y = 655;
+            } else if (y > GameObject.GetCanvasSize().y - 65) {
+                y = GameObject.GetCanvasSize().y - 65; //65 is the player size
             }
             this.position = new Vector2(this.position.x, y);
-            // if (this.bullet1){
-            //     this.bullet1.Update();
-            //     if (this.bullet1.isOutOfBounds()){
-            //         this.bullet1 = undefined;
-            //     }
-            // } 
         }
         public Reset(): void {
             throw new Error("Method not implemented.");
