@@ -108,6 +108,7 @@ let game = (function()
         console.log(`%c Main Started`,"color: green; font-size: 16px;")
 
         // TODO: need to create a new object to use as backgroung
+        // asset from https://opengameart.org/content/2048-digitally-painted-tileable-desert-sand-texture
         // bg =  new objects.Button('./Assets/images/bg-sand-1.png', 0, 0, false);
         // stage.addChild(bg);
 
