@@ -29,12 +29,12 @@ let game = (function()
     {
         console.log(`%c KeyUp ${e.keyCode}`,"color: red; font-size: 20px;")
         switch (e.keyCode) {
-            case 65:
-            case 68:
+            case 83:
+            case 87:
                 player1.StopMove();
                 break;
-            case 37:
-            case 39:
+            case 38:
+            case 40:
                 player2.StopMove();
                 break;
             default:
@@ -45,19 +45,19 @@ let game = (function()
     {
         console.log(`%c KeyDown ${e.keyCode}`,"color: yellow; font-size: 20px;")
         switch (e.keyCode) {
-            case 65:
+            case 87:
                 player1.StartMoveUp();
                 break;
-            case 68:
+            case 83:
                 player1.StartMoveDown();
                 break;
-            case 37:
+            case 38:
                 player2.StartMoveUp();
                 break;
-            case 39:
+            case 40:
                 player2.StartMoveDown();
                 break;
-            case 87:
+            case 68:
                 let bullet = new objects.Bullet(player1.position);
                 bullets.push(bullet);
                 stage.addChild(bullet);
@@ -68,7 +68,7 @@ let game = (function()
                 // bullet1 = new objects.Bullet(player1.position);
                 // stage.addChild(bullet1);
                 break;
-            case 38:
+            case 37:
                 let bullet2 = new objects.Bullet(player2.position, true);
                 bullets.push(bullet2);
                 stage.addChild(bullet2);
