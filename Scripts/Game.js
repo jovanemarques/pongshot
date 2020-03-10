@@ -13,11 +13,6 @@ var Game = (function () {
         { id: "placeholder", src: "./Assets/images/placeholder.png" },
         { id: "startButton", src: "./Assets/images/startButton.png" },
         { id: "nextButton", src: "./Assets/images/nextButton.png" },
-        { id: "backButton", src: "./Assets/images/backButton.png" },
-        { id: "ocean", src: "./Assets/images/ocean.gif" },
-        { id: "plane", src: "./Assets/images/plane.png" },
-        { id: "island", src: "./Assets/images/island.png" },
-        { id: "cloud", src: "./Assets/images/cloud.png" },
         { id: "engine", src: "./Assets/audio/engine.ogg" },
         { id: "yay", src: "./Assets/audio/yay.ogg" },
         { id: "thunder", src: "./Assets/audio/thunder.ogg" },
@@ -25,7 +20,6 @@ var Game = (function () {
         { id: "fgmap", src: "./Assets/data/foreground.txt" },
         { id: "background", src: "./Assets/sprites/background.png" },
         { id: "foreground", src: "./Assets/sprites/foreground.png" },
-        //{ id: " ", src: " " },
         { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
         { id: "blackBackground", src: "./Assets/images/BlackBackground.png" },
         { id: "tank", src: "./Assets/images/tank.png" },
@@ -97,4 +91,4 @@ var Game = (function () {
     }
     window.addEventListener("load", Preload);
 })();
-//# sourceMappingURL=game.js.map
+//# sourceMappingURL=Game.js.map

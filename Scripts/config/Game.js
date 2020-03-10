@@ -12,4 +12,4 @@ var config;
     }());
     config.Game = Game;
 })(config || (config = {}));
-//# sourceMappingURL=game.js.map
+//# sourceMappingURL=Game.js.map

@@ -24,27 +24,28 @@ var scenes;
     })(LogoState || (LogoState = {}));
     var CompanyLogo = /** @class */ (function (_super) {
         __extends(CompanyLogo, _super);
-        // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function CompanyLogo() {
             var _this = _super.call(this) || this;
             _this.Start();
             return _this;
         }
-        // PRIVATE METHODS
         // PUBLIC METHODS
         CompanyLogo.prototype.Start = function () {
-            //instantiate a new Text object
-            //this._presentLabel = new objects.Label("PRESENTS:", "80px", "Consolas", "#FFFFFF", 320, 180, true);
             this._background = new objects.Image(config.Game.ASSETS.getResult("blackBackground"));
-            // buttons
+            // Create company logo based on game screen w,h.
             this._companyLogo = new objects.Image(config.Game.ASSETS.getResult("companyLogo"), config.Game.SCREEN_WIDTH / 2, config.Game.SCREEN_HEIGHT / 2, true);
+            // Start counter and alpha value for fadding effect.
             this._companyLogo.alpha = 0.1;
             this._waitCounter = 0;
             this._state = LogoState.APPEARING;
             this.Main();
         };
         CompanyLogo.prototype.Update = function () {
+            /**
+             * Fadding effect for the company logo.
+             * Once it finishes, jump to the play START scene.
+             */
             switch (this._state) {
                 case LogoState.APPEARING:
                     this._companyLogo.alpha += 0.01;
@@ -54,7 +55,7 @@ var scenes;
                     break;
                 case LogoState.WAITING:
                     this._waitCounter += 1;
-                    if (this._waitCounter >= 180) {
+                    if (this._waitCounter >= 30) {
                         this._state = LogoState.FADING;
                     }
                     break;
@@ -72,12 +73,6 @@ var scenes;
         CompanyLogo.prototype.Main = function () {
             this.addChild(this._background);
             this.addChild(this._companyLogo);
-            this._background.on("click", function () {
-                config.Game.SCENE = scenes.State.PLAY;
-            });
-            this._companyLogo.on("click", function () {
-                config.Game.SCENE = scenes.State.PLAY;
-            });
         };
         return CompanyLogo;
     }(objects.Scene));
