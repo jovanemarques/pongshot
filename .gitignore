@@ -1,5 +1,0 @@
-node_modules/
-**/Script/**/*.js
-**/Script/**/*.js.map
-.DS_Store
-*.log

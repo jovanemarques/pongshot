@@ -1,8 +1,9 @@
 {
   "name": "pongshot",
   "version": "1.0.0",
+  "description": "COMP-397 - W2020 - Web Game Dev. Final Project",
   "main": "game.js",
-  "author": "enuomx",
+  "author": "Enumox Studio",
   "license": "MIT",
   "scripts": {
     "start": "lite-server",
