@@ -2,12 +2,12 @@ module objects {
     export class Player extends GameObject {
         // PRIVATE INSTANCE MEMBERS
         private _playerVel: number = 3;
-        private _playerId: managers.PlayerId;
+        private _playerId: enums.PlayerId;
 
         // PUBLIC PROPERTIES
 
         // CONSTRUCTOR
-        constructor(playerId: managers.PlayerId) {
+        constructor(playerId: enums.PlayerId) {
             super(config.Game.ASSETS.getResult("tank"), 0, 0, true);
 
             this._playerId = playerId;
@@ -31,9 +31,9 @@ module objects {
             let playerKeys = managers.Keyboard.GetPlayerKeys(this._playerId);
 
             // Verify the direction and set the y speed
-            if (playerKeys[managers.PlayerKeys.MOVE_UP] && !playerKeys[managers.PlayerKeys.MOVE_DOWN]) {
+            if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
                 velocity = new Vector2(0, -this._playerVel);
-            } else if (playerKeys[managers.PlayerKeys.MOVE_DOWN] && !playerKeys[managers.PlayerKeys.MOVE_UP]) {
+            } else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
                 velocity = new Vector2(0, this._playerVel);
             }
 
@@ -51,7 +51,7 @@ module objects {
         }
 
         public Reset(): void {
-            if (this._playerId == managers.PlayerId.PLAYER_TWO) {
+            if (this._playerId == enums.PlayerId.PLAYER_TWO) {
                 this.rotation = 180;
                 this.position = new Vector2(
                     config.Game.SCREEN_WIDTH - this.halfWidth,

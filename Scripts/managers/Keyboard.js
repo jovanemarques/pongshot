@@ -1,21 +1,6 @@
 "use strict";
 var managers;
 (function (managers) {
-    var PlayerId;
-    (function (PlayerId) {
-        PlayerId[PlayerId["PLAYER_ONE"] = 0] = "PLAYER_ONE";
-        PlayerId[PlayerId["PLAYER_TWO"] = 1] = "PLAYER_TWO";
-        PlayerId[PlayerId["NUM_OF_PLAYERS"] = 2] = "NUM_OF_PLAYERS";
-    })(PlayerId = managers.PlayerId || (managers.PlayerId = {}));
-    var PlayerKeys;
-    (function (PlayerKeys) {
-        PlayerKeys[PlayerKeys["MOVE_UP"] = 0] = "MOVE_UP";
-        PlayerKeys[PlayerKeys["MOVE_DOWN"] = 1] = "MOVE_DOWN";
-        PlayerKeys[PlayerKeys["ROTATE_CC"] = 2] = "ROTATE_CC";
-        PlayerKeys[PlayerKeys["ROTATE_CW"] = 3] = "ROTATE_CW";
-        PlayerKeys[PlayerKeys["SHOOT"] = 4] = "SHOOT";
-        PlayerKeys[PlayerKeys["NUM_OF_KEYS"] = 5] = "NUM_OF_KEYS";
-    })(PlayerKeys = managers.PlayerKeys || (managers.PlayerKeys = {}));
     var Keyboard = /** @class */ (function () {
         function Keyboard() {
         }
@@ -23,68 +8,68 @@ var managers;
         Keyboard.onKeyDown = function (event) {
             switch (event.keyCode) {
                 case config.Settings.KeyPlayerOneUp:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.MOVE_UP] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.MOVE_UP] = true;
                     break;
                 case config.Settings.KeyPlayerOneDown:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.MOVE_DOWN] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.MOVE_DOWN] = true;
                     break;
                 case config.Settings.KeyPlayerOneCCW:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.ROTATE_CC] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.ROTATE_CC] = true;
                     break;
                 case config.Settings.KeyPlayerOneCW:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.ROTATE_CW] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.ROTATE_CW] = true;
                     break;
                 case config.Settings.KeyPlayerOneShoot:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.SHOOT] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.SHOOT] = true;
                     break;
                 case config.Settings.KeyPlayerTwoUp:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.MOVE_UP] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.MOVE_UP] = true;
                     break;
                 case config.Settings.KeyPlayerTwoDown:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.MOVE_DOWN] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.MOVE_DOWN] = true;
                     break;
                 case config.Settings.KeyPlayerTwoCCW:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.ROTATE_CC] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.ROTATE_CC] = true;
                     break;
                 case config.Settings.KeyPlayerTwoCW:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.ROTATE_CW] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.ROTATE_CW] = true;
                     break;
                 case config.Settings.KeyPlayerTwoShoot:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.SHOOT] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.SHOOT] = true;
                     break;
             }
         };
         Keyboard.onKeyUp = function (event) {
             switch (event.keyCode) {
                 case config.Settings.KeyPlayerOneUp:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.MOVE_UP] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.MOVE_UP] = false;
                     break;
                 case config.Settings.KeyPlayerOneDown:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.MOVE_DOWN] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.MOVE_DOWN] = false;
                     break;
                 case config.Settings.KeyPlayerOneCCW:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.ROTATE_CC] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.ROTATE_CC] = false;
                     break;
                 case config.Settings.KeyPlayerOneCW:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.ROTATE_CW] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.ROTATE_CW] = false;
                     break;
                 case config.Settings.KeyPlayerOneShoot:
-                    this._keyStatus[PlayerId.PLAYER_ONE][PlayerKeys.SHOOT] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_ONE][enums.PlayerKeys.SHOOT] = false;
                     break;
                 case config.Settings.KeyPlayerTwoUp:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.MOVE_UP] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.MOVE_UP] = false;
                     break;
                 case config.Settings.KeyPlayerTwoDown:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.MOVE_DOWN] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.MOVE_DOWN] = false;
                     break;
                 case config.Settings.KeyPlayerTwoCCW:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.ROTATE_CC] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.ROTATE_CC] = false;
                     break;
                 case config.Settings.KeyPlayerTwoCW:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.ROTATE_CW] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.ROTATE_CW] = false;
                     break;
                 case config.Settings.KeyPlayerTwoShoot:
-                    this._keyStatus[PlayerId.PLAYER_TWO][PlayerKeys.SHOOT] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER_TWO][enums.PlayerKeys.SHOOT] = false;
                     break;
             }
         };
@@ -102,8 +87,8 @@ var managers;
             document.removeEventListener("keyup", this.onKeyUp.bind(this), false);
         };
         Keyboard.ResetKeys = function () {
-            for (var iPlr = 0; iPlr < PlayerId.NUM_OF_PLAYERS; iPlr++) {
-                for (var iKey = 0; iKey < PlayerKeys.NUM_OF_KEYS; iKey++) {
+            for (var iPlr = 0; iPlr < enums.PlayerId.NUM_OF_PLAYERS; iPlr++) {
+                for (var iKey = 0; iKey < enums.PlayerKeys.NUM_OF_KEYS; iKey++) {
                     this._keyStatus[iPlr][iKey] = false;
                 }
             }

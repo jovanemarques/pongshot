@@ -4,16 +4,16 @@ var config;
     var Settings = /** @class */ (function () {
         function Settings() {
         }
-        Settings.KeyPlayerOneUp = 87;
-        Settings.KeyPlayerOneDown = 83;
-        Settings.KeyPlayerOneCCW = 65;
-        Settings.KeyPlayerOneCW = 68;
-        Settings.KeyPlayerOneShoot = 69;
-        Settings.KeyPlayerTwoUp = 38;
-        Settings.KeyPlayerTwoDown = 40;
-        Settings.KeyPlayerTwoCCW = 39;
-        Settings.KeyPlayerTwoCW = 37;
-        Settings.KeyPlayerTwoShoot = 17;
+        Settings.KeyPlayerOneUp = 87; // W
+        Settings.KeyPlayerOneDown = 83; // S
+        Settings.KeyPlayerOneCCW = 65; // A
+        Settings.KeyPlayerOneCW = 68; // D
+        Settings.KeyPlayerOneShoot = 69; // E
+        Settings.KeyPlayerTwoUp = 38; // KEY UP
+        Settings.KeyPlayerTwoDown = 40; // KEY DOWN
+        Settings.KeyPlayerTwoCCW = 39; // KEY LEFT
+        Settings.KeyPlayerTwoCW = 37; // KEY RIGHT
+        Settings.KeyPlayerTwoShoot = 96; // NUMPAD 0
         return Settings;
     }());
     config.Settings = Settings;
