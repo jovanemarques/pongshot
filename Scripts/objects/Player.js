@@ -41,10 +41,10 @@ var objects;
             var velocity = new objects.Vector2(0, 0);
             var playerKeys = managers.Keyboard.GetPlayerKeys(this._playerId);
             // Verify the direction and set the y speed
-            if (playerKeys[managers.PlayerKeys.MOVE_UP] && !playerKeys[managers.PlayerKeys.MOVE_DOWN]) {
+            if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
                 velocity = new objects.Vector2(0, -this._playerVel);
             }
-            else if (playerKeys[managers.PlayerKeys.MOVE_DOWN] && !playerKeys[managers.PlayerKeys.MOVE_UP]) {
+            else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
                 velocity = new objects.Vector2(0, this._playerVel);
             }
             this.position = objects.Vector2.add(this.position, velocity);
@@ -58,7 +58,7 @@ var objects;
             this._checkBounds();
         };
         Player.prototype.Reset = function () {
-            if (this._playerId == managers.PlayerId.PLAYER_TWO) {
+            if (this._playerId == enums.PlayerId.PLAYER_TWO) {
                 this.rotation = 180;
                 this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - this.halfWidth, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
             }
