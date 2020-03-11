@@ -17,26 +17,39 @@ var objects;
     var Button = /** @class */ (function (_super) {
         __extends(Button, _super);
         // constructor
-        function Button(imagePath, x, y, isCentered) {
+        function Button(imagePath, x, y, isCentered, scale) {
             if (imagePath === void 0) { imagePath = config.Game.ASSETS.getResult("button"); }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
+            if (scale === void 0) { scale = 1; }
             var _this = _super.call(this, imagePath, x, y, isCentered) || this;
+            _this._selected = null;
             _this.on("mouseover", _this.MouseOver);
             _this.on("mouseout", _this.MouseOut);
+            _this.scaleX = scale;
+            _this.scaleY = scale;
             _this.Start();
             return _this;
         }
         // PRIVATE METHODS
-        Button.prototype._checkBounds = function () {
-        };
+        Button.prototype._checkBounds = function () { };
         // PUBLIC METHODS
         Button.prototype.MouseOver = function () {
-            this.alpha = 0.7;
+            if (this._selected == null)
+                this.alpha = 0.7;
         };
         Button.prototype.MouseOut = function () {
-            this.alpha = 1.0;
+            if (this._selected == null)
+                this.alpha = 1.0;
+        };
+        Button.prototype.SetActive = function () {
+            this._selected = true;
+            this.alpha = 1;
+        };
+        Button.prototype.SetInactive = function () {
+            this._selected = false;
+            this.alpha = 0.5;
         };
         /**
          * This function is used for initialization
@@ -46,10 +59,8 @@ var objects;
         Button.prototype.Start = function () {
             this.type = enums.GameObjectType.BUTTON;
         };
-        Button.prototype.Update = function () {
-        };
-        Button.prototype.Reset = function () {
-        };
+        Button.prototype.Update = function () { };
+        Button.prototype.Reset = function () { };
         return Button;
     }(objects.GameObject));
     objects.Button = Button;

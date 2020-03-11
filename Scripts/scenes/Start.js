@@ -34,14 +34,17 @@ var scenes;
             // Background
             this._background = new objects.Image(config.Game.ASSETS.getResult("blackBackground"));
             // Labels
-            this._player1Label = new objects.Label("Player One", "30px", "Consolas", "#ffcc5c", 300, 200, true);
-            this._player2Label = new objects.Label("Player Two", "30px", "Consolas", "#ffcc5c", config.Game.SCREEN_WIDTH - 300, 200, true);
-            this._welcomeLabel = new objects.Label("The Game", "80px", "Consolas", "#96ceb2", 640, 100, true);
+            this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
+            this._player2Label = new objects.Label("Player Two", "60px", "Pixel", "#ffcc5c", config.Game.SCREEN_WIDTH - 300, 200, true);
+            this._welcomeLabel = new objects.Label("The Game", "120px", "Pixel", "#96ceb2", 640, 100, true);
             // Buttons
-            // TODO: create player type images.
-            this._startButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 640, config.Game.SCREEN_HEIGHT - 100, true);
-            this._p1AssaultButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 300, 300, true);
-            this._p1SniperButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 300, 400, true);
+            this._startButton = new objects.Button(config.Game.ASSETS.getResult("btnPlay"), 640, config.Game.SCREEN_HEIGHT - 100, true, 5);
+            // Player one
+            this._p1MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), 300, 300, true, 1.5);
+            this._p1RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), 300, 400, true, 1.5);
+            // Player two
+            this._p2MageButton = new objects.Button(config.Game.ASSETS.getResult("mage2"), config.Game.SCREEN_WIDTH - 300, 300, true, 1.5);
+            this._p2RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue2"), config.Game.SCREEN_WIDTH - 300, 400, true, 1.5);
             this.Main();
         };
         Start.prototype.Update = function () { };
@@ -52,18 +55,34 @@ var scenes;
             this.addChild(this._player1Label);
             this.addChild(this._player2Label);
             this.addChild(this._startButton);
-            this.addChild(this._p1AssaultButton);
-            this.addChild(this._p1SniperButton);
-            //   this.addChild(this._p2AssaultButton);
-            //   this.addChild(this._p2SniperButton);
+            this.addChild(this._p1MageButton);
+            this.addChild(this._p1RogueButton);
+            this.addChild(this._p2MageButton);
+            this.addChild(this._p2RogueButton);
             this._startButton.on("click", function () {
                 config.Game.SCENE = scenes.State.PLAY;
             });
-            this._p1AssaultButton.on("click", function () {
-                _this._p1Selection = enums.PlayerType.ASSAULT;
+            // Player one handlers.
+            this._p1MageButton.on("click", function () {
+                _this._p1RogueButton.SetInactive();
+                _this._p1MageButton.SetActive();
+                _this._p1Selection = enums.PlayerType.MAGE;
             });
-            this._p1SniperButton.on("click", function () {
-                _this._p1Selection = enums.PlayerType.SNIPER;
+            this._p1RogueButton.on("click", function () {
+                _this._p1RogueButton.SetActive();
+                _this._p1MageButton.SetInactive();
+                _this._p1Selection = enums.PlayerType.ROGUE;
+            });
+            // Player two handlers.
+            this._p2MageButton.on("click", function () {
+                _this._p2RogueButton.SetInactive();
+                _this._p2MageButton.SetActive();
+                _this._p2Selection = enums.PlayerType.MAGE;
+            });
+            this._p2RogueButton.on("click", function () {
+                _this._p2RogueButton.SetActive();
+                _this._p2MageButton.SetInactive();
+                _this._p2Selection = enums.PlayerType.ROGUE;
             });
         };
         return Start;
