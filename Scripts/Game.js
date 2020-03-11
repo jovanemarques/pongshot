@@ -23,7 +23,20 @@ var Game = (function () {
         { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
         { id: "blackBackground", src: "./Assets/images/BlackBackground.png" },
         { id: "tank", src: "./Assets/images/tank.png" },
-        { id: "bullet", src: "./Assets/images/bullet.png" }
+        { id: "bullet", src: "./Assets/images/bullet.png" },
+        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
+        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
+        { id: "mage", src: "./Assets/images/mage.png" },
+        { id: "mageAttack", src: "./Assets/images/mage_attack.png" },
+        { id: "mage2", src: "./Assets/images/mage2.png" },
+        { id: "mage2Attack", src: "./Assets/images/mage2_attack.png" },
+        { id: "rogue", src: "./Assets/images/rogue.png" },
+        { id: "rogueAttack", src: "./Assets/images/rogue_attack.png" },
+        { id: "rogue2", src: "./Assets/images/rogue2.png" },
+        { id: "rogue2Attack", src: "./Assets/images/rogue2_attack.png" },
+        { id: "attack1", src: "./Assets/images/attack1.png" },
+        { id: "attack2", src: "./Assets/images/attack2.png" },
+        { id: "attackCollision", src: "./Assets/images/attack_collision.png" }
     ];
     function Preload() {
         assets = new createjs.LoadQueue(); // asset container

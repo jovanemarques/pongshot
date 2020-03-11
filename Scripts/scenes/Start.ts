@@ -9,12 +9,12 @@ module scenes {
 
     // Player selection handlers
     private _p1Selection: enums.PlayerType;
-    private _p1AssaultButton: objects.Button;
-    private _p1SniperButton: objects.Button;
+    private _p1MageButton: objects.Button;
+    private _p1RogueButton: objects.Button;
 
     private _p2Selection: enums.PlayerType;
-    private _p2AssaultButton: objects.Button;
-    private _p2SniperButton: objects.Button;
+    private _p2MageButton: objects.Button;
+    private _p2RogueButton: objects.Button;
 
     // CONSTRUCTOR
     constructor() {
@@ -40,8 +40,8 @@ module scenes {
       // Labels
       this._player1Label = new objects.Label(
         "Player One",
-        "30px",
-        "Consolas",
+        "60px",
+        "Pixel",
         "#ffcc5c",
         300,
         200,
@@ -49,8 +49,8 @@ module scenes {
       );
       this._player2Label = new objects.Label(
         "Player Two",
-        "30px",
-        "Consolas",
+        "60px",
+        "Pixel",
         "#ffcc5c",
         config.Game.SCREEN_WIDTH - 300,
         200,
@@ -58,8 +58,8 @@ module scenes {
       );
       this._welcomeLabel = new objects.Label(
         "The Game",
-        "80px",
-        "Consolas",
+        "120px",
+        "Pixel",
         "#96ceb2",
         640,
         100,
@@ -67,24 +67,44 @@ module scenes {
       );
 
       // Buttons
-      // TODO: create player type images.
       this._startButton = new objects.Button(
-        config.Game.ASSETS.getResult("startButton"),
+        config.Game.ASSETS.getResult("btnPlay"),
         640,
         config.Game.SCREEN_HEIGHT - 100,
-        true
+        true,
+        5
       );
-      this._p1AssaultButton = new objects.Button(
-        config.Game.ASSETS.getResult("startButton"),
+
+      // Player one
+      this._p1MageButton = new objects.Button(
+        config.Game.ASSETS.getResult("mage"),
         300,
         300,
-        true
+        true,
+        1.5
       );
-      this._p1SniperButton = new objects.Button(
-        config.Game.ASSETS.getResult("startButton"),
+      this._p1RogueButton = new objects.Button(
+        config.Game.ASSETS.getResult("rogue"),
         300,
         400,
-        true
+        true,
+        1.5
+      );
+
+      // Player two
+      this._p2MageButton = new objects.Button(
+        config.Game.ASSETS.getResult("mage2"),
+        config.Game.SCREEN_WIDTH - 300,
+        300,
+        true,
+        1.5
+      );
+      this._p2RogueButton = new objects.Button(
+        config.Game.ASSETS.getResult("rogue2"),
+        config.Game.SCREEN_WIDTH - 300,
+        400,
+        true,
+        1.5
       );
 
       this.Main();
@@ -99,19 +119,37 @@ module scenes {
       this.addChild(this._player2Label);
       this.addChild(this._startButton);
 
-      this.addChild(this._p1AssaultButton);
-      this.addChild(this._p1SniperButton);
-      //   this.addChild(this._p2AssaultButton);
-      //   this.addChild(this._p2SniperButton);
+      this.addChild(this._p1MageButton);
+      this.addChild(this._p1RogueButton);
+      this.addChild(this._p2MageButton);
+      this.addChild(this._p2RogueButton);
 
       this._startButton.on("click", () => {
         config.Game.SCENE = scenes.State.PLAY;
       });
-      this._p1AssaultButton.on("click", () => {
-        this._p1Selection = enums.PlayerType.ASSAULT;
+
+      // Player one handlers.
+      this._p1MageButton.on("click", () => {
+        this._p1RogueButton.SetInactive();
+        this._p1MageButton.SetActive();
+        this._p1Selection = enums.PlayerType.MAGE;
       });
-      this._p1SniperButton.on("click", () => {
-        this._p1Selection = enums.PlayerType.SNIPER;
+      this._p1RogueButton.on("click", () => {
+        this._p1RogueButton.SetActive();
+        this._p1MageButton.SetInactive();
+        this._p1Selection = enums.PlayerType.ROGUE;
+      });
+
+      // Player two handlers.
+      this._p2MageButton.on("click", () => {
+        this._p2RogueButton.SetInactive();
+        this._p2MageButton.SetActive();
+        this._p2Selection = enums.PlayerType.MAGE;
+      });
+      this._p2RogueButton.on("click", () => {
+        this._p2RogueButton.SetActive();
+        this._p2MageButton.SetInactive();
+        this._p2Selection = enums.PlayerType.ROGUE;
       });
     }
   }

@@ -39,7 +39,6 @@ var objects;
             _this.y = y;
             return _this;
         }
-        // methods
         Label.prototype.setText = function (newText) {
             this.text = newText;
             this.regX = this.getBounds().width * 0.5;
