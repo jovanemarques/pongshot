@@ -18,8 +18,8 @@ var objects;
         __extends(Player, _super);
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
-        function Player(playerId) {
-            var _this = _super.call(this, config.Game.ASSETS.getResult("tank"), 0, 0, true) || this;
+        function Player(playerId, playerCharacter) {
+            var _this = _super.call(this, config.Game.ASSETS.getResult(playerCharacter), 0, 0, true) || this;
             // PRIVATE INSTANCE MEMBERS
             _this._playerVel = 3;
             _this._playerId = playerId;
@@ -62,7 +62,7 @@ var objects;
         };
         Player.prototype.Reset = function () {
             if (this._playerId == enums.PlayerId.PLAYER_TWO) {
-                // this.rotation = 180;
+                // Mirror the second player by default
                 this.scaleX = -1;
                 this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - this.halfWidth, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
             }

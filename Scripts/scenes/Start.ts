@@ -109,7 +109,9 @@ module scenes {
       this.Main();
     }
 
-    public Update(): void {}
+    public Update(): void {
+      console.log(this.validateGame());
+    }
 
     public Main(): void {
       this.addChild(this._background);
@@ -123,33 +125,54 @@ module scenes {
       this.addChild(this._p2MageButton);
       this.addChild(this._p2RogueButton);
 
-      this._startButton.on("click", () => {
-        config.Game.SCENE = scenes.State.PLAY;
-      });
-
       // Player one handlers.
       this._p1MageButton.on("click", () => {
         this._p1RogueButton.SetInactive();
         this._p1MageButton.SetActive();
-        config.Game.PLAYER1_CHARACTER = enums.PlayerType.MAGE;
+        config.Game.PLAYER1_CHARACTER = enums.PlayerCharacter.MAGE;
+        this.validateGame();
       });
       this._p1RogueButton.on("click", () => {
         this._p1RogueButton.SetActive();
         this._p1MageButton.SetInactive();
-        config.Game.PLAYER1_CHARACTER = enums.PlayerType.ROGUE;
+        config.Game.PLAYER1_CHARACTER = enums.PlayerCharacter.ROGUE;
+        this.validateGame();
       });
 
       // Player two handlers.
       this._p2MageButton.on("click", () => {
         this._p2RogueButton.SetInactive();
         this._p2MageButton.SetActive();
-        config.Game.PLAYER2_CHARACTER = enums.PlayerType.MAGE;
+        config.Game.PLAYER2_CHARACTER = enums.PlayerCharacter.MAGE;
+        this.validateGame();
       });
       this._p2RogueButton.on("click", () => {
         this._p2RogueButton.SetActive();
         this._p2MageButton.SetInactive();
-        config.Game.PLAYER2_CHARACTER = enums.PlayerType.ROGUE;
+        config.Game.PLAYER2_CHARACTER = enums.PlayerCharacter.ROGUE;
+        this.validateGame();
       });
+
+      // Call this once here to "initialize" as inactive
+      this.validateGame();
+    }
+
+    private validateGame(): void {
+      if (
+        config.Game.PLAYER1_CHARACTER != null &&
+        config.Game.PLAYER2_CHARACTER != null
+      ) {
+        // Use active to set the alpha and handle the over.
+        this._startButton.SetActive();
+
+        // Attache handler if valid
+        this._startButton.on("click", () => {
+          config.Game.SCENE = scenes.State.PLAY;
+        });
+      } else {
+        // Use inactive to set the alpha and handle the over.
+        this._startButton.SetInactive();
+      }
     }
   }
 }

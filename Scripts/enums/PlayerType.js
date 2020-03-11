@@ -1,10 +1,10 @@
 "use strict";
 var enums;
 (function (enums) {
-    var PlayerType;
-    (function (PlayerType) {
-        PlayerType[PlayerType["MAGE"] = 0] = "MAGE";
-        PlayerType[PlayerType["ROGUE"] = 1] = "ROGUE";
-    })(PlayerType = enums.PlayerType || (enums.PlayerType = {}));
+    var PlayerCharacter;
+    (function (PlayerCharacter) {
+        PlayerCharacter[PlayerCharacter["MAGE"] = 0] = "MAGE";
+        PlayerCharacter[PlayerCharacter["ROGUE"] = 1] = "ROGUE";
+    })(PlayerCharacter = enums.PlayerCharacter || (enums.PlayerCharacter = {}));
 })(enums || (enums = {}));
 //# sourceMappingURL=PlayerType.js.map

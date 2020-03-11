@@ -7,13 +7,14 @@ module objects {
     // PUBLIC PROPERTIES
 
     // CONSTRUCTOR
-    constructor(playerId: enums.PlayerId) {
-      super(config.Game.ASSETS.getResult("tank"), 0, 0, true);
-
+    constructor(
+      playerId: enums.PlayerId,
+      playerCharacter: string
+    ) {      
+      super(config.Game.ASSETS.getResult(playerCharacter), 0, 0, true);
       this._playerId = playerId;
-
       this.Reset();
-      this.Start();
+      this.Start();      
     }
 
     // PRIVATE METHODS
@@ -67,7 +68,7 @@ module objects {
 
     public Reset(): void {
       if (this._playerId == enums.PlayerId.PLAYER_TWO) {
-        // this.rotation = 180;
+        // Mirror the second player by default
         this.scaleX = -1;
 
         this.position = new Vector2(

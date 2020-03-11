@@ -1,5 +1,5 @@
 module enums {
-  export enum PlayerType {
+  export enum PlayerCharacter {
     MAGE,
     ROGUE
   }

@@ -47,7 +47,9 @@ var scenes;
             this._p2RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), config.Game.SCREEN_WIDTH - 300, 400, true, 1.5, true);
             this.Main();
         };
-        Start.prototype.Update = function () { };
+        Start.prototype.Update = function () {
+            console.log(this.validateGame());
+        };
         Start.prototype.Main = function () {
             var _this = this;
             this.addChild(this._background);
@@ -59,31 +61,49 @@ var scenes;
             this.addChild(this._p1RogueButton);
             this.addChild(this._p2MageButton);
             this.addChild(this._p2RogueButton);
-            this._startButton.on("click", function () {
-                config.Game.SCENE = scenes.State.PLAY;
-            });
             // Player one handlers.
             this._p1MageButton.on("click", function () {
                 _this._p1RogueButton.SetInactive();
                 _this._p1MageButton.SetActive();
-                config.Game.PLAYER1_CHARACTER = enums.PlayerType.MAGE;
+                config.Game.PLAYER1_CHARACTER = enums.PlayerCharacter.MAGE;
+                _this.validateGame();
             });
             this._p1RogueButton.on("click", function () {
                 _this._p1RogueButton.SetActive();
                 _this._p1MageButton.SetInactive();
-                config.Game.PLAYER1_CHARACTER = enums.PlayerType.ROGUE;
+                config.Game.PLAYER1_CHARACTER = enums.PlayerCharacter.ROGUE;
+                _this.validateGame();
             });
             // Player two handlers.
             this._p2MageButton.on("click", function () {
                 _this._p2RogueButton.SetInactive();
                 _this._p2MageButton.SetActive();
-                config.Game.PLAYER2_CHARACTER = enums.PlayerType.MAGE;
+                config.Game.PLAYER2_CHARACTER = enums.PlayerCharacter.MAGE;
+                _this.validateGame();
             });
             this._p2RogueButton.on("click", function () {
                 _this._p2RogueButton.SetActive();
                 _this._p2MageButton.SetInactive();
-                config.Game.PLAYER2_CHARACTER = enums.PlayerType.ROGUE;
+                config.Game.PLAYER2_CHARACTER = enums.PlayerCharacter.ROGUE;
+                _this.validateGame();
             });
+            // Call this once here to "initialize" as inactive
+            this.validateGame();
+        };
+        Start.prototype.validateGame = function () {
+            if (config.Game.PLAYER1_CHARACTER != null &&
+                config.Game.PLAYER2_CHARACTER != null) {
+                // Use active to set the alpha and handle the over.
+                this._startButton.SetActive();
+                // Attache handler if valid
+                this._startButton.on("click", function () {
+                    config.Game.SCENE = scenes.State.PLAY;
+                });
+            }
+            else {
+                // Use inactive to set the alpha and handle the over.
+                this._startButton.SetInactive();
+            }
         };
         return Start;
     }(objects.Scene));
