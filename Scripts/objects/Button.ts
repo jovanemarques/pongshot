@@ -8,13 +8,17 @@ module objects {
       x: number = 0,
       y: number = 0,
       isCentered: boolean = false,
-      scale: number = 1
+      scale: number = 1,
+      mirror: boolean = false
     ) {
       super(imagePath, x, y, isCentered);
+
       this.on("mouseover", this.MouseOver);
       this.on("mouseout", this.MouseOut);
-      this.scaleX = scale;
+
+      this.scaleX = mirror ? scale * -1 : scale;
       this.scaleY = scale;
+
       this.Start();
     }
 

@@ -33,7 +33,8 @@ var objects;
             if (this.position.y < config.Game.GAME_BAR_HEIGHT + this.halfHeight) {
                 this.position = new objects.Vector2(this.position.x, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
             }
-            else if (this.position.y > config.Game.SCREEN_HEIGHT - this.halfHeight) {
+            else if (this.position.y >
+                config.Game.SCREEN_HEIGHT - this.halfHeight) {
                 this.position = new objects.Vector2(this.position.x, config.Game.SCREEN_HEIGHT - this.halfHeight);
             }
         };
@@ -41,10 +42,12 @@ var objects;
             var velocity = new objects.Vector2(0, 0);
             var playerKeys = managers.Keyboard.GetPlayerKeys(this._playerId);
             // Verify the direction and set the y speed
-            if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
+            if (playerKeys[enums.PlayerKeys.MOVE_UP] &&
+                !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
                 velocity = new objects.Vector2(0, -this._playerVel);
             }
-            else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
+            else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] &&
+                !playerKeys[enums.PlayerKeys.MOVE_UP]) {
                 velocity = new objects.Vector2(0, this._playerVel);
             }
             this.position = objects.Vector2.add(this.position, velocity);
@@ -59,7 +62,8 @@ var objects;
         };
         Player.prototype.Reset = function () {
             if (this._playerId == enums.PlayerId.PLAYER_TWO) {
-                this.rotation = 180;
+                // this.rotation = 180;
+                this.scaleX = -1;
                 this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - this.halfWidth, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
             }
             else {

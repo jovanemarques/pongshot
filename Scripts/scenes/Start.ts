@@ -8,11 +8,8 @@ module scenes {
     private _startButton: objects.Button;
 
     // Player selection handlers
-    private _p1Selection: enums.PlayerType;
     private _p1MageButton: objects.Button;
     private _p1RogueButton: objects.Button;
-
-    private _p2Selection: enums.PlayerType;
     private _p2MageButton: objects.Button;
     private _p2RogueButton: objects.Button;
 
@@ -93,18 +90,20 @@ module scenes {
 
       // Player two
       this._p2MageButton = new objects.Button(
-        config.Game.ASSETS.getResult("mage2"),
+        config.Game.ASSETS.getResult("mage"),
         config.Game.SCREEN_WIDTH - 300,
         300,
         true,
-        1.5
+        1.5,
+        true
       );
       this._p2RogueButton = new objects.Button(
-        config.Game.ASSETS.getResult("rogue2"),
+        config.Game.ASSETS.getResult("rogue"),
         config.Game.SCREEN_WIDTH - 300,
         400,
         true,
-        1.5
+        1.5,
+        true
       );
 
       this.Main();
@@ -132,24 +131,24 @@ module scenes {
       this._p1MageButton.on("click", () => {
         this._p1RogueButton.SetInactive();
         this._p1MageButton.SetActive();
-        this._p1Selection = enums.PlayerType.MAGE;
+        config.Game.PLAYER1_CHARACTER = enums.PlayerType.MAGE;
       });
       this._p1RogueButton.on("click", () => {
         this._p1RogueButton.SetActive();
         this._p1MageButton.SetInactive();
-        this._p1Selection = enums.PlayerType.ROGUE;
+        config.Game.PLAYER1_CHARACTER = enums.PlayerType.ROGUE;
       });
 
       // Player two handlers.
       this._p2MageButton.on("click", () => {
         this._p2RogueButton.SetInactive();
         this._p2MageButton.SetActive();
-        this._p2Selection = enums.PlayerType.MAGE;
+        config.Game.PLAYER2_CHARACTER = enums.PlayerType.MAGE;
       });
       this._p2RogueButton.on("click", () => {
         this._p2RogueButton.SetActive();
         this._p2MageButton.SetInactive();
-        this._p2Selection = enums.PlayerType.ROGUE;
+        config.Game.PLAYER2_CHARACTER = enums.PlayerType.ROGUE;
       });
     }
   }

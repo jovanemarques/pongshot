@@ -43,8 +43,8 @@ var scenes;
             this._p1MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), 300, 300, true, 1.5);
             this._p1RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), 300, 400, true, 1.5);
             // Player two
-            this._p2MageButton = new objects.Button(config.Game.ASSETS.getResult("mage2"), config.Game.SCREEN_WIDTH - 300, 300, true, 1.5);
-            this._p2RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue2"), config.Game.SCREEN_WIDTH - 300, 400, true, 1.5);
+            this._p2MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), config.Game.SCREEN_WIDTH - 300, 300, true, 1.5, true);
+            this._p2RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), config.Game.SCREEN_WIDTH - 300, 400, true, 1.5, true);
             this.Main();
         };
         Start.prototype.Update = function () { };
@@ -66,23 +66,23 @@ var scenes;
             this._p1MageButton.on("click", function () {
                 _this._p1RogueButton.SetInactive();
                 _this._p1MageButton.SetActive();
-                _this._p1Selection = enums.PlayerType.MAGE;
+                config.Game.PLAYER1_CHARACTER = enums.PlayerType.MAGE;
             });
             this._p1RogueButton.on("click", function () {
                 _this._p1RogueButton.SetActive();
                 _this._p1MageButton.SetInactive();
-                _this._p1Selection = enums.PlayerType.ROGUE;
+                config.Game.PLAYER1_CHARACTER = enums.PlayerType.ROGUE;
             });
             // Player two handlers.
             this._p2MageButton.on("click", function () {
                 _this._p2RogueButton.SetInactive();
                 _this._p2MageButton.SetActive();
-                _this._p2Selection = enums.PlayerType.MAGE;
+                config.Game.PLAYER2_CHARACTER = enums.PlayerType.MAGE;
             });
             this._p2RogueButton.on("click", function () {
                 _this._p2RogueButton.SetActive();
                 _this._p2MageButton.SetInactive();
-                _this._p2Selection = enums.PlayerType.ROGUE;
+                config.Game.PLAYER2_CHARACTER = enums.PlayerType.ROGUE;
             });
         };
         return Start;
