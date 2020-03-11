@@ -25,6 +25,8 @@ var Game = (function () {
         { id: "bullet", src: "./Assets/images/bullet.png" },
         { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
         { id: "btnPlay", src: "./Assets/images/btn_play.png" },
+        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
+        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
         { id: "mage", src: "./Assets/images/mage.png" },
         { id: "mageAttack", src: "./Assets/images/mage_attack.png" },
         { id: "rogue", src: "./Assets/images/rogue.png" },
