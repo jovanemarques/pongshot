@@ -1,25 +1,70 @@
 module scenes {
-  export class Play extends objects.Scene {
-    // PRIVATE INSTANCE MEMBERS
-    private _player1: objects.Player;
-    private _player2: objects.Player;
-    private _bullets: Array<objects.Bullet> = [];
-    private _gameBar: managers.GameBar;
+    export class Play extends objects.Scene {
+        // PRIVATE INSTANCE MEMBERS
+        private _player1: objects.Player;
+        private _player2: objects.Player;
+        private _bullets: Array<objects.Bullet> = [];
+        private _gameBar: managers.GameBar;
+        private _plrOneBulletTick: number;
+        private _plrTwoBulletTick: number;
 
-    // CONSTRUCTOR
-    constructor() {
-      super();
-      this.Start();
-    }
+        // PUBLIC PROPERTIES
 
-    //initialize and instatiate
-    public Start(): void {
-      // Create the players
-      this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE);
-      this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO);
+        // CONSTRUCTOR
+        constructor() {
+            super();
 
-      // Create the GamaBar
-      this._gameBar = new managers.GameBar();
+            this.Start();
+        }
+
+        // PRIVATE METHODS
+
+        // PUBLIC METHODS
+
+        //initialize and instatiate
+        public Start(): void {
+            // Create the players
+            this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE);
+            this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO);
+
+            // Create the GamaBar
+            this._gameBar = new managers.GameBar();
+
+            // Initialize the keyboard
+            managers.Keyboard.Start();
+
+            this._plrOneBulletTick = 0;
+            this._plrTwoBulletTick = 0;
+
+            this.Main();
+        }
+
+        public Update(): void {
+            this._player1.Update();
+
+            this._player2.Update();
+
+            this._gameBar.Update();
+
+            if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_ONE, enums.PlayerKeys.SHOOT)) {
+                let curTick = createjs.Ticker.getTicks();
+                if (curTick - this._plrOneBulletTick >= 60) {
+                    let bullet = new objects.Bullet(this._player1.position);
+                    this._bullets.push(bullet);
+                    this.addChild(bullet);
+                    this._plrOneBulletTick = curTick;
+                }
+            }
+
+            if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_TWO, enums.PlayerKeys.SHOOT)) {
+                let curTick = createjs.Ticker.getTicks();
+                if (curTick - this._plrTwoBulletTick >= 60) {
+                    let bullet = new objects.Bullet(this._player2.position, true);
+                    this._bullets.push(bullet);
+                    this.addChild(bullet);
+                    this._plrTwoBulletTick = curTick;
+                }
+            }
 
       // Initialize the keyboard
       managers.Keyboard.Start();
