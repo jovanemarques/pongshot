@@ -5,6 +5,8 @@ module scenes {
         private _player2: objects.Player;
         private _bullets: Array<objects.Bullet> = [];
         private _gameBar: managers.GameBar;
+        private _plrOneBulletTick: number;
+        private _plrTwoBulletTick: number;
 
         // PUBLIC PROPERTIES
 
@@ -31,6 +33,9 @@ module scenes {
             // Initialize the keyboard
             managers.Keyboard.Start();
 
+            this._plrOneBulletTick = 0;
+            this._plrTwoBulletTick = 0;
+
             this.Main();
         }
 
@@ -42,15 +47,23 @@ module scenes {
             this._gameBar.Update();
 
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_ONE, enums.PlayerKeys.SHOOT)) {
-                let bullet = new objects.Bullet(this._player1.position);
-                this._bullets.push(bullet);
-                this.addChild(bullet);
+                let curTick = createjs.Ticker.getTicks();
+                if (curTick - this._plrOneBulletTick >= 60) {
+                    let bullet = new objects.Bullet(this._player1.position);
+                    this._bullets.push(bullet);
+                    this.addChild(bullet);
+                    this._plrOneBulletTick = curTick;
+                }
             }
 
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_TWO, enums.PlayerKeys.SHOOT)) {
-                let bullet = new objects.Bullet(this._player2.position, true);
-                this._bullets.push(bullet);
-                this.addChild(bullet);
+                let curTick = createjs.Ticker.getTicks();
+                if (curTick - this._plrTwoBulletTick >= 60) {
+                    let bullet = new objects.Bullet(this._player2.position, true);
+                    this._bullets.push(bullet);
+                    this.addChild(bullet);
+                    this._plrTwoBulletTick = curTick;
+                }
             }
 
             this._bullets.forEach((e, index) => {
