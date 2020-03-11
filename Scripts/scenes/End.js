@@ -38,7 +38,7 @@ var scenes;
             this.addChild(this._endLabel);
             this.addChild(this._backButton);
             this._backButton.on("click", function () {
-                config.Game.SCENE = scenes.State.PLAY;
+                config.Game.SCENE = scenes.State.START;
             });
         };
         return End;

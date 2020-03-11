@@ -16,19 +16,8 @@ var objects;
 (function (objects) {
     var Bullet = /** @class */ (function (_super) {
         __extends(Bullet, _super);
-        //private _active:boolean;
-        // PUBLIC PROPERTIES
-        // get active():boolean
-        // {
-        //     return this._active;
-        // }
-        // set active(value:boolean)
-        // {
-        //     this._active = value;
-        // }
-        // constuctor
-        function Bullet(startPosition, isPlayer2) {
-            if (isPlayer2 === void 0) { isPlayer2 = false; }
+        function Bullet(startPosition, player) {
+            if (player === void 0) { player = enums.PlayerId.PLAYER_ONE; }
             var _this = 
             // from https://opengameart.org/content/bullets-game-asset
             _super.call(this, config.Game.ASSETS.getResult("bullet")) || this;
@@ -36,13 +25,31 @@ var objects;
             _this.position = new objects.Vector2(startPosition.x, startPosition.y, _this);
             //this.x = startPosition.x;
             //this.y = startPosition.y;
-            _this._isPlayer2 = isPlayer2;
+            _this._player = player;
             return _this;
             //this._active = true;
         }
+        Object.defineProperty(Bullet.prototype, "Player", {
+            //private _active:boolean;
+            // PUBLIC PROPERTIES
+            // get active():boolean
+            // {
+            //     return this._active;
+            // }
+            // set active(value:boolean)
+            // {
+            //     this._active = value;
+            // }
+            // constuctor
+            get: function () {
+                return this._player;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Bullet.prototype._checkBounds = function () { };
         Bullet.prototype.isOutOfBounds = function () {
-            if (this._isPlayer2) {
+            if (this._player == enums.PlayerId.PLAYER_TWO) {
                 return this.x > config.Game.SCREEN_WIDTH;
             }
             else {
@@ -51,7 +58,7 @@ var objects;
         };
         Bullet.prototype.Start = function () { };
         Bullet.prototype.Update = function () {
-            if (this._isPlayer2) {
+            if (this._player == enums.PlayerId.PLAYER_TWO) {
                 this.position.x -= this._bulletVel;
             }
             else {

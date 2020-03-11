@@ -47,7 +47,7 @@ var scenes;
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_ONE, enums.PlayerKeys.SHOOT)) {
                 var curTick = createjs.Ticker.getTicks();
                 if (curTick - this._plrOneBulletTick >= 60) {
-                    var bullet = new objects.Bullet(this._player1.position);
+                    var bullet = new objects.Bullet(this._player1.position, enums.PlayerId.PLAYER_ONE);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     this._plrOneBulletTick = curTick;
@@ -56,7 +56,7 @@ var scenes;
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_TWO, enums.PlayerKeys.SHOOT)) {
                 var curTick = createjs.Ticker.getTicks();
                 if (curTick - this._plrTwoBulletTick >= 60) {
-                    var bullet = new objects.Bullet(this._player2.position, true);
+                    var bullet = new objects.Bullet(this._player2.position, enums.PlayerId.PLAYER_TWO);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     this._plrTwoBulletTick = curTick;
@@ -69,6 +69,16 @@ var scenes;
                 }
                 else if (e) {
                     e.Update();
+                }
+                if (e.Player == enums.PlayerId.PLAYER_TWO && managers.Collision.AABBCheck(_this._player1, e)) {
+                    _this.removeChild(e);
+                    delete _this._bullets[index];
+                    _this._gameBar.PostDamage(enums.PlayerId.PLAYER_ONE, 10);
+                }
+                if (e.Player == enums.PlayerId.PLAYER_ONE && managers.Collision.AABBCheck(_this._player2, e)) {
+                    _this.removeChild(e);
+                    delete _this._bullets[index];
+                    _this._gameBar.PostDamage(enums.PlayerId.PLAYER_TWO, 10);
                 }
             });
             // managers.Collision.AABBCheck(this._plane, this._island);

@@ -1,7 +1,7 @@
 module objects {
     export class Bullet extends objects.GameObject {
         private _bulletVel: number = 10;
-        private _isPlayer2: boolean;
+        private _player: enums.PlayerId;
         //private _active:boolean;
 
         // PUBLIC PROPERTIES
@@ -14,21 +14,24 @@ module objects {
         //     this._active = value;
         // }
         // constuctor
+        get Player(): enums.PlayerId {
+            return this._player;
+        }
 
-        constructor(startPosition: Vector2, isPlayer2: boolean = false) {
+        constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER_ONE) {
             // from https://opengameart.org/content/bullets-game-asset
             super(config.Game.ASSETS.getResult("bullet"));
             this.position = new Vector2(startPosition.x, startPosition.y, this);
             //this.x = startPosition.x;
             //this.y = startPosition.y;
-            this._isPlayer2 = isPlayer2;
+            this._player = player;
             //this._active = true;
         }
 
         protected _checkBounds(): void {}
 
         public isOutOfBounds(): boolean {
-            if (this._isPlayer2) {
+            if (this._player == enums.PlayerId.PLAYER_TWO) {
                 return this.x > config.Game.SCREEN_WIDTH;
             } else {
                 return this.x < 0;
@@ -38,7 +41,7 @@ module objects {
         public Start(): void {}
 
         public Update(): void {
-            if (this._isPlayer2) {
+            if (this._player == enums.PlayerId.PLAYER_TWO) {
                 this.position.x -= this._bulletVel;
             } else {
                 this.position.x += this._bulletVel;

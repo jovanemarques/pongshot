@@ -49,7 +49,7 @@ module scenes {
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_ONE, enums.PlayerKeys.SHOOT)) {
                 let curTick = createjs.Ticker.getTicks();
                 if (curTick - this._plrOneBulletTick >= 60) {
-                    let bullet = new objects.Bullet(this._player1.position);
+                    let bullet = new objects.Bullet(this._player1.position, enums.PlayerId.PLAYER_ONE);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     this._plrOneBulletTick = curTick;
@@ -59,7 +59,7 @@ module scenes {
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_TWO, enums.PlayerKeys.SHOOT)) {
                 let curTick = createjs.Ticker.getTicks();
                 if (curTick - this._plrTwoBulletTick >= 60) {
-                    let bullet = new objects.Bullet(this._player2.position, true);
+                    let bullet = new objects.Bullet(this._player2.position, enums.PlayerId.PLAYER_TWO);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     this._plrTwoBulletTick = curTick;
@@ -72,6 +72,17 @@ module scenes {
                     delete this._bullets[index];
                 } else if (e) {
                     e.Update();
+                }
+
+                if (e.Player == enums.PlayerId.PLAYER_TWO && managers.Collision.AABBCheck(this._player1, e)) {
+                    this.removeChild(e);
+                    delete this._bullets[index];
+                    this._gameBar.PostDamage(enums.PlayerId.PLAYER_ONE, 10);
+                }
+                if (e.Player == enums.PlayerId.PLAYER_ONE && managers.Collision.AABBCheck(this._player2, e)) {
+                    this.removeChild(e);
+                    delete this._bullets[index];
+                    this._gameBar.PostDamage(enums.PlayerId.PLAYER_TWO, 10);
                 }
             });
 
