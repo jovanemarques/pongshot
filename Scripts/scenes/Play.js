@@ -16,7 +16,6 @@ var scenes;
 (function (scenes) {
     var Play = /** @class */ (function (_super) {
         __extends(Play, _super);
-        // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Play() {
             var _this = _super.call(this) || this;
@@ -24,8 +23,6 @@ var scenes;
             _this.Start();
             return _this;
         }
-        // PRIVATE METHODS
-        // PUBLIC METHODS
         //initialize and instatiate
         Play.prototype.Start = function () {
             // Create the players

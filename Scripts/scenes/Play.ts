@@ -96,9 +96,7 @@ module scenes {
 
         public Main(): void {
             this.addChild(this._player1);
-
             this.addChild(this._player2);
-
             this._gameBar.ScreenObjects.forEach(obj => this.addChild(obj));
         }
     }
