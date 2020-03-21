@@ -48,7 +48,6 @@ var scenes;
             this.Main();
         };
         Start.prototype.Update = function () {
-            console.log(this.validateGame());
         };
         Start.prototype.Main = function () {
             var _this = this;
@@ -65,34 +64,33 @@ var scenes;
             this._p1MageButton.on("click", function () {
                 _this._p1RogueButton.SetInactive();
                 _this._p1MageButton.SetActive();
-                config.Game.PLAYER1_CHARACTER = enums.PlayerCharacter.MAGE;
+                config.Game.PLAYER1_CHARACTER = constants.PlayerType.MAGE;
                 _this.validateGame();
             });
             this._p1RogueButton.on("click", function () {
                 _this._p1RogueButton.SetActive();
                 _this._p1MageButton.SetInactive();
-                config.Game.PLAYER1_CHARACTER = enums.PlayerCharacter.ROGUE;
+                config.Game.PLAYER1_CHARACTER = constants.PlayerType.ROGUE;
                 _this.validateGame();
             });
             // Player two handlers.
             this._p2MageButton.on("click", function () {
                 _this._p2RogueButton.SetInactive();
                 _this._p2MageButton.SetActive();
-                config.Game.PLAYER2_CHARACTER = enums.PlayerCharacter.MAGE;
+                config.Game.PLAYER2_CHARACTER = constants.PlayerType.MAGE;
                 _this.validateGame();
             });
             this._p2RogueButton.on("click", function () {
                 _this._p2RogueButton.SetActive();
                 _this._p2MageButton.SetInactive();
-                config.Game.PLAYER2_CHARACTER = enums.PlayerCharacter.ROGUE;
+                config.Game.PLAYER2_CHARACTER = constants.PlayerType.ROGUE;
                 _this.validateGame();
             });
             // Call this once here to "initialize" as inactive
             this.validateGame();
         };
         Start.prototype.validateGame = function () {
-            if (config.Game.PLAYER1_CHARACTER != null &&
-                config.Game.PLAYER2_CHARACTER != null) {
+            if (config.Game.PLAYER1_CHARACTER != null && config.Game.PLAYER2_CHARACTER != null) {
                 // Use active to set the alpha and handle the over.
                 this._startButton.SetActive();
                 // Attache handler if valid

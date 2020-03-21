@@ -16,35 +16,16 @@ var scenes;
 (function (scenes) {
     var Play = /** @class */ (function (_super) {
         __extends(Play, _super);
-        // PUBLIC PROPERTIES
-        // CONSTRUCTOR
         function Play() {
             var _this = _super.call(this) || this;
             _this._bullets = [];
             _this.Start();
             return _this;
         }
-        // PRIVATE METHODS
-        Play.prototype.GetPlayerCharString = function (playerCharacter) {
-            var char;
-            switch (playerCharacter) {
-                case 0: {
-                    char = "mage";
-                    break;
-                }
-                case 1: {
-                    char = "rogue";
-                    break;
-                }
-            }
-            return char;
-        };
-        // PUBLIC METHODS
-        //initialize and instatiate
         Play.prototype.Start = function () {
             // Create the players
-            this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, this.GetPlayerCharString(config.Game.PLAYER1_CHARACTER));
-            this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, this.GetPlayerCharString(config.Game.PLAYER2_CHARACTER));
+            this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
+            this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);
             // Create the GamaBar
             this._gameBar = new managers.GameBar();
             // Initialize the keyboard
