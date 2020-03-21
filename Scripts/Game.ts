@@ -1,6 +1,6 @@
 //IIFE - Immediately Invoked Function Expression
 //means -> self-executing anonymous function
-let Game = (function() {
+let Game = (function () {
     // variable declarations
     let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
     let stage: createjs.Stage;
@@ -11,33 +11,26 @@ let Game = (function() {
     let assets: createjs.LoadQueue;
 
     let assetManifest = [
-        { id: "button", src: "./Assets/images/button.png" },
-        { id: "placeholder", src: "./Assets/images/placeholder.png" },
-        { id: "startButton", src: "./Assets/images/startButton.png" },
-        { id: "backButton", src: "./Assets/images/backButton.png" },
-        { id: "nextButton", src: "./Assets/images/nextButton.png" },
-        { id: "engine", src: "./Assets/audio/engine.ogg" },
-        { id: "yay", src: "./Assets/audio/yay.ogg" },
-        { id: "thunder", src: "./Assets/audio/thunder.ogg" },
-        { id: "background", src: "./Assets/sprites/background.png" },
-        { id: "foreground", src: "./Assets/sprites/foreground.png" },
-        { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
-        { id: "blackBackground", src: "./Assets/images/BlackBackground.png" },
-        { id: "tank", src: "./Assets/images/tank.png" },
-        { id: "bullet", src: "./Assets/images/bullet.png" },
+        // Images
+        {id: "companyLogo", src: "./Assets/images/CompanyLogo.png"},
+        {id: "blackBackground", src: "./Assets/images/bg_blackBackground.png"},
 
-        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
-        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
+        // Buttons
+        {id: "btnConfirm", src: "./Assets/images/btn_confirm.png"},
+        {id: "btnPlay", src: "./Assets/images/btn_play.png"},
+        {id: "btnConfirm", src: "./Assets/images/btn_confirm.png"},
+        {id: "btnPlay", src: "./Assets/images/btn_play.png"},
 
-        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
-        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
-        { id: "mage", src: "./Assets/images/mage.png" },
-        { id: "mageAttack", src: "./Assets/images/mage_attack.png" },
-        { id: "rogue", src: "./Assets/images/rogue.png" },
-        { id: "rogueAttack", src: "./Assets/images/rogue_attack.png" },
-        { id: "attack1", src: "./Assets/images/attack1.png" },
-        { id: "attack2", src: "./Assets/images/attack2.png" },
-        { id: "attackCollision", src: "./Assets/images/attack_collision.png" }
+        // Characters
+        {id: "mage", src: "./Assets/images/mage.png"},
+        {id: "mageAttack", src: "./Assets/images/mage_attack.png"},
+        {id: "rogue", src: "./Assets/images/rogue.png"},
+        {id: "rogueAttack", src: "./Assets/images/rogue_attack.png"},
+
+        // Attacks
+        {id: "attack1", src: "./Assets/images/attack1.png"},
+        {id: "attack2", src: "./Assets/images/attack2.png"},
+        {id: "attackCollision", src: "./Assets/images/attack_collision.png"}
     ];
 
     function Preload(): void {
