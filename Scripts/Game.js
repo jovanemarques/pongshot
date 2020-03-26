@@ -27,7 +27,12 @@ var Game = (function () {
         // Attacks
         { id: "attack1", src: "./Assets/images/attack1.png" },
         { id: "attack2", src: "./Assets/images/attack2.png" },
-        { id: "attackCollision", src: "./Assets/images/attack_collision.png" }
+        { id: "attackCollision", src: "./Assets/images/attack_collision.png" },
+        // Items
+        { id: "itemArmor", src: "./Assets/images/item_armor.png" },
+        { id: "itemBoots", src: "./Assets/images/item_boots.png" },
+        { id: "itemHp", src: "./Assets/images/item_hp.png" },
+        { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" },
     ];
     function Preload() {
         assets = new createjs.LoadQueue(); // asset container

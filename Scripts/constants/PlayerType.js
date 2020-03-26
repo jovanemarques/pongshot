@@ -7,5 +7,9 @@ var constants;
         MAGE: 'mage',
         ROGUE: 'rogue'
     };
+    // Why not a private field inside PowerUp class?
+    // The super inherited for GameObject should not access 'this', therefore I would't have direct access to this array
+    // on PowerUp construction - feel free to try out something else if you want.
+    constants.PowerUps = ['itemArmor', 'itemBoots', 'itemsHp', 'itemSpellScroll'];
 })(constants || (constants = {}));
 //# sourceMappingURL=PlayerType.js.map

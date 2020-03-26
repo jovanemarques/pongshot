@@ -3,6 +3,7 @@ module scenes {
         // PRIVATE INSTANCE MEMBERS
         private _player1: objects.Player;
         private _player2: objects.Player;
+        private _powerUp: objects.PowerUp;
 
         private _bullets: Array<objects.Bullet> = [];
         private _gameBar: managers.GameBar;
@@ -24,6 +25,13 @@ module scenes {
                 enums.PlayerId.PLAYER_TWO,
                 config.Game.PLAYER2_CHARACTER
             );
+
+            setInterval(() => {
+                // TODO: make this timer logic work somehow and check for item collision.
+                // this._powerUp = new objects.PowerUp();
+            }, 5000 ||  Math.random() * 100);
+
+            this._powerUp = new objects.PowerUp();
 
             // Create the GamaBar
             this._gameBar = new managers.GameBar();
@@ -98,6 +106,7 @@ module scenes {
         public Main(): void {
             this.addChild(this._player1);
             this.addChild(this._player2);
+            this.addChild(this._powerUp);
             this._gameBar.ScreenObjects.forEach(obj => this.addChild(obj));
         }
     }

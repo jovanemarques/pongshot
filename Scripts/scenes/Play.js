@@ -26,6 +26,11 @@ var scenes;
             // Create the players
             this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
             this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);
+            setInterval(function () {
+                // TODO: make this timer logic work somehow and check for item collision.
+                // this._powerUp = new objects.PowerUp();
+            }, 5000 || Math.random() * 100);
+            this._powerUp = new objects.PowerUp();
             // Create the GamaBar
             this._gameBar = new managers.GameBar();
             // Initialize the keyboard
@@ -87,6 +92,7 @@ var scenes;
             var _this = this;
             this.addChild(this._player1);
             this.addChild(this._player2);
+            this.addChild(this._powerUp);
             this._gameBar.ScreenObjects.forEach(function (obj) { return _this.addChild(obj); });
         };
         return Play;
