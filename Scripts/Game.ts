@@ -24,8 +24,10 @@ let Game = (function () {
         // Characters
         {id: "mage", src: "./Assets/images/mage.png"},
         {id: "mageAttack", src: "./Assets/images/mage_attack.png"},
+        {id: "mageHit", src: "./Assets/images/mage_hit.png"},
         {id: "rogue", src: "./Assets/images/rogue.png"},
         {id: "rogueAttack", src: "./Assets/images/rogue_attack.png"},
+        {id: "rogueHit", src: "./Assets/images/rogue_hit.png"},
 
         // Attacks
         {id: "attack1", src: "./Assets/images/attack1.png"},

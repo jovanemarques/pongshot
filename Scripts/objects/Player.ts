@@ -3,13 +3,14 @@ module objects {
         // PRIVATE INSTANCE MEMBERS
         private _playerVel: number = 3;
         private _playerId: enums.PlayerId;
+        private _playerCharacter: string;
 
-        // PUBLIC PROPERTIES
 
         // CONSTRUCTOR
         constructor(playerId: enums.PlayerId, playerCharacter: string) {
             super(config.Game.ASSETS.getResult(playerCharacter), 0, 0, true);
             this._playerId = playerId;
+            this._playerCharacter = playerCharacter;
             this.Reset();
             this.Start();
         }
@@ -51,6 +52,18 @@ module objects {
             }
 
             this.position = Vector2.add(this.position, velocity);
+        }
+
+        public Attack() {
+            // Attack position for 250ms then go back.
+            this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Attack`) as any;
+            setTimeout(() => this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any, 250);
+        }
+
+        public Hit() {
+            // Attack position for 250ms then go back.
+            this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Hit`) as any;
+            setTimeout(() => this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any, 250);
         }
 
         // PUBLIC METHODS

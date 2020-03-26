@@ -16,13 +16,13 @@ var objects;
 (function (objects) {
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
-        // PUBLIC PROPERTIES
         // CONSTRUCTOR
         function Player(playerId, playerCharacter) {
             var _this = _super.call(this, config.Game.ASSETS.getResult(playerCharacter), 0, 0, true) || this;
             // PRIVATE INSTANCE MEMBERS
             _this._playerVel = 3;
             _this._playerId = playerId;
+            _this._playerCharacter = playerCharacter;
             _this.Reset();
             _this.Start();
             return _this;
@@ -51,6 +51,18 @@ var objects;
                 velocity = new objects.Vector2(0, this._playerVel);
             }
             this.position = objects.Vector2.add(this.position, velocity);
+        };
+        Player.prototype.Attack = function () {
+            var _this = this;
+            // Attack position for 250ms then go back.
+            this.image = config.Game.ASSETS.getResult(this._playerCharacter + "Attack");
+            setTimeout(function () { return _this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter); }, 250);
+        };
+        Player.prototype.Hit = function () {
+            var _this = this;
+            // Attack position for 250ms then go back.
+            this.image = config.Game.ASSETS.getResult(this._playerCharacter + "Hit");
+            setTimeout(function () { return _this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter); }, 250);
         };
         // PUBLIC METHODS
         Player.prototype.Start = function () {
