@@ -1,10 +1,14 @@
 module managers {
     // Constants
-    const HB_HEIGHT: number = 20;
-    const HB_WIDTH: number = 450;
-    const HB_POS_Y: number = 15;
-    const HB_POS_X_P1: number = 10;
-    const HB_POS_X_P2: number = config.Game.SCREEN_WIDTH - HB_WIDTH - 12;
+    const BARS_WIDTH: number = 450;
+    const BARS_POS_X_P1: number = 10;
+    const BARS_POS_X_P2: number = config.Game.SCREEN_WIDTH - BARS_WIDTH - 12;
+
+    const HB_HEIGHT: number = 18;
+    const HB_POS_Y: number = 10;
+
+    const XPB_HEIGHT: number = 8;
+    const XPB_POS_Y: number = 35;
 
     export class GameBar {
         // PRIVATE INSTANCE MEMBERS
@@ -16,13 +20,23 @@ module managers {
 
         private _plrOneLifeBar: objects.GraphicBar;
         private _plrTwoLifeBar: objects.GraphicBar;
-        private _plrOneXpBar: createjs.Graphics;
-        private _plrTwoXpBar: createjs.Graphics;
+        private _plrOneHeartIcon: objects.Image;
+        private _plrTwoHeartIcon: objects.Image;
+        private _plrOneXpBar: objects.GraphicBar;
+        private _plrTwoXpBar: objects.GraphicBar;
         private _timerLabel: objects.Label;
 
         // PUBLIC PROPERTIES
         get ScreenObjects(): Array<createjs.DisplayObject> {
-            return [this._timerLabel, this._plrOneLifeBar, this._plrTwoLifeBar];
+            return [
+                this._timerLabel,
+                this._plrOneLifeBar,
+                this._plrTwoLifeBar,
+                this._plrOneXpBar,
+                this._plrTwoXpBar,
+                this._plrOneHeartIcon,
+                this._plrTwoHeartIcon
+            ];
         }
 
         // CONSTRUCTOR
@@ -34,23 +48,48 @@ module managers {
             this._gameStart = new Date().getTime();
 
             this._plrOneLifeBar = new objects.GraphicBar(
-                HB_POS_X_P1,
+                BARS_POS_X_P1,
                 HB_POS_Y,
-                HB_WIDTH,
+                BARS_WIDTH,
                 HB_HEIGHT,
                 objects.GameBarType.HEALTH
+            );
+            this._plrOneHeartIcon = new objects.Image(
+                config.Game.ASSETS.getResult("heart"),
+                BARS_POS_X_P1 + BARS_WIDTH + 10,
+                HB_POS_Y
             );
 
             this._plrTwoLifeBar = new objects.GraphicBar(
-                HB_POS_X_P2,
+                BARS_POS_X_P2,
                 HB_POS_Y,
-                HB_WIDTH,
+                BARS_WIDTH,
                 HB_HEIGHT,
-                objects.GameBarType.HEALTH
+                objects.GameBarType.HEALTH,
+                true
+            );
+            this._plrTwoHeartIcon = new objects.Image(
+                config.Game.ASSETS.getResult("heart"),
+                BARS_POS_X_P2 - 30,
+                HB_POS_Y
             );
 
-            this._plrOneXpBar = new createjs.Graphics();
-            this._plrTwoXpBar = new createjs.Graphics();
+            this._plrOneXpBar = new objects.GraphicBar(
+                BARS_POS_X_P1,
+                XPB_POS_Y,
+                BARS_WIDTH,
+                XPB_HEIGHT,
+                objects.GameBarType.EXPERIENCE
+            );
+
+            this._plrTwoXpBar = new objects.GraphicBar(
+                BARS_POS_X_P2,
+                XPB_POS_Y,
+                BARS_WIDTH,
+                XPB_HEIGHT,
+                objects.GameBarType.EXPERIENCE,
+                true
+            );
             this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
         }
 
@@ -73,7 +112,7 @@ module managers {
                 }
             } else {
                 this._plrTwoLife -= damage;
-                this._plrOneLifeBar.Value = this._plrTwoLife;
+                this._plrTwoLifeBar.Value = this._plrTwoLife;
 
                 if (this._plrTwoLife <= 0) {
                     config.Game.SCENE = scenes.State.END;

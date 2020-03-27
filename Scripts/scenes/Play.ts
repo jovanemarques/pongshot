@@ -17,19 +17,13 @@ module scenes {
 
         public Start(): void {
             // Create the players
-            this._player1 = new objects.Player(
-                enums.PlayerId.PLAYER_ONE,
-                config.Game.PLAYER1_CHARACTER
-            );
-            this._player2 = new objects.Player(
-                enums.PlayerId.PLAYER_TWO,
-                config.Game.PLAYER2_CHARACTER
-            );
+            this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
+            this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);
 
             setInterval(() => {
                 // TODO: make this timer logic work somehow and check for item collision.
                 // this._powerUp = new objects.PowerUp();
-            }, 5000 ||  Math.random() * 100);
+            }, 5000 || Math.random() * 100);
 
             this._powerUp = new objects.PowerUp();
 
@@ -52,12 +46,9 @@ module scenes {
 
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_ONE, enums.PlayerKeys.SHOOT)) {
                 let curTick = createjs.Ticker.getTicks();
-                if (curTick - this._plrOneBulletTick >= 60) {
+                if (curTick - this._plrOneBulletTick >= config.Game.PLAYER1_STATUS.AttackSpeed) {
                     this._player1.Attack();
-                    let bullet = new objects.Bullet(
-                        this._player1.position,
-                        enums.PlayerId.PLAYER_ONE
-                    );
+                    let bullet = new objects.Bullet(this._player1.position, enums.PlayerId.PLAYER_ONE);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     this._plrOneBulletTick = curTick;
@@ -66,12 +57,9 @@ module scenes {
 
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_TWO, enums.PlayerKeys.SHOOT)) {
                 let curTick = createjs.Ticker.getTicks();
-                if (curTick - this._plrTwoBulletTick >= 60) {
+                if (curTick - this._plrTwoBulletTick >= config.Game.PLAYER1_STATUS.AttackSpeed) {
                     this._player2.Attack();
-                    let bullet = new objects.Bullet(
-                        this._player2.position,
-                        enums.PlayerId.PLAYER_TWO
-                    );
+                    let bullet = new objects.Bullet(this._player2.position, enums.PlayerId.PLAYER_TWO);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     this._plrTwoBulletTick = curTick;
@@ -86,19 +74,23 @@ module scenes {
                     e.Update();
                 }
 
-                if (e.Player == enums.PlayerId.PLAYER_TWO &&
-                    managers.Collision.AABBCheck(this._player1, e)) {
+                if (e.Player == enums.PlayerId.PLAYER_TWO && managers.Collision.AABBCheck(this._player1, e)) {
                     this.removeChild(e);
                     delete this._bullets[index];
                     this._player1.Hit();
-                    this._gameBar.PostDamage(enums.PlayerId.PLAYER_ONE, 10);
+                    this._gameBar.PostDamage(
+                        enums.PlayerId.PLAYER_ONE,
+                        config.Game.PLAYER1_STATUS.CalculateDamage(config.Game.PLAYER2_STATUS.AtackPower)
+                    );
                 }
-                if (e.Player == enums.PlayerId.PLAYER_ONE &&
-                    managers.Collision.AABBCheck(this._player2, e)) {
+                if (e.Player == enums.PlayerId.PLAYER_ONE && managers.Collision.AABBCheck(this._player2, e)) {
                     this.removeChild(e);
                     delete this._bullets[index];
                     this._player2.Hit();
-                    this._gameBar.PostDamage(enums.PlayerId.PLAYER_TWO, 10);
+                    this._gameBar.PostDamage(
+                        enums.PlayerId.PLAYER_TWO,
+                        config.Game.PLAYER2_STATUS.CalculateDamage(config.Game.PLAYER1_STATUS.AtackPower)
+                    );
                 }
             });
         }

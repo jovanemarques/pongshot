@@ -46,7 +46,7 @@ var scenes;
             this._gameBar.Update();
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_ONE, enums.PlayerKeys.SHOOT)) {
                 var curTick = createjs.Ticker.getTicks();
-                if (curTick - this._plrOneBulletTick >= 60) {
+                if (curTick - this._plrOneBulletTick >= config.Game.PLAYER1_STATUS.AttackSpeed) {
                     this._player1.Attack();
                     var bullet = new objects.Bullet(this._player1.position, enums.PlayerId.PLAYER_ONE);
                     this._bullets.push(bullet);
@@ -56,7 +56,7 @@ var scenes;
             }
             if (managers.Keyboard.IsActive(enums.PlayerId.PLAYER_TWO, enums.PlayerKeys.SHOOT)) {
                 var curTick = createjs.Ticker.getTicks();
-                if (curTick - this._plrTwoBulletTick >= 60) {
+                if (curTick - this._plrTwoBulletTick >= config.Game.PLAYER1_STATUS.AttackSpeed) {
                     this._player2.Attack();
                     var bullet = new objects.Bullet(this._player2.position, enums.PlayerId.PLAYER_TWO);
                     this._bullets.push(bullet);
@@ -72,19 +72,17 @@ var scenes;
                 else if (e) {
                     e.Update();
                 }
-                if (e.Player == enums.PlayerId.PLAYER_TWO &&
-                    managers.Collision.AABBCheck(_this._player1, e)) {
+                if (e.Player == enums.PlayerId.PLAYER_TWO && managers.Collision.AABBCheck(_this._player1, e)) {
                     _this.removeChild(e);
                     delete _this._bullets[index];
                     _this._player1.Hit();
-                    _this._gameBar.PostDamage(enums.PlayerId.PLAYER_ONE, 10);
+                    _this._gameBar.PostDamage(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_STATUS.CalculateDamage(config.Game.PLAYER2_STATUS.AtackPower));
                 }
-                if (e.Player == enums.PlayerId.PLAYER_ONE &&
-                    managers.Collision.AABBCheck(_this._player2, e)) {
+                if (e.Player == enums.PlayerId.PLAYER_ONE && managers.Collision.AABBCheck(_this._player2, e)) {
                     _this.removeChild(e);
                     delete _this._bullets[index];
                     _this._player2.Hit();
-                    _this._gameBar.PostDamage(enums.PlayerId.PLAYER_TWO, 10);
+                    _this._gameBar.PostDamage(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_STATUS.CalculateDamage(config.Game.PLAYER1_STATUS.AtackPower));
                 }
             });
         };

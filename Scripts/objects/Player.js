@@ -33,8 +33,7 @@ var objects;
             if (this.position.y < config.Game.GAME_BAR_HEIGHT + this.halfHeight) {
                 this.position = new objects.Vector2(this.position.x, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
             }
-            else if (this.position.y >
-                config.Game.SCREEN_HEIGHT - this.halfHeight) {
+            else if (this.position.y > config.Game.SCREEN_HEIGHT - this.halfHeight) {
                 this.position = new objects.Vector2(this.position.x, config.Game.SCREEN_HEIGHT - this.halfHeight);
             }
         };
@@ -42,12 +41,10 @@ var objects;
             var velocity = new objects.Vector2(0, 0);
             var playerKeys = managers.Keyboard.GetPlayerKeys(this._playerId);
             // Verify the direction and set the y speed
-            if (playerKeys[enums.PlayerKeys.MOVE_UP] &&
-                !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
+            if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
                 velocity = new objects.Vector2(0, -this._playerVel);
             }
-            else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] &&
-                !playerKeys[enums.PlayerKeys.MOVE_UP]) {
+            else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
                 velocity = new objects.Vector2(0, this._playerVel);
             }
             this.position = objects.Vector2.add(this.position, velocity);
@@ -56,13 +53,13 @@ var objects;
             var _this = this;
             // Attack position for 250ms then go back.
             this.image = config.Game.ASSETS.getResult(this._playerCharacter + "Attack");
-            setTimeout(function () { return _this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter); }, 250);
+            setTimeout(function () { return (_this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter)); }, 250);
         };
         Player.prototype.Hit = function () {
             var _this = this;
             // Attack position for 250ms then go back.
             this.image = config.Game.ASSETS.getResult(this._playerCharacter + "Hit");
-            setTimeout(function () { return _this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter); }, 250);
+            setTimeout(function () { return (_this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter)); }, 250);
         };
         // PUBLIC METHODS
         Player.prototype.Start = function () {

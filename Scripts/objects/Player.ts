@@ -5,7 +5,6 @@ module objects {
         private _playerId: enums.PlayerId;
         private _playerCharacter: string;
 
-
         // CONSTRUCTOR
         constructor(playerId: enums.PlayerId, playerCharacter: string) {
             super(config.Game.ASSETS.getResult(playerCharacter), 0, 0, true);
@@ -19,18 +18,9 @@ module objects {
         protected _checkBounds(): void {
             // Upper and lower bound
             if (this.position.y < config.Game.GAME_BAR_HEIGHT + this.halfHeight) {
-                this.position = new Vector2(
-                    this.position.x,
-                    config.Game.GAME_BAR_HEIGHT + this.halfHeight
-                );
-            } else if (
-                this.position.y >
-                config.Game.SCREEN_HEIGHT - this.halfHeight
-            ) {
-                this.position = new Vector2(
-                    this.position.x,
-                    config.Game.SCREEN_HEIGHT - this.halfHeight
-                );
+                this.position = new Vector2(this.position.x, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
+            } else if (this.position.y > config.Game.SCREEN_HEIGHT - this.halfHeight) {
+                this.position = new Vector2(this.position.x, config.Game.SCREEN_HEIGHT - this.halfHeight);
             }
         }
 
@@ -39,15 +29,9 @@ module objects {
             let playerKeys = managers.Keyboard.GetPlayerKeys(this._playerId);
 
             // Verify the direction and set the y speed
-            if (
-                playerKeys[enums.PlayerKeys.MOVE_UP] &&
-                !playerKeys[enums.PlayerKeys.MOVE_DOWN]
-            ) {
+            if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
                 velocity = new Vector2(0, -this._playerVel);
-            } else if (
-                playerKeys[enums.PlayerKeys.MOVE_DOWN] &&
-                !playerKeys[enums.PlayerKeys.MOVE_UP]
-            ) {
+            } else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
                 velocity = new Vector2(0, this._playerVel);
             }
 
@@ -57,13 +41,13 @@ module objects {
         public Attack() {
             // Attack position for 250ms then go back.
             this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Attack`) as any;
-            setTimeout(() => this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any, 250);
+            setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
         }
 
         public Hit() {
             // Attack position for 250ms then go back.
             this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Hit`) as any;
-            setTimeout(() => this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any, 250);
+            setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
         }
 
         // PUBLIC METHODS
@@ -86,10 +70,7 @@ module objects {
                     config.Game.GAME_BAR_HEIGHT + this.halfHeight
                 );
             } else {
-                this.position = new Vector2(
-                    this.halfWidth,
-                    config.Game.GAME_BAR_HEIGHT + this.halfHeight
-                );
+                this.position = new Vector2(this.halfWidth, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
             }
         }
     }

@@ -1,6 +1,6 @@
 //IIFE - Immediately Invoked Function Expression
 //means -> self-executing anonymous function
-let Game = (function () {
+let Game = (function() {
     // variable declarations
     let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
     let stage: createjs.Stage;
@@ -12,33 +12,34 @@ let Game = (function () {
 
     let assetManifest = [
         // Images
-        {id: "companyLogo", src: "./Assets/images/CompanyLogo.png"},
-        {id: "blackBackground", src: "./Assets/images/bg_blackBackground.png"},
+        { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
+        { id: "blackBackground", src: "./Assets/images/bg_blackBackground.png" },
+        { id: "heart", src: "./Assets/images/heart.png" },
 
         // Buttons
-        {id: "btnConfirm", src: "./Assets/images/btn_confirm.png"},
-        {id: "btnPlay", src: "./Assets/images/btn_play.png"},
-        {id: "btnConfirm", src: "./Assets/images/btn_confirm.png"},
-        {id: "btnPlay", src: "./Assets/images/btn_play.png"},
+        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
+        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
+        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
+        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
 
         // Characters
-        {id: "mage", src: "./Assets/images/mage.png"},
-        {id: "mageAttack", src: "./Assets/images/mage_attack.png"},
-        {id: "mageHit", src: "./Assets/images/mage_hit.png"},
-        {id: "rogue", src: "./Assets/images/rogue.png"},
-        {id: "rogueAttack", src: "./Assets/images/rogue_attack.png"},
-        {id: "rogueHit", src: "./Assets/images/rogue_hit.png"},
+        { id: "mage", src: "./Assets/images/mage.png" },
+        { id: "mageAttack", src: "./Assets/images/mage_attack.png" },
+        { id: "mageHit", src: "./Assets/images/mage_hit.png" },
+        { id: "rogue", src: "./Assets/images/rogue.png" },
+        { id: "rogueAttack", src: "./Assets/images/rogue_attack.png" },
+        { id: "rogueHit", src: "./Assets/images/rogue_hit.png" },
 
         // Attacks
-        {id: "attack1", src: "./Assets/images/attack1.png"},
-        {id: "attack2", src: "./Assets/images/attack2.png"},
-        {id: "attackCollision", src: "./Assets/images/attack_collision.png"},
+        { id: "attack1", src: "./Assets/images/attack1.png" },
+        { id: "attack2", src: "./Assets/images/attack2.png" },
+        { id: "attackCollision", src: "./Assets/images/attack_collision.png" },
 
         // Items
-        {id: "itemArmor", src: "./Assets/images/item_armor.png"},
-        {id: "itemBoots", src: "./Assets/images/item_boots.png"},
-        {id: "itemHp", src: "./Assets/images/item_hp.png"},
-        {id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png"},
+        { id: "itemArmor", src: "./Assets/images/item_armor.png" },
+        { id: "itemBoots", src: "./Assets/images/item_boots.png" },
+        { id: "itemHp", src: "./Assets/images/item_hp.png" },
+        { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" }
     ];
 
     function Preload(): void {

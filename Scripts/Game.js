@@ -12,6 +12,7 @@ var Game = (function () {
         // Images
         { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
         { id: "blackBackground", src: "./Assets/images/bg_blackBackground.png" },
+        { id: "heart", src: "./Assets/images/heart.png" },
         // Buttons
         { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
         { id: "btnPlay", src: "./Assets/images/btn_play.png" },
@@ -32,7 +33,7 @@ var Game = (function () {
         { id: "itemArmor", src: "./Assets/images/item_armor.png" },
         { id: "itemBoots", src: "./Assets/images/item_boots.png" },
         { id: "itemHp", src: "./Assets/images/item_hp.png" },
-        { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" },
+        { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" }
     ];
     function Preload() {
         assets = new createjs.LoadQueue(); // asset container

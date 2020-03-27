@@ -30,20 +30,10 @@ module scenes {
         // PUBLIC METHODS
         public Start(): void {
             // Background
-            this._background = new objects.Image(
-                config.Game.ASSETS.getResult("blackBackground")
-            );
+            this._background = new objects.Image(config.Game.ASSETS.getResult("blackBackground"));
 
             // Labels
-            this._player1Label = new objects.Label(
-                "Player One",
-                "60px",
-                "Pixel",
-                "#ffcc5c",
-                300,
-                200,
-                true
-            );
+            this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
             this._player2Label = new objects.Label(
                 "Player Two",
                 "60px",
@@ -53,15 +43,7 @@ module scenes {
                 200,
                 true
             );
-            this._welcomeLabel = new objects.Label(
-                "The Game",
-                "120px",
-                "Pixel",
-                "#96ceb2",
-                640,
-                100,
-                true
-            );
+            this._welcomeLabel = new objects.Label("The Game", "120px", "Pixel", "#96ceb2", 640, 100, true);
 
             // Buttons
             this._startButton = new objects.Button(
@@ -73,20 +55,8 @@ module scenes {
             );
 
             // Player one
-            this._p1MageButton = new objects.Button(
-                config.Game.ASSETS.getResult("mage"),
-                300,
-                300,
-                true,
-                1.5
-            );
-            this._p1RogueButton = new objects.Button(
-                config.Game.ASSETS.getResult("rogue"),
-                300,
-                400,
-                true,
-                1.5
-            );
+            this._p1MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), 300, 300, true, 1.5);
+            this._p1RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), 300, 400, true, 1.5);
 
             // Player two
             this._p2MageButton = new objects.Button(
@@ -109,9 +79,7 @@ module scenes {
             this.Main();
         }
 
-        public Update(): void {
-
-        }
+        public Update(): void {}
 
         public Main(): void {
             this.addChild(this._background);
@@ -130,12 +98,14 @@ module scenes {
                 this._p1RogueButton.SetInactive();
                 this._p1MageButton.SetActive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.MAGE;
+                config.Game.PLAYER1_STATUS = objects.CharacterStatusMage;
                 this.validateGame();
             });
             this._p1RogueButton.on("click", () => {
                 this._p1RogueButton.SetActive();
                 this._p1MageButton.SetInactive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.ROGUE;
+                config.Game.PLAYER1_STATUS = objects.CharacterStatusRogue;
                 this.validateGame();
             });
 
@@ -144,12 +114,14 @@ module scenes {
                 this._p2RogueButton.SetInactive();
                 this._p2MageButton.SetActive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.MAGE;
+                config.Game.PLAYER2_STATUS = objects.CharacterStatusMage;
                 this.validateGame();
             });
             this._p2RogueButton.on("click", () => {
                 this._p2RogueButton.SetActive();
                 this._p2MageButton.SetInactive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.ROGUE;
+                config.Game.PLAYER2_STATUS = objects.CharacterStatusRogue;
                 this.validateGame();
             });
 

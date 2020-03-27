@@ -47,8 +47,7 @@ var scenes;
             this._p2RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), config.Game.SCREEN_WIDTH - 300, 400, true, 1.5, true);
             this.Main();
         };
-        Start.prototype.Update = function () {
-        };
+        Start.prototype.Update = function () { };
         Start.prototype.Main = function () {
             var _this = this;
             this.addChild(this._background);
@@ -65,12 +64,14 @@ var scenes;
                 _this._p1RogueButton.SetInactive();
                 _this._p1MageButton.SetActive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.MAGE;
+                config.Game.PLAYER1_STATUS = objects.CharacterStatusMage;
                 _this.validateGame();
             });
             this._p1RogueButton.on("click", function () {
                 _this._p1RogueButton.SetActive();
                 _this._p1MageButton.SetInactive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.ROGUE;
+                config.Game.PLAYER1_STATUS = objects.CharacterStatusRogue;
                 _this.validateGame();
             });
             // Player two handlers.
@@ -78,12 +79,14 @@ var scenes;
                 _this._p2RogueButton.SetInactive();
                 _this._p2MageButton.SetActive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.MAGE;
+                config.Game.PLAYER2_STATUS = objects.CharacterStatusMage;
                 _this.validateGame();
             });
             this._p2RogueButton.on("click", function () {
                 _this._p2RogueButton.SetActive();
                 _this._p2MageButton.SetInactive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.ROGUE;
+                config.Game.PLAYER2_STATUS = objects.CharacterStatusRogue;
                 _this.validateGame();
             });
             // Call this once here to "initialize" as inactive
