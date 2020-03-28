@@ -17,7 +17,7 @@ module objects {
             return this._level;
         }
         public get AttackSpeed(): number {
-            return this._attackSpeed * (this._attackSpeedPUTick > 0 ? 2 : 1);
+            return this._attackSpeed / (this._attackSpeedPUTick > 0 ? 2 : 1);
         }
         public get AtackPower(): number {
             return this._attackPower * (this._attackPowerPUTick > 0 ? 2 : 1);
@@ -54,7 +54,7 @@ module objects {
         public LevelUp(): void {
             if (this._level < 5) {
                 this._level++;
-                this._attackSpeed += this._attackSpeedIncrement;
+                this._attackSpeed -= this._attackSpeedIncrement;
                 this._attackPower += this._attackPowerIncrement;
                 this._armor += this._armorIncrement;
             }

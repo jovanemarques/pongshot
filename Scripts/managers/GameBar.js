@@ -9,6 +9,7 @@ var managers;
     var HB_POS_Y = 10;
     var XPB_HEIGHT = 8;
     var XPB_POS_Y = 35;
+    var STATUS_POS_Y = 50;
     var GameBar = /** @class */ (function () {
         // CONSTRUCTOR
         function GameBar() {
@@ -19,16 +20,18 @@ var managers;
             this._gameStart = new Date().getTime();
             this._plrOneLifeBar = new objects.GraphicBar(BARS_POS_X_P1, HB_POS_Y, BARS_WIDTH, HB_HEIGHT, objects.GameBarType.HEALTH);
             this._plrOneHeartIcon = new objects.Image(config.Game.ASSETS.getResult("heart"), BARS_POS_X_P1 + BARS_WIDTH + 10, HB_POS_Y);
+            this._plrOneXpBar = new objects.GraphicBar(BARS_POS_X_P1, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE);
+            this._plrOneStatus = this._createStatusBarImages(BARS_POS_X_P1, STATUS_POS_Y, 25);
             this._plrTwoLifeBar = new objects.GraphicBar(BARS_POS_X_P2, HB_POS_Y, BARS_WIDTH, HB_HEIGHT, objects.GameBarType.HEALTH, true);
             this._plrTwoHeartIcon = new objects.Image(config.Game.ASSETS.getResult("heart"), BARS_POS_X_P2 - 30, HB_POS_Y);
-            this._plrOneXpBar = new objects.GraphicBar(BARS_POS_X_P1, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE);
             this._plrTwoXpBar = new objects.GraphicBar(BARS_POS_X_P2, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE, true);
+            this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
             this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
         }
         Object.defineProperty(GameBar.prototype, "ScreenObjects", {
             // PUBLIC PROPERTIES
             get: function () {
-                return [
+                var result = [
                     this._timerLabel,
                     this._plrOneLifeBar,
                     this._plrTwoLifeBar,
@@ -37,10 +40,29 @@ var managers;
                     this._plrOneHeartIcon,
                     this._plrTwoHeartIcon
                 ];
+                this._plrOneStatus.forEach(function (i) { return result.push(i); });
+                this._plrTwoStatus.forEach(function (i) { return result.push(i); });
+                return result;
             },
             enumerable: true,
             configurable: true
         });
+        // PRIVATE METHODS
+        GameBar.prototype._createStatusBarImages = function (posX, posY, incPosX) {
+            var result = new Array();
+            var imagesToCreate = ["itemArmor", "itemBoots", "itemSpellScroll"];
+            var currentPosX = posX;
+            imagesToCreate.forEach(function (item) {
+                var image = new objects.Image(config.Game.ASSETS.getResult(item), currentPosX, posY, false);
+                image.scaleX = 0.5;
+                image.scaleY = 0.5;
+                image.alpha = 0.25;
+                result.push(image);
+                currentPosX += incPosX;
+            });
+            return result;
+        };
+        // PUBLIC METHODS
         GameBar.prototype.Update = function () {
             var curMilis = new Date().getTime();
             var secondsDiff = (curMilis - this._gameStart) / 1000;

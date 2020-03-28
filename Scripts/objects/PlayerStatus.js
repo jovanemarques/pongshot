@@ -25,7 +25,7 @@ var objects;
         });
         Object.defineProperty(PlayerStatus.prototype, "AttackSpeed", {
             get: function () {
-                return this._attackSpeed * (this._attackSpeedPUTick > 0 ? 2 : 1);
+                return this._attackSpeed / (this._attackSpeedPUTick > 0 ? 2 : 1);
             },
             enumerable: true,
             configurable: true
@@ -49,7 +49,7 @@ var objects;
         PlayerStatus.prototype.LevelUp = function () {
             if (this._level < 5) {
                 this._level++;
-                this._attackSpeed += this._attackSpeedIncrement;
+                this._attackSpeed -= this._attackSpeedIncrement;
                 this._attackPower += this._attackPowerIncrement;
                 this._armor += this._armorIncrement;
             }
