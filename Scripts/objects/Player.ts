@@ -5,6 +5,11 @@ module objects {
         private _playerId: enums.PlayerId;
         private _playerCharacter: string;
 
+        // PUBLIC PROPERTIES
+        public get PlayerId(): enums.PlayerId {
+            return this._playerId;
+        }
+
         // CONSTRUCTOR
         constructor(playerId: enums.PlayerId, playerCharacter: string) {
             super(config.Game.ASSETS.getResult(playerCharacter), 0, 0, true);

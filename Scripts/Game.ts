@@ -39,7 +39,8 @@ let Game = (function() {
         { id: "itemArmor", src: "./Assets/images/item_armor.png" },
         { id: "itemBoots", src: "./Assets/images/item_boots.png" },
         { id: "itemHp", src: "./Assets/images/item_hp.png" },
-        { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" }
+        { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" },
+        { id: "itemXp", src: "./Assets/images/item_xp.png" }
     ];
 
     function Preload(): void {

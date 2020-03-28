@@ -18,24 +18,36 @@ var objects;
         __extends(PowerUp, _super);
         // CONSTRUCTOR
         function PowerUp() {
-            var _this = _super.call(this, config.Game.ASSETS.getResult(constants.PowerUps[Math.floor(Math.random() * constants.PowerUps.length)]), Math.floor(config.Game.SCREEN_WIDTH / 2), Math.floor(Math.random() * config.Game.SCREEN_HEIGHT - config.Game.GAME_BAR_HEIGHT) + config.Game.GAME_BAR_HEIGHT, true) || this;
-            _this.Reset();
+            var _this = _super.call(this, config.Game.ASSETS.getResult(constants.PowerUps[0]), config.Game.SCREEN_WIDTH, config.Game.SCREEN_HEIGHT) || this;
+            // It will display in a random position between 1/3 and 2/3 of the screen, and calculate positions
+            var oneThirdScreen = config.Game.SCREEN_WIDTH / 3;
+            var posX = util.Mathf.RandomRange(oneThirdScreen, oneThirdScreen * 2 - _this.width);
+            var posY = util.Mathf.RandomRange(config.Game.GAME_BAR_HEIGHT, config.Game.SCREEN_HEIGHT - _this.height);
+            // Get a random power type
+            _this._powerType = constants.PowerUps[util.Mathf.RandomRangeInt(0, constants.PowerUps.length - 1)];
+            _this.image = config.Game.ASSETS.getResult(_this._powerType);
+            _this.position = new objects.Vector2(posX, posY);
+            console.log("Creating power up at " + posX + ", " + posY + ", " + _this._powerType);
             _this.Start();
-            _this.scaleX = 2;
-            _this.scaleY = 2;
             return _this;
         }
+        Object.defineProperty(PowerUp.prototype, "PowerType", {
+            // PUBLIC PROPERTIES
+            get: function () {
+                return this._powerType;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // PUBLIC METHODS
         PowerUp.prototype.Start = function () {
-            this.type = enums.GameObjectType.PLAYER;
+            this.type = enums.GameObjectType.POWER_UP;
         };
         PowerUp.prototype.Update = function () {
             this._checkBounds();
         };
-        PowerUp.prototype.Reset = function () {
-        };
-        PowerUp.prototype._checkBounds = function () {
-        };
+        PowerUp.prototype.Reset = function () { };
+        PowerUp.prototype._checkBounds = function () { };
         return PowerUp;
     }(objects.GameObject));
     objects.PowerUp = PowerUp;

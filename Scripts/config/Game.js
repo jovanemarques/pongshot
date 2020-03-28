@@ -8,6 +8,7 @@ var config;
         Game.SCREEN_HEIGHT = 720;
         Game.FPS = 60; // 60 Frames per second
         Game.GAME_BAR_HEIGHT = 80;
+        Game.INITIAL_ITEM_SPAWN_TICKER = 30 * Game.FPS;
         return Game;
     }());
     config.Game = Game;
