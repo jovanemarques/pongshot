@@ -4,7 +4,7 @@ module objects {
 
     // constructor
     constructor(
-      imagePath: Object = config.Game.ASSETS.getResult("button"),
+      imagePath: Object = config.Game.ASSETS.getResult("btnBack"),
       x: number = 0,
       y: number = 0,
       isCentered: boolean = false,

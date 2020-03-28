@@ -17,7 +17,7 @@ var Game = (function () {
         { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
         { id: "btnPlay", src: "./Assets/images/btn_play.png" },
         { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
-        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
+        { id: "btnBack", src: "./Assets/images/btn_back.png" },
         // Characters
         { id: "mage", src: "./Assets/images/mage.png" },
         { id: "mageAttack", src: "./Assets/images/mage_attack.png" },
