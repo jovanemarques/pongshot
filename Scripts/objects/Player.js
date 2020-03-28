@@ -27,6 +27,14 @@ var objects;
             _this.Start();
             return _this;
         }
+        Object.defineProperty(Player.prototype, "PlayerId", {
+            // PUBLIC PROPERTIES
+            get: function () {
+                return this._playerId;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // PRIVATE METHODS
         Player.prototype._checkBounds = function () {
             // Upper and lower bound

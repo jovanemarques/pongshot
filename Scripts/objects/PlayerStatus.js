@@ -11,6 +11,9 @@ var objects;
             this._attackPowerIncrement = incAP;
             this._armor = initialArmor;
             this._armorIncrement = incAr;
+            this._attackSpeedPUTick = -1;
+            this._attackPowerPUTick = -1;
+            this._armorPUTick = -1;
         }
         Object.defineProperty(PlayerStatus.prototype, "Level", {
             // PUBLIC PROPERTIES
@@ -22,21 +25,21 @@ var objects;
         });
         Object.defineProperty(PlayerStatus.prototype, "AttackSpeed", {
             get: function () {
-                return this._attackSpeed;
+                return this._attackSpeed * (this._attackSpeedPUTick > 0 ? 2 : 1);
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(PlayerStatus.prototype, "AtackPower", {
             get: function () {
-                return this._attackPower;
+                return this._attackPower * (this._attackPowerPUTick > 0 ? 2 : 1);
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(PlayerStatus.prototype, "Armor", {
             get: function () {
-                return this._armor;
+                return this._armor * (this._armorPUTick > 0 ? 2 : 1);
             },
             enumerable: true,
             configurable: true
@@ -52,7 +55,24 @@ var objects;
             }
         };
         PlayerStatus.prototype.CalculateDamage = function (attack) {
-            return attack - attack * this._armor * 0.01;
+            return attack - attack * this.Armor * 0.01;
+        };
+        PlayerStatus.prototype.ActivatePowerUp = function (power, tick) {
+            switch (power.PowerType) {
+                case "itemArmor":
+                    this._armorPUTick = tick;
+                    break;
+                case "itemSpellScroll":
+                    this._attackPowerPUTick = tick;
+                    break;
+                case "itemBoots":
+                    this._attackSpeedPUTick = tick;
+                    break;
+                case "itemHp":
+                    break;
+                case "itemXp":
+                    break;
+            }
         };
         return PlayerStatus;
     }());

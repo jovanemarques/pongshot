@@ -6,18 +6,6 @@ module managers {
 
             if (objects.Vector2.sqrDistance(object1.position, object2.position) < radii * radii) {
                 if (!object2.isColliding) {
-                    switch (object2.type) {
-                        case enums.GameObjectType.ISLAND:
-                            console.log("Collision with Island!");
-                            let yaySound = createjs.Sound.play("yay");
-                            yaySound.volume = 0.2;
-                            break;
-                        case enums.GameObjectType.CLOUD:
-                            console.log("Collision with Cloud!");
-                            let thunderSound = createjs.Sound.play("thunder");
-                            thunderSound.volume = 0.2;
-                            break;
-                    }
                     object2.isColliding = true;
                     return true;
                 }
@@ -52,18 +40,6 @@ module managers {
                 object1TopLeft.y + object1.height > object2TopLeft.y
             ) {
                 if (!object2.isColliding) {
-                    switch (object2.type) {
-                        case enums.GameObjectType.ISLAND:
-                            console.log("Collision with Island!");
-                            let yaySound = createjs.Sound.play("yay");
-                            yaySound.volume = 0.2;
-                            break;
-                        case enums.GameObjectType.CLOUD:
-                            console.log("Collision with Cloud!");
-                            let thunderSound = createjs.Sound.play("thunder");
-                            thunderSound.volume = 0.2;
-                            break;
-                    }
                     object2.isColliding = true;
                     return true;
                 }
