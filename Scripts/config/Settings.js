@@ -13,7 +13,7 @@ var config;
         Settings.KeyPlayerTwoDown = 40; // KEY DOWN
         Settings.KeyPlayerTwoCCW = 39; // KEY LEFT
         Settings.KeyPlayerTwoCW = 37; // KEY RIGHT
-        Settings.KeyPlayerTwoShoot = 33; // NUMPAD 0
+        Settings.KeyPlayerTwoShoot = 96; // NUMPAD 0
         return Settings;
     }());
     config.Settings = Settings;

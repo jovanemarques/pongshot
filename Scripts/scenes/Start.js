@@ -36,7 +36,7 @@ var scenes;
             // Labels
             this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
             this._player2Label = new objects.Label("Player Two", "60px", "Pixel", "#ffcc5c", config.Game.SCREEN_WIDTH - 300, 200, true);
-            this._welcomeLabel = new objects.Label("The Game", "120px", "Pixel", "#96ceb2", 640, 100, true);
+            this._gameTitle = new objects.Label("Pongshot", "120px", "Pixel", "#96ceb2", config.Game.SCREEN_WIDTH / 2, 100, true);
             // Buttons
             this._startButton = new objects.Button(config.Game.ASSETS.getResult("btnPlay"), 640, config.Game.SCREEN_HEIGHT - 100, true, 5);
             // Player one
@@ -51,7 +51,7 @@ var scenes;
         Start.prototype.Main = function () {
             var _this = this;
             this.addChild(this._background);
-            this.addChild(this._welcomeLabel);
+            this.addChild(this._gameTitle);
             this.addChild(this._player1Label);
             this.addChild(this._player2Label);
             this.addChild(this._startButton);

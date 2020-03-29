@@ -2,7 +2,7 @@ module scenes {
     export class Start extends objects.Scene {
         // PRIVATE INSTANCE MEMBERS
         private _background: objects.Image;
-        private _welcomeLabel: objects.Label;
+        private _gameTitle: objects.Label;
         private _player1Label: objects.Label;
         private _player2Label: objects.Label;
         private _startButton: objects.Button;
@@ -43,7 +43,15 @@ module scenes {
                 200,
                 true
             );
-            this._welcomeLabel = new objects.Label("The Game", "120px", "Pixel", "#96ceb2", 640, 100, true);
+            this._gameTitle = new objects.Label(
+                "Pongshot",
+                "120px",
+                "Pixel",
+                "#96ceb2",
+                config.Game.SCREEN_WIDTH / 2,
+                100,
+                true
+            );
 
             // Buttons
             this._startButton = new objects.Button(
@@ -83,7 +91,7 @@ module scenes {
 
         public Main(): void {
             this.addChild(this._background);
-            this.addChild(this._welcomeLabel);
+            this.addChild(this._gameTitle);
             this.addChild(this._player1Label);
             this.addChild(this._player2Label);
             this.addChild(this._startButton);

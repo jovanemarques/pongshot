@@ -1,10 +1,10 @@
 module objects {
     export class PowerUp extends GameObject {
         // PRIVATE INSTANCE MEMBERS
-        private _powerType: string;
+        private _powerType: enums.PowerUpTypes;
 
         // PUBLIC PROPERTIES
-        public get PowerType(): string {
+        public get PowerType(): enums.PowerUpTypes {
             return this._powerType;
         }
 
@@ -22,7 +22,9 @@ module objects {
             let posY = util.Mathf.RandomRange(config.Game.GAME_BAR_HEIGHT, config.Game.SCREEN_HEIGHT - this.height);
 
             // Get a random power type
-            this._powerType = constants.PowerUps[util.Mathf.RandomRangeInt(0, constants.PowerUps.length - 1)];
+            this._powerType = constants.PowerUps[
+                util.Mathf.RandomRangeInt(0, constants.PowerUps.length - 1)
+            ] as enums.PowerUpTypes;
             this.image = config.Game.ASSETS.getResult(this._powerType) as any;
             this.position = new objects.Vector2(posX, posY);
             console.log(`Creating power up at ${posX}, ${posY}, ${this._powerType}`);

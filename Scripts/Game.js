@@ -34,7 +34,8 @@ var Game = (function () {
         { id: "itemBoots", src: "./Assets/images/item_boots.png" },
         { id: "itemHp", src: "./Assets/images/item_hp.png" },
         { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" },
-        { id: "itemXp", src: "./Assets/images/item_xp.png" }
+        { id: "itemXp", src: "./Assets/images/item_xp.png" },
+        { id: "itemTrap", src: "./Assets/images/item_trap.png" }
     ];
     function Preload() {
         assets = new createjs.LoadQueue(); // asset container
