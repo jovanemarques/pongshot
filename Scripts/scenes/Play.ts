@@ -22,7 +22,7 @@ module scenes {
             if (managers.Keyboard.IsActive(player.PlayerId, enums.PlayerKeys.SHOOT)) {
                 // Verify if the player can shoot
                 let curTick = createjs.Ticker.getTicks();
-                if (curTick - bulletTick >= status.AttackSpeed) {
+                if (curTick - bulletTick >= status.GetValue(enums.StatusTypes.ATK_SPEED)) {
                     player.Attack();
                     let bullet = new objects.Bullet(player.position, player.PlayerId);
                     this._bullets.push(bullet);
@@ -50,22 +50,25 @@ module scenes {
                     this._player1.Hit();
                     this._gameBar.PostDamage(
                         enums.PlayerId.PLAYER_ONE,
-                        config.Game.PLAYER1_STATUS.CalculateDamage(config.Game.PLAYER2_STATUS.AtackPower)
+                        config.Game.PLAYER1_STATUS.CalculateDamage(
+                            config.Game.PLAYER2_STATUS.GetValue(enums.StatusTypes.ATK_POWER)
+                        )
                     );
                     bulletHit = true;
                 }
-                bulletHit = bulletHit || this._checkPowerUpCollision(e, config.Game.PLAYER2_STATUS);
             } else if (e.Player == enums.PlayerId.PLAYER_ONE) {
                 if (managers.Collision.AABBCheck(this._player2, e)) {
                     this._player2.Hit();
                     this._gameBar.PostDamage(
                         enums.PlayerId.PLAYER_TWO,
-                        config.Game.PLAYER2_STATUS.CalculateDamage(config.Game.PLAYER1_STATUS.AtackPower)
+                        config.Game.PLAYER2_STATUS.CalculateDamage(
+                            config.Game.PLAYER1_STATUS.GetValue(enums.StatusTypes.ATK_POWER)
+                        )
                     );
                     bulletHit = true;
                 }
-                bulletHit = bulletHit || this._checkPowerUpCollision(e, config.Game.PLAYER1_STATUS);
             }
+            bulletHit = bulletHit || this._checkPowerUpCollision(e);
 
             // If the bullet hit something, remove it
             if (bulletHit) {
@@ -74,18 +77,39 @@ module scenes {
             }
         }
 
-        private _checkPowerUpCollision(e: objects.Bullet, status: objects.PlayerStatus): boolean {
+        private _checkPowerUpCollision(e: objects.Bullet): boolean {
             let result: boolean = false;
             // Checks if the bullet activate the power up
             this._powerUp.forEach((pu, index) => {
                 if (managers.Collision.squaredRadiusCheck(pu, e)) {
-                    status.ActivatePowerUp(pu, createjs.Ticker.getTicks());
+                    this._activatePowerUp(pu, e.Player);
                     this.removeChild(pu);
                     delete this._powerUp[index];
                     result = true;
                 }
             });
             return result;
+        }
+
+        private _activatePowerUp(pu: objects.PowerUp, playerId: enums.PlayerId): void {
+            let status: objects.PlayerStatus =
+                playerId == enums.PlayerId.PLAYER_ONE ? config.Game.PLAYER1_STATUS : config.Game.PLAYER2_STATUS;
+
+            switch (pu.PowerType) {
+                case enums.PowerUpTypes.ARMOR:
+                case enums.PowerUpTypes.ATTACK_POWER:
+                case enums.PowerUpTypes.ATTACK_SPEED:
+                    status.ActivatePowerUp(pu, createjs.Ticker.getTicks());
+                    break;
+
+                case enums.PowerUpTypes.POTION_HP:
+                    this._gameBar.ReceiveHealing(playerId);
+                    break;
+
+                case enums.PowerUpTypes.POTION_XP:
+                    this._gameBar.ReceiveExperience(playerId);
+                    break;
+            }
         }
 
         private _createPowerUp(): void {
@@ -137,6 +161,9 @@ module scenes {
 
             this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER1_STATUS, this._plrOneBulletTick);
             this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.PLAYER2_STATUS, this._plrTwoBulletTick);
+
+            config.Game.PLAYER1_STATUS.Update();
+            config.Game.PLAYER2_STATUS.Update();
 
             this._bullets.forEach((e, index) => {
                 this._checkBullet(e, index);

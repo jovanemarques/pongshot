@@ -13,5 +13,9 @@ var constants;
     // The super inherited for GameObject should not access 'this', therefore I would't have direct access to this array
     // on PowerUp construction - feel free to try out something else if you want.
     constants.PowerUps = util.Util.enumStringToArray(enums.PowerUpTypes);
+    // Max Level
+    constants.MAX_LEVEL = 5;
+    // Default powerup tick
+    constants.DEFAULT_POWER_UP_TICK = -1;
 })(constants || (constants = {}));
 //# sourceMappingURL=PlayerType.js.map

@@ -12,6 +12,12 @@ module managers {
 
     const STATUS_POS_Y: number = 50;
 
+    const XP_POTION_VALUE: number = 10;
+    const XP_PER_LEVEL: Array<number> = [20, 30, 40, 80];
+
+    const HP_POTION_VALUE: number = 25;
+    const HP_MAX_VALUE: number = 100;
+
     export class GameBar {
         // PRIVATE INSTANCE MEMBERS
         private _plrOneLife: number;
@@ -23,11 +29,13 @@ module managers {
         private _plrOneLifeBar: objects.GraphicBar;
         private _plrOneHeartIcon: objects.Image;
         private _plrOneXpBar: objects.GraphicBar;
+        private _plrOneLevelLabel: objects.Label;
         private _plrOneStatus: Array<objects.Image>;
 
         private _plrTwoLifeBar: objects.GraphicBar;
         private _plrTwoHeartIcon: objects.Image;
         private _plrTwoXpBar: objects.GraphicBar;
+        private _plrTwoLevelLabel: objects.Label;
         private _plrTwoStatus: Array<objects.Image>;
 
         private _timerLabel: objects.Label;
@@ -37,14 +45,16 @@ module managers {
             let result: Array<createjs.DisplayObject> = [
                 this._timerLabel,
                 this._plrOneLifeBar,
-                this._plrTwoLifeBar,
                 this._plrOneXpBar,
-                this._plrTwoXpBar,
+                this._plrOneLevelLabel,
                 this._plrOneHeartIcon,
-                this._plrTwoHeartIcon
+                this._plrTwoLifeBar,
+                this._plrTwoXpBar,
+                this._plrTwoHeartIcon,
+                this._plrTwoLevelLabel
             ];
-            this._plrOneStatus.forEach(i => result.push(i));
-            this._plrTwoStatus.forEach(i => result.push(i));
+            //     this._plrOneStatus.forEach(i => result.push(i));
+            //      this._plrTwoStatus.forEach(i => result.push(i));
             return result;
         }
 
@@ -75,7 +85,15 @@ module managers {
                 XPB_HEIGHT,
                 objects.GameBarType.EXPERIENCE
             );
-            this._plrOneStatus = this._createStatusBarImages(BARS_POS_X_P1, STATUS_POS_Y, 25);
+            // this._plrOneStatus = this._createStatusBarImages(BARS_POS_X_P1, STATUS_POS_Y, 25);
+            this._plrOneLevelLabel = new objects.Label(
+                "LVL 1",
+                "bold 16px",
+                "Consolas",
+                "#021775",
+                BARS_POS_X_P1 + BARS_WIDTH + 10,
+                XPB_POS_Y
+            );
 
             this._plrTwoLifeBar = new objects.GraphicBar(
                 BARS_POS_X_P2,
@@ -98,7 +116,15 @@ module managers {
                 objects.GameBarType.EXPERIENCE,
                 true
             );
-            this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
+            this._plrTwoLevelLabel = new objects.Label(
+                "LVL 1",
+                "bold 16px",
+                "Consolas",
+                "#021775",
+                BARS_POS_X_P2 - 55,
+                XPB_POS_Y
+            );
+            //this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
 
             this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
         }
@@ -106,19 +132,37 @@ module managers {
         // PRIVATE METHODS
         private _createStatusBarImages(posX: number, posY: number, incPosX: number): Array<objects.Image> {
             let result = new Array<objects.Image>();
-            let imagesToCreate = ["itemArmor", "itemBoots", "itemSpellScroll"];
+            let imagesToCreate = [
+                enums.PowerUpTypes.ARMOR,
+                enums.PowerUpTypes.ATTACK_POWER,
+                enums.PowerUpTypes.ATTACK_SPEED,
+                enums.PowerUpTypes.TRAP
+            ];
             let currentPosX: number = posX;
 
             imagesToCreate.forEach(item => {
-                let image = new objects.Image(config.Game.ASSETS.getResult(item), currentPosX, posY, false);
+                console.log("Item to create: " + `${item}_disabled`);
+                console.log("Item: " + config.Game.ITEMS_ATLAS.getAnimation(`${item}_disabled`));
+                let image = new objects.Image(
+                    new createjs.Sprite(config.Game.ITEMS_ATLAS, `${item}_disabled`).bitmapCache,
+                    currentPosX,
+                    posY,
+                    false
+                );
+
                 image.scaleX = 0.5;
                 image.scaleY = 0.5;
-                image.alpha = 0.25;
                 result.push(image);
                 currentPosX += incPosX;
             });
 
             return result;
+        }
+
+        private _checkStatus(type: enums.StatusTypes, powerStatus: enums.PowerUpStatus): void {
+            switch (type) {
+                case enums.StatusTypes.ARMOR:
+            }
         }
 
         // PUBLIC METHODS
@@ -129,6 +173,18 @@ module managers {
             let minutes: string = ("000" + Math.floor(secondsDiff / 60)).substr(-3);
 
             this._timerLabel.text = `${minutes}:${seconds}`;
+
+            // Check for status
+            let currentTicks = createjs.Ticker.getTicks();
+
+            // Check for all the status for player 1 and 2
+            for (let i: number = 0; i < enums.StatusTypes.NUM_OF_STATUS; i++) {
+                let type = i as enums.StatusTypes;
+                let powerStatus = config.Game.PLAYER1_STATUS.GetPowerStatus(type);
+                if (powerStatus != enums.PowerUpStatus.INACTIVE) {
+                    this._checkStatus(type, powerStatus);
+                }
+            }
         }
 
         public PostDamage(player: enums.PlayerId, damage: number): void {
@@ -148,6 +204,60 @@ module managers {
                     config.Game.SCENE = scenes.State.END;
                     config.Game.WINNER = enums.PlayerId.PLAYER_ONE;
                 }
+            }
+        }
+
+        public ReceiveExperience(player: enums.PlayerId): void {
+            console.log("ReceiveXP: " + player);
+            if (player == enums.PlayerId.PLAYER_ONE) {
+                let posXpLvl = config.Game.PLAYER1_STATUS.Level;
+                if (posXpLvl < constants.MAX_LEVEL) {
+                    posXpLvl--;
+                    this._plrOneXp += XP_POTION_VALUE;
+
+                    if (this._plrOneXp >= XP_PER_LEVEL[posXpLvl]) {
+                        config.Game.PLAYER1_STATUS.LevelUp();
+                        this._plrOneLevelLabel.setText(`LVL ${config.Game.PLAYER1_STATUS.Level}`);
+                        if (config.Game.PLAYER1_STATUS.Level < constants.MAX_LEVEL) {
+                            this._plrOneXp = 0;
+                        }
+                    }
+                    this._plrOneXpBar.Value = (100 * this._plrOneXp) / XP_PER_LEVEL[posXpLvl];
+                    console.log("plronexpbarvalue: " + this._plrOneXpBar.Value);
+                }
+            } else if (player == enums.PlayerId.PLAYER_TWO) {
+                let posXpLvl = config.Game.PLAYER2_STATUS.Level;
+                if (posXpLvl < constants.MAX_LEVEL) {
+                    posXpLvl--;
+                    this._plrTwoXp += XP_POTION_VALUE;
+
+                    if (this._plrTwoXp >= XP_PER_LEVEL[posXpLvl]) {
+                        config.Game.PLAYER2_STATUS.LevelUp();
+                        this._plrTwoLevelLabel.setText(`LVL ${config.Game.PLAYER2_STATUS.Level}`);
+                        if (config.Game.PLAYER2_STATUS.Level < constants.MAX_LEVEL) {
+                            this._plrTwoXp = 0;
+                        }
+                    }
+                    console.log("plrtwoxp: " + this._plrTwoXp);
+                    this._plrTwoXpBar.Value = (100 * this._plrTwoXp) / XP_PER_LEVEL[posXpLvl];
+                    console.log("plrtwoxpbarvalue: " + this._plrTwoXpBar.Value);
+                }
+            }
+        }
+
+        public ReceiveHealing(player: enums.PlayerId): void {
+            if (player == enums.PlayerId.PLAYER_ONE) {
+                this._plrOneLife += HP_POTION_VALUE;
+                if (this._plrOneLife > HP_MAX_VALUE) {
+                    this._plrOneLife = HP_MAX_VALUE;
+                }
+                this._plrOneLifeBar.Value = this._plrOneLife;
+            } else if (player == enums.PlayerId.PLAYER_TWO) {
+                this._plrTwoLife += HP_POTION_VALUE;
+                if (this._plrTwoLife > HP_MAX_VALUE) {
+                    this._plrTwoLife = HP_MAX_VALUE;
+                }
+                this._plrTwoLifeBar.Value = this._plrTwoLife;
             }
         }
     }

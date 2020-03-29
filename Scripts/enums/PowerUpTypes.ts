@@ -1,12 +1,12 @@
 module enums {
     export enum PowerUpTypes {
-        ARMOR = "itemArmor",
-        ATTACK_SPEED = "itemBoots",
-        ATTACK_POWER = "itemSpellScroll",
-        TRAP = "itemTrap",
+        ARMOR = "armor",
+        ATTACK_SPEED = "boots",
+        ATTACK_POWER = "spellScroll",
+        TRAP = "trap",
 
         // This items must be the last ones
-        POTION_HP = "itemHp",
-        POTION_XP = "itemXp"
+        POTION_HP = "hp",
+        POTION_XP = "xp"
     }
 }

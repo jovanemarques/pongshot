@@ -41,8 +41,8 @@ var objects;
         }
         Label.prototype.setText = function (newText) {
             this.text = newText;
-            this.regX = this.getBounds().width * 0.5;
-            this.regY = this.getMeasuredLineHeight() * 0.5;
+            // this.regX = this.getBounds().width * 0.5;
+            // this.regY = this.getMeasuredLineHeight() * 0.5;
         };
         return Label;
     }(createjs.Text));
