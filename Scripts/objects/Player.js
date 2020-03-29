@@ -58,16 +58,16 @@ var objects;
             this.position = objects.Vector2.add(this.position, velocity);
         };
         Player.prototype.Attack = function () {
-            // Attack position for 250ms then go back.
-            //TODO: Fix this
-            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Attack`) as any;
-            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
+            var _this = this;
+            // Attack position for 250ms then go back
+            this.gotoAndStop(this._playerCharacter + "Attack");
+            setTimeout(function () { return _this.gotoAndStop("" + _this._playerCharacter); }, 250);
         };
         Player.prototype.Hit = function () {
+            var _this = this;
             // Attack position for 250ms then go back.
-            //TODO: Fix this
-            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Hit`) as any;
-            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
+            this.gotoAndStop(this._playerCharacter + "Hit");
+            setTimeout(function () { return _this.gotoAndStop("" + _this._playerCharacter); }, 250);
         };
         // PUBLIC METHODS
         Player.prototype.Start = function () {

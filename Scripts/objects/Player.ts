@@ -44,17 +44,15 @@ module objects {
         }
 
         public Attack() {
-            // Attack position for 250ms then go back.
-            //TODO: Fix this
-            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Attack`) as any;
-            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
+            // Attack position for 250ms then go back
+            this.gotoAndStop(`${this._playerCharacter}Attack`);
+            setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         }
 
         public Hit() {
             // Attack position for 250ms then go back.
-            //TODO: Fix this
-            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Hit`) as any;
-            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
+            this.gotoAndStop(`${this._playerCharacter}Hit`);
+            setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         }
 
         // PUBLIC METHODS

@@ -114,7 +114,6 @@ module scenes {
 
         private _createPowerUp(): void {
             // Create an item every 30s to a minium of 10s (reducing 1s per item showed)
-
             if (createjs.Ticker.getTicks() % this._itemSpawnTicks == 0) {
                 let powerUp = new objects.PowerUp();
                 this._powerUp.push(powerUp);
