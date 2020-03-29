@@ -1,6 +1,6 @@
 module objects
 {
-    export abstract class GameObject extends createjs.Bitmap
+    export abstract class GameObject extends createjs.Sprite
     {
         // PRIVATE INSTANCE MEMBERS
         private _width:number;
@@ -104,11 +104,11 @@ module objects
 
 
         // CONSTRUCTOR
-        constructor(imageString?:Object, x?:number, y?:number, centered?:boolean)
-        constructor(imageString:Object, position: objects.Vector2, centered?: boolean)
-        constructor(first: Object = config.Game.ASSETS.getResult("placeholder"), second: Vector2 | number = 0, third: boolean | number = 0, fourth:boolean = false)
+        constructor(sprite_sheet?:createjs.SpriteSheet, frame_name?: string, x?:number, y?:number, centered?:boolean)
+        constructor(sprite_sheet:createjs.SpriteSheet, frame_name: string, position: objects.Vector2, centered?: boolean)
+        constructor(first: createjs.SpriteSheet,second: string = "placeholder",  third: Vector2 | number = 0, fourth: boolean | number = 0, fifth:boolean = false)
         {
-            super(first);
+            super(first, second);
 
             // initialization
             this._width = 0;
@@ -123,10 +123,11 @@ module objects
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
 
-            if(fourth != undefined)
-            {
-                this.isCentered = fourth;
-            }
+            //TODO: Fix
+            // if(fourth != undefined)
+            // {
+            //     this.isCentered = fourth;
+            // }
 
             if(typeof third == "boolean")
             {
@@ -139,10 +140,11 @@ module objects
                 this.position = new Vector2(second, third, this);
             }
 
-            if(second instanceof Vector2)
-            {
-                this.position = second;
-            }
+            //TODO: Fix
+            // if(second instanceof Vector2)
+            // {
+            //     this.position = second;
+            // }
 
             this.type = enums.GameObjectType.UNDEFINED;
             

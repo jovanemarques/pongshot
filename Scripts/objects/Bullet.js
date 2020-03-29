@@ -20,7 +20,8 @@ var objects;
             if (player === void 0) { player = enums.PlayerId.PLAYER_ONE; }
             var _this = 
             // from https://opengameart.org/content/bullets-game-asset
-            _super.call(this, config.Game.ASSETS.getResult("attack1")) || this;
+            //super(config.Game.ASSETS.getResult("attack1"));
+            _super.call(this, config.Game.ITEMS_ATLAS, "attack1") || this;
             _this._bulletVel = 10;
             _this.position = new objects.Vector2(startPosition.x, startPosition.y, _this);
             //this.x = startPosition.x;

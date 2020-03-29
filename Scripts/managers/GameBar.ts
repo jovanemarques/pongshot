@@ -74,7 +74,7 @@ module managers {
                 objects.GameBarType.HEALTH
             );
             this._plrOneHeartIcon = new objects.Image(
-                config.Game.ASSETS.getResult("heart"),
+                "heart",
                 BARS_POS_X_P1 + BARS_WIDTH + 10,
                 HB_POS_Y
             );
@@ -104,7 +104,7 @@ module managers {
                 true
             );
             this._plrTwoHeartIcon = new objects.Image(
-                config.Game.ASSETS.getResult("heart"),
+                "heart",
                 BARS_POS_X_P2 - 30,
                 HB_POS_Y
             );
@@ -144,7 +144,7 @@ module managers {
                 console.log("Item to create: " + `${item}_disabled`);
                 console.log("Item: " + config.Game.ITEMS_ATLAS.getAnimation(`${item}_disabled`));
                 let image = new objects.Image(
-                    new createjs.Sprite(config.Game.ITEMS_ATLAS, `${item}_disabled`).bitmapCache,
+                    `${item}_disabled`,
                     currentPosX,
                     posY,
                     false

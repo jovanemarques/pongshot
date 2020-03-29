@@ -116,7 +116,7 @@ var scenes;
         // PUBLIC METHODS
         Play.prototype.Start = function () {
             // Background
-            this._background = new objects.Image(config.Game.ASSETS.getResult("forestBackground"));
+            this._background = new objects.Image("forestBackground");
             // Create the players
             this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
             this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);

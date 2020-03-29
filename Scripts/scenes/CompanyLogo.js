@@ -32,9 +32,9 @@ var scenes;
         }
         // PUBLIC METHODS
         CompanyLogo.prototype.Start = function () {
-            this._background = new objects.Image(config.Game.ASSETS.getResult("blackBackground"));
+            this._background = new objects.Image("blackBackground");
             // Create company logo based on game screen w,h.
-            this._companyLogo = new objects.Image(config.Game.ASSETS.getResult("companyLogo"), config.Game.SCREEN_WIDTH / 2, config.Game.SCREEN_HEIGHT / 2, true);
+            this._companyLogo = new objects.Image("companyLogo", config.Game.SCREEN_WIDTH / 2, config.Game.SCREEN_HEIGHT / 2, true);
             // Start counter and alpha value for fadding effect.
             this._companyLogo.alpha = 0.1;
             this._waitCounter = 0;

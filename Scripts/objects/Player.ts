@@ -12,7 +12,7 @@ module objects {
 
         // CONSTRUCTOR
         constructor(playerId: enums.PlayerId, playerCharacter: string) {
-            super(config.Game.ASSETS.getResult(playerCharacter), 0, 0, true);
+            super(config.Game.ITEMS_ATLAS, playerCharacter, 0, 0, true);
             this._playerId = playerId;
             this._playerCharacter = playerCharacter;
             this.Reset();
@@ -45,14 +45,16 @@ module objects {
 
         public Attack() {
             // Attack position for 250ms then go back.
-            this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Attack`) as any;
-            setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
+            //TODO: Fix this
+            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Attack`) as any;
+            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
         }
 
         public Hit() {
             // Attack position for 250ms then go back.
-            this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Hit`) as any;
-            setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
+            //TODO: Fix this
+            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Hit`) as any;
+            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
         }
 
         // PUBLIC METHODS

@@ -30,7 +30,7 @@ module scenes {
         // PUBLIC METHODS
         public Start(): void {
             // Background
-            this._background = new objects.Image(config.Game.ASSETS.getResult("blackBackground"));
+            this._background = new objects.Image("blackBackground");
 
             // Labels
             this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
@@ -55,27 +55,26 @@ module scenes {
 
             // Buttons
             this._startButton = new objects.Button(
-                config.Game.ASSETS.getResult("btnPlay"),
+                "btnPlay",
                 640,
                 config.Game.SCREEN_HEIGHT - 100,
                 true
             );
 
             // Player one
-            this._p1MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), 300, 300, true, 1.5);
-            this._p1RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), 300, 400, true, 1.5);
+            this._p1MageButton = new objects.Button("mage", 300, 300, true, 1.5);
+            this._p1RogueButton = new objects.Button("rogue", 300, 400, true, 1.5);
 
             // Player two
             this._p2MageButton = new objects.Button(
-                config.Game.ASSETS.getResult("mage"),
+                "mage",
                 config.Game.SCREEN_WIDTH - 300,
                 300,
                 true,
                 1.5,
                 true
             );
-            this._p2RogueButton = new objects.Button(
-                config.Game.ASSETS.getResult("rogue"),
+            this._p2RogueButton = new objects.Button("rogue",
                 config.Game.SCREEN_WIDTH - 300,
                 400,
                 true,

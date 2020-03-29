@@ -17,12 +17,12 @@ var objects;
     var Image = /** @class */ (function (_super) {
         __extends(Image, _super);
         // constructor
-        function Image(imagePath, x, y, isCentered) {
-            if (imagePath === void 0) { imagePath = config.Game.ASSETS.getResult("placeholder"); }
+        function Image(imageName, x, y, isCentered) {
+            if (imageName === void 0) { imageName = "placeholder"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
-            var _this = _super.call(this, imagePath, x, y, isCentered) || this;
+            var _this = _super.call(this, config.Game.ITEMS_ATLAS, imageName, x, y, isCentered) || this;
             _this.Start();
             return _this;
         }

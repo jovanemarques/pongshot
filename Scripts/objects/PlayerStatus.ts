@@ -170,7 +170,7 @@ module objects {
     }
 
     // Character status
-    export const CharacterStatusMage = new objects.PlayerStatus(120, 10, 20, 3, 6, 1);
+    export const CharacterStatusMage = new objects.PlayerStatus(1, 10, 20, 3, 6, 1);
     export const CharacterStatusRogue = new objects.PlayerStatus(80, 8, 12, 2, 10, 1);
     export const CharacterStatusWarrior = new objects.PlayerStatus(90, 5, 15, 2, 12, 2);
     export const CharacterStatusArcher = new objects.PlayerStatus(60, 5, 10, 2, 8, 1);

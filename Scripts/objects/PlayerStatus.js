@@ -155,7 +155,7 @@ var objects;
     }());
     objects.PlayerStatus = PlayerStatus;
     // Character status
-    objects.CharacterStatusMage = new objects.PlayerStatus(120, 10, 20, 3, 6, 1);
+    objects.CharacterStatusMage = new objects.PlayerStatus(1, 10, 20, 3, 6, 1);
     objects.CharacterStatusRogue = new objects.PlayerStatus(80, 8, 12, 2, 10, 1);
     objects.CharacterStatusWarrior = new objects.PlayerStatus(90, 5, 15, 2, 12, 2);
     objects.CharacterStatusArcher = new objects.PlayerStatus(60, 5, 10, 2, 8, 1);

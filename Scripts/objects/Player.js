@@ -18,7 +18,7 @@ var objects;
         __extends(Player, _super);
         // CONSTRUCTOR
         function Player(playerId, playerCharacter) {
-            var _this = _super.call(this, config.Game.ASSETS.getResult(playerCharacter), 0, 0, true) || this;
+            var _this = _super.call(this, config.Game.ITEMS_ATLAS, playerCharacter, 0, 0, true) || this;
             // PRIVATE INSTANCE MEMBERS
             _this._playerVel = 3;
             _this._playerId = playerId;
@@ -58,16 +58,16 @@ var objects;
             this.position = objects.Vector2.add(this.position, velocity);
         };
         Player.prototype.Attack = function () {
-            var _this = this;
             // Attack position for 250ms then go back.
-            this.image = config.Game.ASSETS.getResult(this._playerCharacter + "Attack");
-            setTimeout(function () { return (_this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter)); }, 250);
+            //TODO: Fix this
+            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Attack`) as any;
+            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
         };
         Player.prototype.Hit = function () {
-            var _this = this;
             // Attack position for 250ms then go back.
-            this.image = config.Game.ASSETS.getResult(this._playerCharacter + "Hit");
-            setTimeout(function () { return (_this.image = config.Game.ASSETS.getResult("" + _this._playerCharacter)); }, 250);
+            //TODO: Fix this
+            //this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}Hit`) as any;
+            //setTimeout(() => (this.image = config.Game.ASSETS.getResult(`${this._playerCharacter}`) as any), 250);
         };
         // PUBLIC METHODS
         Player.prototype.Start = function () {

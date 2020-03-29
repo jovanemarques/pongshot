@@ -2,12 +2,12 @@ module objects {
   export class Image extends GameObject {
     // constructor
     constructor(
-      imagePath: Object = config.Game.ASSETS.getResult("placeholder"),
+      imageName: string = "placeholder",
       x: number = 0,
       y: number = 0,
       isCentered: boolean = false
     ) {
-      super(imagePath, x, y, isCentered);
+      super(config.Game.ITEMS_ATLAS, imageName, x, y, isCentered);
       this.Start();
     }
 

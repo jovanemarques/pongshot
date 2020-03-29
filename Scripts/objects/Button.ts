@@ -4,14 +4,14 @@ module objects {
 
     // constructor
     constructor(
-      imagePath: Object = config.Game.ASSETS.getResult("btnBack"),
+        button_name:string = "button",
       x: number = 0,
       y: number = 0,
       isCentered: boolean = false,
       scale: number = 1,
       mirror: boolean = false
     ) {
-      super(imagePath, x, y, isCentered);
+      super(config.Game.ITEMS_ATLAS, "attack1", x, y, isCentered);
 
       this.on("mouseover", this.MouseOver);
       this.on("mouseout", this.MouseOut);

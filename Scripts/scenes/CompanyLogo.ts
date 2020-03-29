@@ -24,12 +24,12 @@ module scenes {
     // PUBLIC METHODS
     public Start(): void {
       this._background = new objects.Image(
-        config.Game.ASSETS.getResult("blackBackground")
+        "blackBackground"
       );
 
       // Create company logo based on game screen w,h.
       this._companyLogo = new objects.Image(
-        config.Game.ASSETS.getResult("companyLogo"),
+        "companyLogo",
         config.Game.SCREEN_WIDTH / 2,
         config.Game.SCREEN_HEIGHT / 2,
         true

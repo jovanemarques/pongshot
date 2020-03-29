@@ -20,7 +20,8 @@ module objects {
 
         constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER_ONE) {
             // from https://opengameart.org/content/bullets-game-asset
-            super(config.Game.ASSETS.getResult("attack1"));
+            //super(config.Game.ASSETS.getResult("attack1"));
+            super(config.Game.ITEMS_ATLAS, "attack1");
             this.position = new Vector2(startPosition.x, startPosition.y, this);
             //this.x = startPosition.x;
             //this.y = startPosition.y;

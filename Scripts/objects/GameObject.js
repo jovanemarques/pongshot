@@ -16,12 +16,12 @@ var objects;
 (function (objects) {
     var GameObject = /** @class */ (function (_super) {
         __extends(GameObject, _super);
-        function GameObject(first, second, third, fourth) {
-            if (first === void 0) { first = config.Game.ASSETS.getResult("placeholder"); }
-            if (second === void 0) { second = 0; }
+        function GameObject(first, second, third, fourth, fifth) {
+            if (second === void 0) { second = "placeholder"; }
             if (third === void 0) { third = 0; }
-            if (fourth === void 0) { fourth = false; }
-            var _this = _super.call(this, first) || this;
+            if (fourth === void 0) { fourth = 0; }
+            if (fifth === void 0) { fifth = false; }
+            var _this = _super.call(this, first, second) || this;
             // initialization
             _this._width = 0;
             _this._height = 0;
@@ -33,18 +33,22 @@ var objects;
             _this._isCentered = false;
             _this.width = _this.getBounds().width;
             _this.height = _this.getBounds().height;
-            if (fourth != undefined) {
-                _this.isCentered = fourth;
-            }
+            //TODO: Fix
+            // if(fourth != undefined)
+            // {
+            //     this.isCentered = fourth;
+            // }
             if (typeof third == "boolean") {
                 _this.isCentered = third;
             }
             if ((typeof second == "number") && (typeof third == "number")) {
                 _this.position = new objects.Vector2(second, third, _this);
             }
-            if (second instanceof objects.Vector2) {
-                _this.position = second;
-            }
+            //TODO: Fix
+            // if(second instanceof Vector2)
+            // {
+            //     this.position = second;
+            // }
             _this.type = enums.GameObjectType.UNDEFINED;
             return _this;
         }
@@ -152,7 +156,7 @@ var objects;
             this.regY = this.halfHeight;
         };
         return GameObject;
-    }(createjs.Bitmap));
+    }(createjs.Sprite));
     objects.GameObject = GameObject;
 })(objects || (objects = {}));
 //# sourceMappingURL=GameObject.js.map

@@ -18,14 +18,20 @@ var objects;
         __extends(PowerUp, _super);
         // CONSTRUCTOR
         function PowerUp() {
-            var _this = _super.call(this, config.Game.ASSETS.getResult(constants.PowerUps[0]), config.Game.SCREEN_WIDTH, config.Game.SCREEN_HEIGHT) || this;
+            var _this = 
+            // super(
+            //     config.Game.ASSETS.getResult(constants.PowerUps[0]),
+            //     config.Game.SCREEN_WIDTH,
+            //     config.Game.SCREEN_HEIGHT
+            // );
+            _super.call(this, config.Game.ITEMS_ATLAS, constants.PowerUps[0], config.Game.SCREEN_WIDTH, config.Game.SCREEN_HEIGHT) || this;
             // It will display in a random position between 1/3 and 2/3 of the screen, and calculate positions
             var oneThirdScreen = config.Game.SCREEN_WIDTH / 3;
             var posX = util.Mathf.RandomRange(oneThirdScreen, oneThirdScreen * 2 - _this.width);
             var posY = util.Mathf.RandomRange(config.Game.GAME_BAR_HEIGHT, config.Game.SCREEN_HEIGHT - _this.height);
             // Get a random power type
             _this._powerType = constants.PowerUps[util.Mathf.RandomRangeInt(0, constants.PowerUps.length - 1)];
-            _this.image = config.Game.ASSETS.getResult(_this._powerType);
+            //this.image = config.Game.ASSETS.getResult(this._powerType) as any;
             _this.position = new objects.Vector2(posX, posY);
             console.log("Creating power up at " + posX + ", " + posY + ", " + _this._powerType);
             _this.Start();

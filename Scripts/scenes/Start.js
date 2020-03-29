@@ -32,19 +32,19 @@ var scenes;
         // PUBLIC METHODS
         Start.prototype.Start = function () {
             // Background
-            this._background = new objects.Image(config.Game.ASSETS.getResult("blackBackground"));
+            this._background = new objects.Image("blackBackground");
             // Labels
             this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
             this._player2Label = new objects.Label("Player Two", "60px", "Pixel", "#ffcc5c", config.Game.SCREEN_WIDTH - 300, 200, true);
             this._gameTitle = new objects.Label("Pongshot", "120px", "Pixel", "#96ceb2", config.Game.SCREEN_WIDTH / 2, 100, true);
             // Buttons
-            this._startButton = new objects.Button(config.Game.ASSETS.getResult("btnPlay"), 640, config.Game.SCREEN_HEIGHT - 100, true);
+            this._startButton = new objects.Button("btnPlay", 640, config.Game.SCREEN_HEIGHT - 100, true);
             // Player one
-            this._p1MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), 300, 300, true, 1.5);
-            this._p1RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), 300, 400, true, 1.5);
+            this._p1MageButton = new objects.Button("mage", 300, 300, true, 1.5);
+            this._p1RogueButton = new objects.Button("rogue", 300, 400, true, 1.5);
             // Player two
-            this._p2MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), config.Game.SCREEN_WIDTH - 300, 300, true, 1.5, true);
-            this._p2RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), config.Game.SCREEN_WIDTH - 300, 400, true, 1.5, true);
+            this._p2MageButton = new objects.Button("mage", config.Game.SCREEN_WIDTH - 300, 300, true, 1.5, true);
+            this._p2RogueButton = new objects.Button("rogue", config.Game.SCREEN_WIDTH - 300, 400, true, 1.5, true);
             this.Main();
         };
         Start.prototype.Update = function () { };
