@@ -1,7 +1,7 @@
 module scenes {
     export class Start extends objects.Scene {
         // PRIVATE INSTANCE MEMBERS
-        private _background: objects.Image;
+        private _background: objects.Background;
         private _gameTitle: objects.Label;
         private _player1Label: objects.Label;
         private _player2Label: objects.Label;
@@ -30,7 +30,7 @@ module scenes {
         // PUBLIC METHODS
         public Start(): void {
             // Background
-            this._background = new objects.Image("blackBackground");
+            this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
 
             // Labels
             this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
@@ -54,33 +54,15 @@ module scenes {
             );
 
             // Buttons
-            this._startButton = new objects.Button(
-                "btnPlay",
-                640,
-                config.Game.SCREEN_HEIGHT - 100,
-                true
-            );
+            this._startButton = new objects.Button("btnPlay", 640, config.Game.SCREEN_HEIGHT - 100, true);
 
             // Player one
             this._p1MageButton = new objects.Button("mage", 300, 300, true, 1.5);
             this._p1RogueButton = new objects.Button("rogue", 300, 400, true, 1.5);
 
             // Player two
-            this._p2MageButton = new objects.Button(
-                "mage",
-                config.Game.SCREEN_WIDTH - 300,
-                300,
-                true,
-                1.5,
-                true
-            );
-            this._p2RogueButton = new objects.Button("rogue",
-                config.Game.SCREEN_WIDTH - 300,
-                400,
-                true,
-                1.5,
-                true
-            );
+            this._p2MageButton = new objects.Button("mage", config.Game.SCREEN_WIDTH - 300, 300, true, 1.5, true);
+            this._p2RogueButton = new objects.Button("rogue", config.Game.SCREEN_WIDTH - 300, 400, true, 1.5, true);
 
             this.Main();
         }

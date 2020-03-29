@@ -32,7 +32,7 @@ var scenes;
         // PUBLIC METHODS
         Start.prototype.Start = function () {
             // Background
-            this._background = new objects.Image("blackBackground");
+            this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
             // Labels
             this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
             this._player2Label = new objects.Label("Player Two", "60px", "Pixel", "#ffcc5c", config.Game.SCREEN_WIDTH - 300, 200, true);
