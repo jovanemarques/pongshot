@@ -100,6 +100,8 @@ var scenes;
         };
         // PUBLIC METHODS
         Play.prototype.Start = function () {
+            // Background
+            this._background = new objects.Image(config.Game.ASSETS.getResult("forestBackground"));
             // Create the players
             this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
             this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);
@@ -133,6 +135,7 @@ var scenes;
         };
         Play.prototype.Main = function () {
             var _this = this;
+            this.addChild(this._background);
             this.addChild(this._player1);
             this.addChild(this._player2);
             this._gameBar.ScreenObjects.forEach(function (obj) { return _this.addChild(obj); });

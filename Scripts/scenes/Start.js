@@ -38,7 +38,7 @@ var scenes;
             this._player2Label = new objects.Label("Player Two", "60px", "Pixel", "#ffcc5c", config.Game.SCREEN_WIDTH - 300, 200, true);
             this._gameTitle = new objects.Label("Pongshot", "120px", "Pixel", "#96ceb2", config.Game.SCREEN_WIDTH / 2, 100, true);
             // Buttons
-            this._startButton = new objects.Button(config.Game.ASSETS.getResult("btnPlay"), 640, config.Game.SCREEN_HEIGHT - 100, true, 5);
+            this._startButton = new objects.Button(config.Game.ASSETS.getResult("btnPlay"), 640, config.Game.SCREEN_HEIGHT - 100, true);
             // Player one
             this._p1MageButton = new objects.Button(config.Game.ASSETS.getResult("mage"), 300, 300, true, 1.5);
             this._p1RogueButton = new objects.Button(config.Game.ASSETS.getResult("rogue"), 300, 400, true, 1.5);

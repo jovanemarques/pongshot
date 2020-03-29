@@ -76,6 +76,7 @@ var managers;
                 this._plrOneLifeBar.Value = this._plrOneLife;
                 if (this._plrOneLife <= 0) {
                     config.Game.SCENE = scenes.State.END;
+                    config.Game.WINNER = enums.PlayerId.PLAYER_TWO;
                 }
             }
             else {
@@ -83,6 +84,7 @@ var managers;
                 this._plrTwoLifeBar.Value = this._plrTwoLife;
                 if (this._plrTwoLife <= 0) {
                     config.Game.SCENE = scenes.State.END;
+                    config.Game.WINNER = enums.PlayerId.PLAYER_ONE;
                 }
             }
         };
