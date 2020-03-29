@@ -10,7 +10,8 @@ module config {
         public static SCENE: scenes.State;
         public static ASSETS: createjs.LoadQueue;
         public static FPS: number = 60; // 60 Frames per second
-        static GAME_BAR_HEIGHT: number = 80;
+        public static GAME_BAR_HEIGHT: number = 80;
         public static INITIAL_ITEM_SPAWN_TICKER: number = 30 * Game.FPS;
+        public static ITEMS_ATLAS: createjs.SpriteSheet;
     }
 }

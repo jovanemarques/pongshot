@@ -10,6 +10,8 @@ let Game = (function() {
 
     let assets: createjs.LoadQueue;
 
+    let itemsAtlas: createjs.SpriteSheet;
+
     let assetManifest = [
         // Images
         { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
@@ -36,6 +38,9 @@ let Game = (function() {
         { id: "attack2", src: "./Assets/images/attack2.png" },
         { id: "attackCollision", src: "./Assets/images/attack_collision.png" },
 
+        // Items Atlas
+        { id: "itemAtlas", src: "./Assets/sprites/itemsAtlas.png" },
+
         // Items
         { id: "itemArmor", src: "./Assets/images/item_armor.png" },
         { id: "itemBoots", src: "./Assets/images/item_boots.png" },
@@ -44,6 +49,92 @@ let Game = (function() {
         { id: "itemXp", src: "./Assets/images/item_xp.png" },
         { id: "itemTrap", src: "./Assets/images/item_trap.png" }
     ];
+
+    let itemsSpriteData = {
+        images: {},
+        frames: [
+            [0, 0, 15, 12, 0, 0, 0],
+            [15, 0, 20, 18, 0, 0, 0],
+            [35, 0, 32, 32, 0, 0, 0],
+            [67, 0, 32, 32, 0, 0, 0],
+            [99, 0, 32, 32, 0, 0, 0],
+            [131, 0, 32, 32, 0, 0, 0],
+            [163, 0, 32, 32, 0, 0, 0],
+            [195, 0, 32, 32, 0, 0, 0],
+            [0, 32, 32, 32, 0, 0, 0],
+            [32, 32, 32, 32, 0, 0, 0],
+            [64, 32, 32, 32, 0, 0, 0],
+            [96, 32, 32, 32, 0, 0, 0],
+            [128, 32, 32, 32, 0, 0, 0],
+            [160, 32, 71, 56, 0, 0, 0],
+            [0, 88, 72, 56, 0, 0, 0],
+            [72, 88, 72, 56, 0, 0, 0],
+            [144, 88, 72, 56, 0, 0, 0],
+            [0, 144, 72, 56, 0, 0, 0],
+            [72, 144, 72, 56, 0, 0, 0],
+            [0, 200, 128, 128, 0, 0, 0],
+            [128, 200, 128, 128, 0, 0, 0],
+            [0, 328, 200, 200, 0, 0, 0],
+            [0, 528, 200, 200, 0, 0, 0]
+        ],
+        animations: {
+            btnConfirm: { frames: [0] },
+            heart: { frames: [1] },
+            attack1: { frames: [2] },
+            itemArmor: { frames: [3] },
+            itemArmorDis: { frames: [4] },
+            itemBoots: { frames: [5] },
+            itemBootsDis: { frames: [6] },
+            itemHp: { frames: [7] },
+            itemSpellScroll: { frames: [8] },
+            itemSpellScrollDis: { frames: [9] },
+            itemTrap: { frames: [10] },
+            itemTrapDis: { frames: [11] },
+            itemXp: { frames: [12] },
+            mageAttack: { frames: [13] },
+            mage: { frames: [14] },
+            mageHit: { frames: [15] },
+            rogue: { frames: [16] },
+            rogueAttack: { frames: [17] },
+            rogueHit: { frames: [18] },
+            attack2: { frames: [19] },
+            attackCollision: { frames: [20] },
+            btnBack: { frames: [21] },
+            btnPlay: { frames: [22] },
+            armorHalftime: {
+                frames: [3, 4],
+                speed: 0.8
+            },
+            armorExpiring: {
+                frames: [3, 4],
+                speed: 0.4
+            },
+            bootsHalftime: {
+                frames: [5, 6],
+                speed: 0.8
+            },
+            bootsExpiring: {
+                frames: [5, 6],
+                speed: 0.4
+            },
+            spellScroolHalftime: {
+                frames: [8, 9],
+                speed: 0.8
+            },
+            spellScroolExpiring: {
+                frames: [8, 9],
+                speed: 0.4
+            },
+            trapHalftime: {
+                frames: [10, 11],
+                speed: 0.8
+            },
+            trapExpiring: {
+                frames: [10, 11],
+                speed: 0.4
+            }
+        }
+    };
 
     function Preload(): void {
         assets = new createjs.LoadQueue(); // asset container
@@ -63,6 +154,11 @@ let Game = (function() {
         createjs.Ticker.framerate = config.Game.FPS;
         createjs.Ticker.on("tick", Update);
         stage.enableMouseOver(20);
+
+        // Load the atlas
+        itemsSpriteData.images = [assets.getResult("itemAtlas")];
+        itemsAtlas = new createjs.SpriteSheet(itemsSpriteData);
+        config.Game.ITEMS_ATLAS = itemsAtlas;
 
         currentSceneState = scenes.State.NO_SCENE;
         config.Game.SCENE = scenes.State.COMPANY_LOGO;
