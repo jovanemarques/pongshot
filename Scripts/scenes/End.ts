@@ -1,7 +1,7 @@
 module scenes {
     export class End extends objects.Scene {
         // PRIVATE INSTANCE MEMBERS
-        private _background: objects.Image;
+        private _background: objects.Background;
         private _endLabel: objects.Label;
         private _winnerLabel: objects.Label;
         private _backButton: objects.Button;
@@ -22,10 +22,19 @@ module scenes {
         // Initializing and Instantiating
         public Start(): void {
             // Background
-            this._background = new objects.Image("blackBackground");
+            this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
+
             //instantiate a new Text object
             this._endLabel = new objects.Label(`Game Over`, "80px", "Consolas", "#FFFF00", 620, 180, true);
-            this._winnerLabel = new objects.Label(`Player ${config.Game.WINNER + 1} Won`, "80px", "Consolas", "#FFFF00", 620, 280, true);
+            this._winnerLabel = new objects.Label(
+                `Player ${config.Game.WINNER + 1} Won`,
+                "80px",
+                "Consolas",
+                "#FFFF00",
+                620,
+                280,
+                true
+            );
             // buttons
             this._backButton = new objects.Button("btnBack", 620, 430, true);
 

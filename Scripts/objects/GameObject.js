@@ -33,22 +33,18 @@ var objects;
             _this._isCentered = false;
             _this.width = _this.getBounds().width;
             _this.height = _this.getBounds().height;
-            //TODO: Fix
-            // if(fourth != undefined)
-            // {
-            //     this.isCentered = fourth;
-            // }
-            if (typeof third == "boolean") {
-                _this.isCentered = third;
+            if (fifth != undefined) {
+                _this.isCentered = fifth;
             }
-            if ((typeof second == "number") && (typeof third == "number")) {
-                _this.position = new objects.Vector2(second, third, _this);
+            if (typeof fourth == "boolean") {
+                _this.isCentered = fourth;
             }
-            //TODO: Fix
-            // if(second instanceof Vector2)
-            // {
-            //     this.position = second;
-            // }
+            if (typeof third == "number" && typeof fourth == "number") {
+                _this.position = new objects.Vector2(third, fourth, _this);
+            }
+            if (third instanceof objects.Vector2) {
+                _this.position = third;
+            }
             _this.type = enums.GameObjectType.UNDEFINED;
             return _this;
         }

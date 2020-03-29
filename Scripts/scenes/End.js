@@ -28,7 +28,7 @@ var scenes;
         // Initializing and Instantiating
         End.prototype.Start = function () {
             // Background
-            this._background = new objects.Image("blackBackground");
+            this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
             //instantiate a new Text object
             this._endLabel = new objects.Label("Game Over", "80px", "Consolas", "#FFFF00", 620, 180, true);
             this._winnerLabel = new objects.Label("Player " + (config.Game.WINNER + 1) + " Won", "80px", "Consolas", "#FFFF00", 620, 280, true);

@@ -128,7 +128,7 @@ module scenes {
         // PUBLIC METHODS
         public Start(): void {
             // Background
-            this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
+            this._background = new objects.Background(config.Game.ASSETS.getResult("forestBackground"));
             // Create the players
             this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
             this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);
