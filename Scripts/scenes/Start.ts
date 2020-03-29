@@ -50,8 +50,7 @@ module scenes {
                 config.Game.ASSETS.getResult("btnPlay"),
                 640,
                 config.Game.SCREEN_HEIGHT - 100,
-                true,
-                5
+                true
             );
 
             // Player one

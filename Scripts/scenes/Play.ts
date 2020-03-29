@@ -1,6 +1,7 @@
 module scenes {
     export class Play extends objects.Scene {
         // PRIVATE INSTANCE MEMBERS
+        private _background: objects.Image;
         private _player1: objects.Player;
         private _player2: objects.Player;
         private _powerUp: Array<objects.PowerUp> = [];
@@ -102,6 +103,8 @@ module scenes {
 
         // PUBLIC METHODS
         public Start(): void {
+            // Background
+            this._background = new objects.Image(config.Game.ASSETS.getResult("forestBackground"));
             // Create the players
             this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
             this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);
@@ -146,6 +149,7 @@ module scenes {
         }
 
         public Main(): void {
+            this.addChild(this._background);
             this.addChild(this._player1);
             this.addChild(this._player2);
             this._gameBar.ScreenObjects.forEach(obj => this.addChild(obj));

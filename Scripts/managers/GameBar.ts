@@ -138,6 +138,7 @@ module managers {
 
                 if (this._plrOneLife <= 0) {
                     config.Game.SCENE = scenes.State.END;
+                    config.Game.WINNER = enums.PlayerId.PLAYER_TWO;
                 }
             } else {
                 this._plrTwoLife -= damage;
@@ -145,6 +146,7 @@ module managers {
 
                 if (this._plrTwoLife <= 0) {
                     config.Game.SCENE = scenes.State.END;
+                    config.Game.WINNER = enums.PlayerId.PLAYER_ONE;
                 }
             }
         }
