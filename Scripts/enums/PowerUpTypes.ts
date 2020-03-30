@@ -6,7 +6,7 @@ module enums {
         TRAP = "trap",
 
         // This items must be the last ones
-        POTION_HP = "hp",
-        POTION_XP = "xp"
+        POTION_HP = "itemHp",
+        POTION_XP = "itemXp"
     }
 }

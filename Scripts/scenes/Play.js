@@ -94,6 +94,12 @@ var scenes;
                 case enums.PowerUpTypes.ATTACK_SPEED:
                     status.ActivatePowerUp(pu, createjs.Ticker.getTicks());
                     break;
+                case enums.PowerUpTypes.TRAP:
+                    // Change the player before sending the status
+                    status =
+                        playerId == enums.PlayerId.PLAYER_ONE ? config.Game.PLAYER2_STATUS : config.Game.PLAYER1_STATUS;
+                    status.ActivatePowerUp(pu, createjs.Ticker.getTicks());
+                    break;
                 case enums.PowerUpTypes.POTION_HP:
                     this._gameBar.ReceiveHealing(playerId);
                     break;
@@ -127,6 +133,7 @@ var scenes;
             this._powerUp = new Array();
             // Create the GamaBar
             this._gameBar = new managers.GameBar();
+            config.Game.GAME_BAR = this._gameBar;
             // Initialize the keyboard
             managers.Keyboard.Start();
             this._plrOneBulletTick = 0;
@@ -136,8 +143,13 @@ var scenes;
         };
         Play.prototype.Update = function () {
             var _this = this;
-            this._player1.Update();
-            this._player2.Update();
+            // Do not allow player 1 to move if it is trapped
+            if (config.Game.PLAYER1_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
+                this._player1.Update();
+            }
+            if (config.Game.PLAYER2_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
+                this._player2.Update();
+            }
             this._gameBar.Update();
             this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER1_STATUS, this._plrOneBulletTick);
             this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.PLAYER2_STATUS, this._plrTwoBulletTick);

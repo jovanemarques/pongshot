@@ -64,14 +64,14 @@ var scenes;
                 _this._p1RogueButton.SetInactive();
                 _this._p1MageButton.SetActive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.MAGE;
-                config.Game.PLAYER1_STATUS = objects.CharacterStatusMage;
+                config.Game.PLAYER1_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER_ONE, constants.PlayerType.MAGE);
                 _this.validateGame();
             });
             this._p1RogueButton.on("click", function () {
                 _this._p1RogueButton.SetActive();
                 _this._p1MageButton.SetInactive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.ROGUE;
-                config.Game.PLAYER1_STATUS = objects.CharacterStatusRogue;
+                config.Game.PLAYER1_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER_ONE, constants.PlayerType.ROGUE);
                 _this.validateGame();
             });
             // Player two handlers.
@@ -79,14 +79,14 @@ var scenes;
                 _this._p2RogueButton.SetInactive();
                 _this._p2MageButton.SetActive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.MAGE;
-                config.Game.PLAYER2_STATUS = objects.CharacterStatusMage;
+                config.Game.PLAYER2_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER_TWO, constants.PlayerType.MAGE);
                 _this.validateGame();
             });
             this._p2RogueButton.on("click", function () {
                 _this._p2RogueButton.SetActive();
                 _this._p2MageButton.SetInactive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.ROGUE;
-                config.Game.PLAYER2_STATUS = objects.CharacterStatusRogue;
+                config.Game.PLAYER2_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER_TWO, constants.PlayerType.ROGUE);
                 _this.validateGame();
             });
             // Call this once here to "initialize" as inactive

@@ -12,7 +12,7 @@ module objects {
 
         // CONSTRUCTOR
         constructor(playerId: enums.PlayerId, playerCharacter: string) {
-            super(config.Game.ITEMS_ATLAS, playerCharacter, 0, 0, true);
+            super(config.Game.ATLAS, playerCharacter, 0, 0, true);
             this._playerId = playerId;
             this._playerCharacter = playerCharacter;
             this.Reset();

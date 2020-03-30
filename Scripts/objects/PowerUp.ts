@@ -15,7 +15,7 @@ module objects {
             //     config.Game.SCREEN_WIDTH,
             //     config.Game.SCREEN_HEIGHT
             // );
-            super(config.Game.ITEMS_ATLAS, constants.PowerUps[0], config.Game.SCREEN_WIDTH, config.Game.SCREEN_HEIGHT);
+            super(config.Game.ATLAS, constants.PowerUps[0], config.Game.SCREEN_WIDTH, config.Game.SCREEN_HEIGHT);
 
             // It will display in a random position between 1/3 and 2/3 of the screen, and calculate positions
             let oneThirdScreen = config.Game.SCREEN_WIDTH / 3;
@@ -23,12 +23,10 @@ module objects {
             let posY = util.Mathf.RandomRange(config.Game.GAME_BAR_HEIGHT, config.Game.SCREEN_HEIGHT - this.height);
 
             // Get a random power type
-            this._powerType = constants.PowerUps[
-                util.Mathf.RandomRangeInt(0, constants.PowerUps.length - 1)
-            ] as enums.PowerUpTypes;
-            //this.image = config.Game.ASSETS.getResult(this._powerType) as any;
+            let power = constants.PowerUps[util.Mathf.RandomRangeInt(0, constants.PowerUps.length - 1)];
+            this._powerType = power as enums.PowerUpTypes;
+            this.gotoAndStop(power);
             this.position = new objects.Vector2(posX, posY);
-            console.log(`Creating power up at ${posX}, ${posY}, ${this._powerType}`);
 
             this.Start();
         }

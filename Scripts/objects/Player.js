@@ -18,7 +18,7 @@ var objects;
         __extends(Player, _super);
         // CONSTRUCTOR
         function Player(playerId, playerCharacter) {
-            var _this = _super.call(this, config.Game.ITEMS_ATLAS, playerCharacter, 0, 0, true) || this;
+            var _this = _super.call(this, config.Game.ATLAS, playerCharacter, 0, 0, true) || this;
             // PRIVATE INSTANCE MEMBERS
             _this._playerVel = 3;
             _this._playerId = playerId;

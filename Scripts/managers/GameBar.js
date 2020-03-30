@@ -17,6 +17,13 @@ var managers;
     var GameBar = /** @class */ (function () {
         // CONSTRUCTOR
         function GameBar() {
+            // This should match the same order as StatusType, so it is easier to get the index
+            this._statusOrder = [
+                enums.PowerUpTypes.ARMOR,
+                enums.PowerUpTypes.ATTACK_POWER,
+                enums.PowerUpTypes.ATTACK_SPEED,
+                enums.PowerUpTypes.TRAP
+            ];
             this._plrOneLife = 100;
             this._plrTwoLife = 100;
             this._plrOneXp = 0;
@@ -25,13 +32,13 @@ var managers;
             this._plrOneLifeBar = new objects.GraphicBar(BARS_POS_X_P1, HB_POS_Y, BARS_WIDTH, HB_HEIGHT, objects.GameBarType.HEALTH);
             this._plrOneHeartIcon = new objects.Image("heart", BARS_POS_X_P1 + BARS_WIDTH + 10, HB_POS_Y);
             this._plrOneXpBar = new objects.GraphicBar(BARS_POS_X_P1, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE);
-            // this._plrOneStatus = this._createStatusBarImages(BARS_POS_X_P1, STATUS_POS_Y, 25);
+            this._plrOneStatus = this._createStatusBarImages(BARS_POS_X_P1, STATUS_POS_Y, 25);
             this._plrOneLevelLabel = new objects.Label("LVL 1", "bold 16px", "Consolas", "#021775", BARS_POS_X_P1 + BARS_WIDTH + 10, XPB_POS_Y);
             this._plrTwoLifeBar = new objects.GraphicBar(BARS_POS_X_P2, HB_POS_Y, BARS_WIDTH, HB_HEIGHT, objects.GameBarType.HEALTH, true);
             this._plrTwoHeartIcon = new objects.Image("heart", BARS_POS_X_P2 - 30, HB_POS_Y);
             this._plrTwoXpBar = new objects.GraphicBar(BARS_POS_X_P2, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE, true);
             this._plrTwoLevelLabel = new objects.Label("LVL 1", "bold 16px", "Consolas", "#021775", BARS_POS_X_P2 - 55, XPB_POS_Y);
-            //this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
+            this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
             this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
         }
         Object.defineProperty(GameBar.prototype, "ScreenObjects", {
@@ -48,8 +55,8 @@ var managers;
                     this._plrTwoHeartIcon,
                     this._plrTwoLevelLabel
                 ];
-                //     this._plrOneStatus.forEach(i => result.push(i));
-                //      this._plrTwoStatus.forEach(i => result.push(i));
+                this._plrOneStatus.forEach(function (i) { return result.push(i); });
+                this._plrTwoStatus.forEach(function (i) { return result.push(i); });
                 return result;
             },
             enumerable: true,
@@ -58,17 +65,9 @@ var managers;
         // PRIVATE METHODS
         GameBar.prototype._createStatusBarImages = function (posX, posY, incPosX) {
             var result = new Array();
-            var imagesToCreate = [
-                enums.PowerUpTypes.ARMOR,
-                enums.PowerUpTypes.ATTACK_POWER,
-                enums.PowerUpTypes.ATTACK_SPEED,
-                enums.PowerUpTypes.TRAP
-            ];
             var currentPosX = posX;
-            imagesToCreate.forEach(function (item) {
-                console.log("Item to create: " + (item + "_disabled"));
-                console.log("Item: " + config.Game.ITEMS_ATLAS.getAnimation(item + "_disabled"));
-                var image = new objects.Image(item + "_disabled", currentPosX, posY, false);
+            this._statusOrder.forEach(function (item) {
+                var image = new objects.Image(item + "Dis", currentPosX, posY, false);
                 image.scaleX = 0.5;
                 image.scaleY = 0.5;
                 result.push(image);
@@ -88,16 +87,6 @@ var managers;
             var seconds = ("00" + (Math.floor(secondsDiff) % 60)).substr(-2);
             var minutes = ("000" + Math.floor(secondsDiff / 60)).substr(-3);
             this._timerLabel.text = minutes + ":" + seconds;
-            // Check for status
-            var currentTicks = createjs.Ticker.getTicks();
-            // Check for all the status for player 1 and 2
-            for (var i = 0; i < enums.StatusTypes.NUM_OF_STATUS; i++) {
-                var type = i;
-                var powerStatus = config.Game.PLAYER1_STATUS.GetPowerStatus(type);
-                if (powerStatus != enums.PowerUpStatus.INACTIVE) {
-                    this._checkStatus(type, powerStatus);
-                }
-            }
         };
         GameBar.prototype.PostDamage = function (player, damage) {
             if (player == enums.PlayerId.PLAYER_ONE) {
@@ -118,7 +107,6 @@ var managers;
             }
         };
         GameBar.prototype.ReceiveExperience = function (player) {
-            console.log("ReceiveXP: " + player);
             if (player == enums.PlayerId.PLAYER_ONE) {
                 var posXpLvl = config.Game.PLAYER1_STATUS.Level;
                 if (posXpLvl < constants.MAX_LEVEL) {
@@ -132,7 +120,6 @@ var managers;
                         }
                     }
                     this._plrOneXpBar.Value = (100 * this._plrOneXp) / XP_PER_LEVEL[posXpLvl];
-                    console.log("plronexpbarvalue: " + this._plrOneXpBar.Value);
                 }
             }
             else if (player == enums.PlayerId.PLAYER_TWO) {
@@ -147,9 +134,7 @@ var managers;
                             this._plrTwoXp = 0;
                         }
                     }
-                    console.log("plrtwoxp: " + this._plrTwoXp);
                     this._plrTwoXpBar.Value = (100 * this._plrTwoXp) / XP_PER_LEVEL[posXpLvl];
-                    console.log("plrtwoxpbarvalue: " + this._plrTwoXpBar.Value);
                 }
             }
         };
@@ -168,6 +153,22 @@ var managers;
                 }
                 this._plrTwoLifeBar.Value = this._plrTwoLife;
             }
+        };
+        GameBar.prototype.ChangePlayerStatus = function (player, type, status) {
+            var statusBar = player == enums.PlayerId.PLAYER_ONE ? this._plrOneStatus : this._plrTwoStatus;
+            var suffix = "";
+            switch (status) {
+                case enums.PowerUpStatus.INACTIVE:
+                    suffix = "Dis";
+                    break;
+                case enums.PowerUpStatus.ACTIVE_HALF_TIME:
+                    suffix = "Halftime";
+                    break;
+                case enums.PowerUpStatus.ACTIVE_QUARTER_TIME:
+                    suffix = "Expiring";
+                    break;
+            }
+            statusBar[type].gotoAndPlay("" + this._statusOrder[type] + suffix);
         };
         return GameBar;
     }());

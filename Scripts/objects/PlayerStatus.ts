@@ -55,14 +55,19 @@ module objects {
         // PRIVATE INSTACE MEMBERS
         private _level: number;
         private _status: Array<PowerUpInfo>;
+        private _playerId: enums.PlayerId;
 
         // PUBLIC PROPERTIES
         public get Level(): number {
             return this._level;
         }
+        public get PlayerId(): enums.PlayerId {
+            return this._playerId;
+        }
 
         // CONSTRUCTORS
-        constructor(
+        private constructor(
+            playerId: enums.PlayerId,
             initialAttackSpeed: number,
             incAS: number,
             initialAttackPower: number,
@@ -71,6 +76,7 @@ module objects {
             incAr: number
         ) {
             this._level = 1;
+            this._playerId = playerId;
             this._status = new Array<PowerUpInfo>(enums.StatusTypes.NUM_OF_STATUS);
             this._status[enums.StatusTypes.ATK_SPEED] = new PowerUpInfo(
                 initialAttackSpeed,
@@ -94,19 +100,21 @@ module objects {
         public Update(): void {
             let currentTick = createjs.Ticker.getTicks();
 
-            this._status.forEach(s => {
+            this._status.forEach((s, type) => {
                 if (s.Status != enums.PowerUpStatus.INACTIVE) {
                     let diff = currentTick - s.Tick;
                     switch (s.Status) {
                         case enums.PowerUpStatus.ACTIVE:
                             if (diff >= s.PowerDuration * 0.5) {
                                 s.Status = enums.PowerUpStatus.ACTIVE_HALF_TIME;
+                                config.Game.GAME_BAR.ChangePlayerStatus(this._playerId, type, s.Status);
                             }
                             break;
 
                         case enums.PowerUpStatus.ACTIVE_HALF_TIME:
                             if (diff >= s.PowerDuration * 0.75) {
                                 s.Status = enums.PowerUpStatus.ACTIVE_QUARTER_TIME;
+                                config.Game.GAME_BAR.ChangePlayerStatus(this._playerId, type, s.Status);
                             }
                             break;
 
@@ -114,6 +122,7 @@ module objects {
                             if (diff > s.PowerDuration) {
                                 s.Status = enums.PowerUpStatus.INACTIVE;
                                 s.Tick = constants.DEFAULT_POWER_UP_TICK;
+                                config.Game.GAME_BAR.ChangePlayerStatus(this._playerId, type, s.Status);
                             }
                             break;
                     }
@@ -133,25 +142,31 @@ module objects {
         }
 
         public ActivatePowerUp(power: objects.PowerUp, tick: number): void {
-            let powerInfo: PowerUpInfo;
+            let type: enums.StatusTypes;
 
             switch (power.PowerType) {
                 case enums.PowerUpTypes.ARMOR:
-                    powerInfo = this._status[enums.StatusTypes.ARMOR];
+                    type = enums.StatusTypes.ARMOR;
                     break;
 
                 case enums.PowerUpTypes.ATTACK_POWER:
-                    powerInfo = this._status[enums.StatusTypes.ATK_POWER];
+                    type = enums.StatusTypes.ATK_POWER;
                     break;
 
                 case enums.PowerUpTypes.ATTACK_SPEED:
-                    powerInfo = this._status[enums.StatusTypes.ATK_SPEED];
+                    type = enums.StatusTypes.ATK_SPEED;
+                    break;
+
+                case enums.PowerUpTypes.TRAP:
+                    type = enums.StatusTypes.TRAP;
                     break;
             }
 
+            let powerInfo: PowerUpInfo = this._status[type];
             if (powerInfo) {
                 powerInfo.Tick = tick;
                 powerInfo.Status = enums.PowerUpStatus.ACTIVE;
+                config.Game.GAME_BAR.ChangePlayerStatus(this._playerId, type, powerInfo.Status);
             }
         }
 
@@ -167,11 +182,40 @@ module objects {
         public GetPowerStatus(type: enums.StatusTypes): enums.PowerUpStatus {
             return this._status[type].Status;
         }
-    }
 
-    // Character status
-    export const CharacterStatusMage = new objects.PlayerStatus(1, 10, 20, 3, 6, 1);
-    export const CharacterStatusRogue = new objects.PlayerStatus(80, 8, 12, 2, 10, 1);
-    export const CharacterStatusWarrior = new objects.PlayerStatus(90, 5, 15, 2, 12, 2);
-    export const CharacterStatusArcher = new objects.PlayerStatus(60, 5, 10, 2, 8, 1);
+        public static GetPlayerStatus(plrId: enums.PlayerId, plrClass: string): objects.PlayerStatus {
+            let iniAS, incAS, iniAP, incAP, iniAr, incAr;
+
+            if (plrClass == constants.PlayerType.MAGE) {
+                iniAS = 120;
+                incAS = 10;
+                iniAP = 20;
+                incAP = 3;
+                iniAr = 6;
+                incAr = 1;
+            } else if (plrClass == constants.PlayerType.ROGUE) {
+                iniAS = 80;
+                incAS = 8;
+                iniAP = 12;
+                incAP = 2;
+                iniAr = 10;
+                incAr = 1;
+            } else if (plrClass == constants.PlayerType.WARRIOR) {
+                iniAS = 90;
+                incAS = 5;
+                iniAP = 15;
+                incAP = 2;
+                iniAr = 12;
+                incAr = 2;
+            } else if (plrClass == constants.PlayerType.ARCHER) {
+                iniAS = 60;
+                incAS = 5;
+                iniAP = 10;
+                incAP = 2;
+                iniAr = 8;
+                incAr = 1;
+            }
+            return new objects.PlayerStatus(plrId, iniAS, incAS, iniAP, incAP, iniAr, incAr);
+        }
+    }
 }

@@ -86,14 +86,20 @@ module scenes {
                 this._p1RogueButton.SetInactive();
                 this._p1MageButton.SetActive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.MAGE;
-                config.Game.PLAYER1_STATUS = objects.CharacterStatusMage;
+                config.Game.PLAYER1_STATUS = objects.PlayerStatus.GetPlayerStatus(
+                    enums.PlayerId.PLAYER_ONE,
+                    constants.PlayerType.MAGE
+                );
                 this.validateGame();
             });
             this._p1RogueButton.on("click", () => {
                 this._p1RogueButton.SetActive();
                 this._p1MageButton.SetInactive();
                 config.Game.PLAYER1_CHARACTER = constants.PlayerType.ROGUE;
-                config.Game.PLAYER1_STATUS = objects.CharacterStatusRogue;
+                config.Game.PLAYER1_STATUS = objects.PlayerStatus.GetPlayerStatus(
+                    enums.PlayerId.PLAYER_ONE,
+                    constants.PlayerType.ROGUE
+                );
                 this.validateGame();
             });
 
@@ -102,14 +108,20 @@ module scenes {
                 this._p2RogueButton.SetInactive();
                 this._p2MageButton.SetActive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.MAGE;
-                config.Game.PLAYER2_STATUS = objects.CharacterStatusMage;
+                config.Game.PLAYER2_STATUS = objects.PlayerStatus.GetPlayerStatus(
+                    enums.PlayerId.PLAYER_TWO,
+                    constants.PlayerType.MAGE
+                );
                 this.validateGame();
             });
             this._p2RogueButton.on("click", () => {
                 this._p2RogueButton.SetActive();
                 this._p2MageButton.SetInactive();
                 config.Game.PLAYER2_CHARACTER = constants.PlayerType.ROGUE;
-                config.Game.PLAYER2_STATUS = objects.CharacterStatusRogue;
+                config.Game.PLAYER2_STATUS = objects.PlayerStatus.GetPlayerStatus(
+                    enums.PlayerId.PLAYER_TWO,
+                    constants.PlayerType.ROGUE
+                );
                 this.validateGame();
             });
 

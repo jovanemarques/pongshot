@@ -72,15 +72,15 @@ var Game = (function () {
             btnConfirm: { frames: [0] },
             heart: { frames: [1] },
             attack1: { frames: [2] },
-            itemArmor: { frames: [3] },
-            itemArmorDis: { frames: [4] },
-            itemBoots: { frames: [5] },
-            itemBootsDis: { frames: [6] },
+            armor: { frames: [3] },
+            armorDis: { frames: [4] },
+            boots: { frames: [5] },
+            bootsDis: { frames: [6] },
             itemHp: { frames: [7] },
-            itemSpellScroll: { frames: [8] },
-            itemSpellScrollDis: { frames: [9] },
-            itemTrap: { frames: [10] },
-            itemTrapDis: { frames: [11] },
+            spellScroll: { frames: [8] },
+            spellScrollDis: { frames: [9] },
+            trap: { frames: [10] },
+            trapDis: { frames: [11] },
             itemXp: { frames: [12] },
             mageAttack: { frames: [13] },
             mage: { frames: [14] },
@@ -146,7 +146,7 @@ var Game = (function () {
         // Load the atlas
         itemsSpriteData.images = [assets.getResult("itemAtlas")];
         itemsAtlas = new createjs.SpriteSheet(itemsSpriteData);
-        config.Game.ITEMS_ATLAS = itemsAtlas;
+        config.Game.ATLAS = itemsAtlas;
         currentSceneState = scenes.State.NO_SCENE;
         config.Game.SCENE = scenes.State.COMPANY_LOGO;
     }
