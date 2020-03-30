@@ -161,7 +161,7 @@ var objects;
             var power = this._status[type];
             // Verify if the power up is active
             if (power.Status != enums.PowerUpStatus.INACTIVE) {
-                return power.Value * power.Increment;
+                return power.Value * power.PowerMultiplier;
             }
             return power.Value;
         };
