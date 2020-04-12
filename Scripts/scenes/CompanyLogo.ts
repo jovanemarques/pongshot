@@ -4,12 +4,12 @@ module scenes {
         WAITING,
         FADING,
         COMPLETE,
-        NUM_OF_STATES
+        NUM_OF_STATES,
     }
 
     export class CompanyLogo extends objects.Scene {
         // PRIVATE INSTANCE MEMBERS
-        private _presentLabel: objects.Label;
+        private _fakeLabel: objects.Label;
         private _background: objects.Background;
         private _companyLogo: objects.Background;
         private _state: LogoState;
@@ -24,6 +24,17 @@ module scenes {
         // PUBLIC METHODS
         public Start(): void {
             this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
+
+            // Creates a fake label, to load the font
+            this._fakeLabel = new objects.Label(
+                "Pongshot",
+                "14px",
+                "Pixel",
+                "#000000",
+                config.Game.SCREEN_WIDTH,
+                config.Game.SCREEN_HEIGHT,
+                false
+            );
 
             // Create company logo based on game screen w,h.
             this._companyLogo = new objects.Background(
@@ -75,6 +86,7 @@ module scenes {
         }
 
         public Main(): void {
+            this.addChild(this._fakeLabel);
             this.addChild(this._background);
             this.addChild(this._companyLogo);
         }

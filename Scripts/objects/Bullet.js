@@ -16,19 +16,15 @@ var objects;
 (function (objects) {
     var Bullet = /** @class */ (function (_super) {
         __extends(Bullet, _super);
-        function Bullet(startPosition, player) {
+        function Bullet(char, startPosition, player) {
             if (player === void 0) { player = enums.PlayerId.PLAYER_ONE; }
             var _this = 
             // from https://opengameart.org/content/bullets-game-asset
-            //super(config.Game.ASSETS.getResult("attack1"));
-            _super.call(this, config.Game.ATLAS, "attack1") || this;
+            _super.call(this, config.Game.ATLAS, char + "Bullet") || this;
             _this._bulletVel = 20;
             _this.position = new objects.Vector2(startPosition.x, startPosition.y, _this);
-            //this.x = startPosition.x;
-            //this.y = startPosition.y;
             _this._player = player;
             return _this;
-            //this._active = true;
         }
         Object.defineProperty(Bullet.prototype, "Player", {
             //private _active:boolean;

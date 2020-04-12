@@ -1,0 +1,7 @@
+#!/bin/bash
+for entry in `find . -type f -name '*.png'`
+do
+	newName="${entry/rouge/rogue}"
+	newName="${newName/idle/rogue_idle_}"
+	mv ${entry} ${newName}
+done

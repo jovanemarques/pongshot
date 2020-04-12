@@ -17,14 +17,19 @@ module scenes {
         }
 
         // PRIVATE METHODS
-        private _plrShoot(player: objects.Player, status: objects.PlayerStatus, bulletTick: number): number {
+        private _plrShoot(
+            char: string,
+            player: objects.Player,
+            status: objects.PlayerStatus,
+            bulletTick: number
+        ): number {
             // Verify if the shoot button is active
             if (managers.Keyboard.IsActive(player.PlayerId, enums.PlayerKeys.SHOOT)) {
                 // Verify if the player can shoot
                 let curTick = createjs.Ticker.getTicks();
                 if (curTick - bulletTick >= status.GetValue(enums.StatusTypes.ATK_SPEED)) {
                     player.Attack();
-                    let bullet = new objects.Bullet(player.position, player.PlayerId);
+                    let bullet = new objects.Bullet(char, player.position, player.PlayerId);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     return curTick;
@@ -171,8 +176,18 @@ module scenes {
             }
             this._gameBar.Update();
 
-            this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER1_STATUS, this._plrOneBulletTick);
-            this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.PLAYER2_STATUS, this._plrTwoBulletTick);
+            this._plrOneBulletTick = this._plrShoot(
+                config.Game.PLAYER1_CHARACTER,
+                this._player1,
+                config.Game.PLAYER1_STATUS,
+                this._plrOneBulletTick
+            );
+            this._plrTwoBulletTick = this._plrShoot(
+                config.Game.PLAYER2_CHARACTER,
+                this._player2,
+                config.Game.PLAYER2_STATUS,
+                this._plrTwoBulletTick
+            );
 
             config.Game.PLAYER1_STATUS.Update();
             config.Game.PLAYER2_STATUS.Update();
@@ -191,7 +206,7 @@ module scenes {
             this.addChild(this._background);
             this.addChild(this._player1);
             this.addChild(this._player2);
-            this._gameBar.ScreenObjects.forEach(obj => this.addChild(obj));
+            this._gameBar.ScreenObjects.forEach((obj) => this.addChild(obj));
         }
     }
 }

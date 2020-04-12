@@ -33,6 +33,8 @@ var scenes;
         // PUBLIC METHODS
         CompanyLogo.prototype.Start = function () {
             this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
+            // Creates a fake label, to load the font
+            this._fakeLabel = new objects.Label("Pongshot", "14px", "Pixel", "#000000", config.Game.SCREEN_WIDTH, config.Game.SCREEN_HEIGHT, false);
             // Create company logo based on game screen w,h.
             this._companyLogo = new objects.Background(config.Game.ASSETS.getResult("companyLogo"), config.Game.SCREEN_WIDTH / 2, config.Game.SCREEN_HEIGHT / 2, true);
             // Start counter and alpha value for fadding effect.
@@ -71,6 +73,7 @@ var scenes;
             }
         };
         CompanyLogo.prototype.Main = function () {
+            this.addChild(this._fakeLabel);
             this.addChild(this._background);
             this.addChild(this._companyLogo);
         };

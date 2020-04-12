@@ -18,15 +18,11 @@ module objects {
             return this._player;
         }
 
-        constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER_ONE) {
+        constructor(char: string, startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER_ONE) {
             // from https://opengameart.org/content/bullets-game-asset
-            //super(config.Game.ASSETS.getResult("attack1"));
-            super(config.Game.ATLAS, "attack1");
+            super(config.Game.ATLAS, `${char}Bullet`);
             this.position = new Vector2(startPosition.x, startPosition.y, this);
-            //this.x = startPosition.x;
-            //this.y = startPosition.y;
             this._player = player;
-            //this._active = true;
         }
 
         protected _checkBounds(): void {}

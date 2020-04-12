@@ -24,14 +24,14 @@ var scenes;
             return _this;
         }
         // PRIVATE METHODS
-        Play.prototype._plrShoot = function (player, status, bulletTick) {
+        Play.prototype._plrShoot = function (char, player, status, bulletTick) {
             // Verify if the shoot button is active
             if (managers.Keyboard.IsActive(player.PlayerId, enums.PlayerKeys.SHOOT)) {
                 // Verify if the player can shoot
                 var curTick = createjs.Ticker.getTicks();
                 if (curTick - bulletTick >= status.GetValue(enums.StatusTypes.ATK_SPEED)) {
                     player.Attack();
-                    var bullet = new objects.Bullet(player.position, player.PlayerId);
+                    var bullet = new objects.Bullet(char, player.position, player.PlayerId);
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     return curTick;
@@ -151,8 +151,8 @@ var scenes;
                 this._player2.Update();
             }
             this._gameBar.Update();
-            this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER1_STATUS, this._plrOneBulletTick);
-            this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.PLAYER2_STATUS, this._plrTwoBulletTick);
+            this._plrOneBulletTick = this._plrShoot(config.Game.PLAYER1_CHARACTER, this._player1, config.Game.PLAYER1_STATUS, this._plrOneBulletTick);
+            this._plrTwoBulletTick = this._plrShoot(config.Game.PLAYER2_CHARACTER, this._player2, config.Game.PLAYER2_STATUS, this._plrTwoBulletTick);
             config.Game.PLAYER1_STATUS.Update();
             config.Game.PLAYER2_STATUS.Update();
             this._bullets.forEach(function (e, index) {
