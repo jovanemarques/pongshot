@@ -40,13 +40,13 @@ var scenes;
             // Buttons
             this._startButton = new objects.Button("btnPlay", 640, config.Game.SCREEN_HEIGHT - 150, true);
             // Player one
-            this._p1MageButton = new objects.Button("mage", 275, 180, true, 1.5);
-            this._p1RogueButton = new objects.Button("rogue", 275, 290, true, 1.5);
-            this._p1WarriorButton = new objects.Button("warrior", 290, 420, true, 1.5);
+            this._p1MageButton = new objects.Button("mage", 300, 250, true, 1.5);
+            this._p1RogueButton = new objects.Button("rogue", 300, 350, true, 1.5);
+            this._p1WarriorButton = new objects.Button("warrior", 300, 470, true, 1.5);
             // Player two
-            this._p2MageButton = new objects.Button("mage", config.Game.SCREEN_WIDTH - 275, 180, true, 1.5, true);
-            this._p2RogueButton = new objects.Button("rogue", config.Game.SCREEN_WIDTH - 275, 290, true, 1.5, true);
-            this._p2WarriorButton = new objects.Button("warrior", config.Game.SCREEN_WIDTH - 275, 420, true, 1.5, true);
+            this._p2MageButton = new objects.Button("mage", config.Game.SCREEN_WIDTH - 300, 250, true, 1.5, true);
+            this._p2RogueButton = new objects.Button("rogue", config.Game.SCREEN_WIDTH - 300, 350, true, 1.5, true);
+            this._p2WarriorButton = new objects.Button("warrior", config.Game.SCREEN_WIDTH - 300, 470, true, 1.5, true);
             // Inactivate all the buttons
             this._p1MageButton.SetInactive();
             this._p1RogueButton.SetInactive();

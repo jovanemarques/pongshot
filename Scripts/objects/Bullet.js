@@ -24,6 +24,9 @@ var objects;
             _this._bulletVel = 20;
             _this.position = new objects.Vector2(startPosition.x, startPosition.y, _this);
             _this._player = player;
+            if (player == enums.PlayerId.PLAYER_TWO) {
+                _this.scaleX = -1;
+            }
             return _this;
         }
         Object.defineProperty(Bullet.prototype, "Player", {

@@ -51,23 +51,30 @@ var objects;
             // Verify the direction and set the y speed
             if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
                 velocity = new objects.Vector2(0, -this._playerVel);
+                if (!this.currentAnimation.match("^" + this._playerCharacter + "Up")) {
+                    this.gotoAndPlay(this._playerCharacter + "UpStart");
+                }
             }
             else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
                 velocity = new objects.Vector2(0, this._playerVel);
+                if (this.currentAnimation != this._playerCharacter + "Down") {
+                    this.gotoAndPlay(this._playerCharacter + "Down");
+                }
+            }
+            else {
+                if (this.currentAnimation.match("(Up|Down)")) {
+                    this.gotoAndStop("" + this._playerCharacter);
+                }
             }
             this.position = objects.Vector2.add(this.position, velocity);
         };
         Player.prototype.Attack = function () {
-            var _this = this;
             // Attack position for 250ms then go back
-            this.gotoAndStop(this._playerCharacter + "Attack");
-            setTimeout(function () { return _this.gotoAndStop("" + _this._playerCharacter); }, 250);
+            this.gotoAndPlay(this._playerCharacter + "Attack");
         };
         Player.prototype.Hit = function () {
-            var _this = this;
             // Attack position for 250ms then go back.
-            this.gotoAndStop(this._playerCharacter + "Hit");
-            setTimeout(function () { return _this.gotoAndStop("" + _this._playerCharacter); }, 250);
+            this.gotoAndPlay(this._playerCharacter + "Hurt");
         };
         // PUBLIC METHODS
         Player.prototype.Start = function () {

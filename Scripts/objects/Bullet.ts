@@ -23,6 +23,9 @@ module objects {
             super(config.Game.ATLAS, `${char}Bullet`);
             this.position = new Vector2(startPosition.x, startPosition.y, this);
             this._player = player;
+            if (player == enums.PlayerId.PLAYER_TWO) {
+                this.scaleX = -1;
+            }
         }
 
         protected _checkBounds(): void {}

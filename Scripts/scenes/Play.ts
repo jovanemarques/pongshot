@@ -194,9 +194,6 @@ module scenes {
 
             this._bullets.forEach((e, index) => {
                 this._checkBullet(e, index);
-
-                if (e.Player == enums.PlayerId.PLAYER_ONE) {
-                }
             });
 
             this._createPowerUp();

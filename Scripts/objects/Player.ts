@@ -36,8 +36,18 @@ module objects {
             // Verify the direction and set the y speed
             if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
                 velocity = new Vector2(0, -this._playerVel);
+                if (!this.currentAnimation.match(`^${this._playerCharacter}Up`)) {
+                    this.gotoAndPlay(`${this._playerCharacter}UpStart`);
+                }
             } else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
                 velocity = new Vector2(0, this._playerVel);
+                if (this.currentAnimation != `${this._playerCharacter}Down`) {
+                    this.gotoAndPlay(`${this._playerCharacter}Down`);
+                }
+            } else {
+                if (this.currentAnimation.match(`(Up|Down)`)) {
+                    this.gotoAndStop(`${this._playerCharacter}`);
+                }
             }
 
             this.position = Vector2.add(this.position, velocity);
@@ -45,14 +55,12 @@ module objects {
 
         public Attack() {
             // Attack position for 250ms then go back
-            this.gotoAndStop(`${this._playerCharacter}Attack`);
-            setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
+            this.gotoAndPlay(`${this._playerCharacter}Attack`);
         }
 
         public Hit() {
             // Attack position for 250ms then go back.
-            this.gotoAndStop(`${this._playerCharacter}Hit`);
-            setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
+            this.gotoAndPlay(`${this._playerCharacter}Hurt`);
         }
 
         // PUBLIC METHODS

@@ -157,8 +157,6 @@ var scenes;
             config.Game.PLAYER2_STATUS.Update();
             this._bullets.forEach(function (e, index) {
                 _this._checkBullet(e, index);
-                if (e.Player == enums.PlayerId.PLAYER_ONE) {
-                }
             });
             this._createPowerUp();
         };
