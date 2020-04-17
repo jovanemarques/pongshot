@@ -129,6 +129,7 @@ var objects;
             if (this._level < constants.MAX_LEVEL) {
                 this._level++;
                 this._status.forEach(function (s) { return (s.Value += s.Increment); });
+                config.Game.SOUND_MANAGER.PlaySound("levelUp", 0.15);
             }
         };
         PlayerStatus.prototype.CalculateDamage = function (attack) {

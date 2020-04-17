@@ -35,6 +35,13 @@ var objects;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Player.prototype, "Character", {
+            get: function () {
+                return this._playerCharacter;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // PRIVATE METHODS
         Player.prototype._checkBounds = function () {
             // Upper and lower bound
@@ -71,10 +78,12 @@ var objects;
         Player.prototype.Attack = function () {
             // Attack position for 250ms then go back
             this.gotoAndPlay(this._playerCharacter + "Attack");
+            config.Game.SOUND_MANAGER.PlaySound(this._playerCharacter + "Attack", 0.15);
         };
         Player.prototype.Hit = function () {
             // Attack position for 250ms then go back.
             this.gotoAndPlay(this._playerCharacter + "Hurt");
+            config.Game.SOUND_MANAGER.PlaySound(this._playerCharacter + "Hit", 0.15);
         };
         // PUBLIC METHODS
         Player.prototype.Start = function () {

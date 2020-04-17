@@ -43,7 +43,7 @@ module managers {
             enums.PowerUpTypes.ARMOR,
             enums.PowerUpTypes.ATTACK_POWER,
             enums.PowerUpTypes.ATTACK_SPEED,
-            enums.PowerUpTypes.TRAP
+            enums.PowerUpTypes.TRAP,
         ];
 
         private _timerLabel: objects.Label;
@@ -59,10 +59,10 @@ module managers {
                 this._plrTwoLifeBar,
                 this._plrTwoXpBar,
                 this._plrTwoHeartIcon,
-                this._plrTwoLevelLabel
+                this._plrTwoLevelLabel,
             ];
-            this._plrOneStatus.forEach(i => result.push(i));
-            this._plrTwoStatus.forEach(i => result.push(i));
+            this._plrOneStatus.forEach((i) => result.push(i));
+            this._plrTwoStatus.forEach((i) => result.push(i));
             return result;
         }
 
@@ -126,7 +126,7 @@ module managers {
             );
             this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
 
-            this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
+            this._timerLabel = new objects.Label("000:00", "80px", "Pixel", "#000000", 640, 20, true);
         }
 
         // PRIVATE METHODS
@@ -134,7 +134,7 @@ module managers {
             let result = new Array<objects.Image>();
             let currentPosX: number = posX;
 
-            this._statusOrder.forEach(item => {
+            this._statusOrder.forEach((item) => {
                 let image = new objects.Image(`${item}Dis`, currentPosX, posY, false);
 
                 image.scaleX = 0.5;

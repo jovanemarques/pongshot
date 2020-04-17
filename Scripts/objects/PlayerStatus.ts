@@ -133,7 +133,8 @@ module objects {
         public LevelUp(): void {
             if (this._level < constants.MAX_LEVEL) {
                 this._level++;
-                this._status.forEach(s => (s.Value += s.Increment));
+                this._status.forEach((s) => (s.Value += s.Increment));
+                config.Game.SOUND_MANAGER.PlaySound(`levelUp`, 0.15);
             }
         }
 

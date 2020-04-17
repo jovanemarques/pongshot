@@ -22,7 +22,7 @@ var managers;
                 enums.PowerUpTypes.ARMOR,
                 enums.PowerUpTypes.ATTACK_POWER,
                 enums.PowerUpTypes.ATTACK_SPEED,
-                enums.PowerUpTypes.TRAP
+                enums.PowerUpTypes.TRAP,
             ];
             this._plrOneLife = 100;
             this._plrTwoLife = 100;
@@ -39,7 +39,7 @@ var managers;
             this._plrTwoXpBar = new objects.GraphicBar(BARS_POS_X_P2, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE, true);
             this._plrTwoLevelLabel = new objects.Label("LVL 1", "bold 16px", "Consolas", "#021775", BARS_POS_X_P2 - 55, XPB_POS_Y);
             this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
-            this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
+            this._timerLabel = new objects.Label("000:00", "80px", "Pixel", "#000000", 640, 20, true);
         }
         Object.defineProperty(GameBar.prototype, "ScreenObjects", {
             // PUBLIC PROPERTIES
@@ -53,7 +53,7 @@ var managers;
                     this._plrTwoLifeBar,
                     this._plrTwoXpBar,
                     this._plrTwoHeartIcon,
-                    this._plrTwoLevelLabel
+                    this._plrTwoLevelLabel,
                 ];
                 this._plrOneStatus.forEach(function (i) { return result.push(i); });
                 this._plrTwoStatus.forEach(function (i) { return result.push(i); });

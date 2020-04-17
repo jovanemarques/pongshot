@@ -9,13 +9,25 @@ var Game = (function () {
     var currentScene;
     var assets;
     var itemsAtlas;
+    var soundManager;
     var assetManifest = [
         // Images
         { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
         { id: "blackBackground", src: "./Assets/images/bg_blackBackground.png" },
-        { id: "forestBackground", src: "./Assets/images/bg-forest.png" },
+        { id: "playBackground", src: "./Assets/images/background.png" },
         // Items Atlas
         { id: "itemAtlas", src: "./Assets/sprites/itemsAtlas.png" },
+        // Sounds
+        { id: "bgSound", src: "./Assets/audio/background.mp3" },
+        { id: "itemHit", src: "./Assets/audio/itemHit.wav" },
+        { id: "levelUp", src: "./Assets/audio/levelUp.wav" },
+        { id: "mageAttack", src: "./Assets/audio/mageAttack.wav" },
+        { id: "mageHit", src: "./Assets/audio/mageHit.wav" },
+        { id: "rogueAttack", src: "./Assets/audio/rogueAttack.wav" },
+        { id: "rogueHit", src: "./Assets/audio/rogueHit.wav" },
+        { id: "warriorAttack", src: "./Assets/audio/warriorAttack.wav" },
+        { id: "warriorHit", src: "./Assets/audio/warriorHit.wav" },
+        { id: "winner", src: "./Assets/audio/winner.wav" },
     ];
     // All the items sprites
     // Align the first in line 30, so it is easy to identify the frame number index line
@@ -183,7 +195,7 @@ var Game = (function () {
             mage: 40,
             mageAttack: { frames: [14, 15, 16, 17, 18, 19, 20], speed: 0.3, next: "mage" },
             mageBullet: { frames: [21] },
-            mageDeath: { frames: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31], speed: 0.2, next: "mageDeathEnd" },
+            mageDeath: { frames: [22, 23, 24, 25, 26, 27, 28, 29, 30, 31], speed: 0.1, next: "mageDeathEnd" },
             mageDeathEnd: 31,
             mageDown: { frames: [32, 33, 34, 35], speed: 0.25 },
             mageHurt: { frames: [36, 37, 38, 39], speed: 0.3, next: "mage" },
@@ -193,7 +205,7 @@ var Game = (function () {
             rogue: 83,
             rogueAttack: { frames: [58, 59, 60, 61, 62, 63, 64], speed: 0.3, next: "rogue" },
             rogueBullet: { frames: [65] },
-            rogueDeath: { frames: [66, 67, 68, 69, 70, 71, 72, 73, 74, 75], speed: 0.2, next: "rogueDeathEnd" },
+            rogueDeath: { frames: [66, 67, 68, 69, 70, 71, 72, 73, 74, 75], speed: 0.1, next: "rogueDeathEnd" },
             rogueDeathEnd: 75,
             rogueDown: { frames: [76, 77], speed: 0.4 },
             rogueHurt: { frames: [78, 79, 80, 81], speed: 0.3, next: "rogue" },
@@ -205,7 +217,7 @@ var Game = (function () {
             warriorBullet: { frames: [107] },
             warriorDeath: {
                 frames: [108, 109, 110, 111, 112, 113, 114, 115, 116, 117],
-                speed: 0.2,
+                speed: 0.1,
                 next: "warriorDeathEnd",
             },
             warriorDeathEnd: 117,
@@ -265,6 +277,9 @@ var Game = (function () {
         createjs.Ticker.framerate = config.Game.FPS;
         createjs.Ticker.on("tick", Update);
         stage.enableMouseOver(20);
+        // Load the sound manager
+        soundManager = new managers.Sound();
+        config.Game.SOUND_MANAGER = soundManager;
         // Load the atlas
         itemsSpriteData.images = [assets.getResult("itemAtlas")];
         itemsAtlas = new createjs.SpriteSheet(itemsSpriteData);
@@ -314,6 +329,7 @@ var Game = (function () {
                 break;
         }
         currentSceneState = config.Game.SCENE;
+        soundManager.AddObjectsToScene(currentScene);
         stage.addChild(currentScene);
     }
     window.addEventListener("load", Preload);

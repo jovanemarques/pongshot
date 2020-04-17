@@ -14,5 +14,6 @@ module config {
         public static GAME_BAR_HEIGHT: number = 80;
         public static INITIAL_ITEM_SPAWN_TICKER: number = 30 * Game.FPS;
         public static ATLAS: createjs.SpriteSheet;
+        public static SOUND_MANAGER: managers.Sound;
     }
 }

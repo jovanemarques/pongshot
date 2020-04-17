@@ -10,6 +10,10 @@ module objects {
             return this._playerId;
         }
 
+        public get Character(): string {
+            return this._playerCharacter;
+        }
+
         // CONSTRUCTOR
         constructor(playerId: enums.PlayerId, playerCharacter: string) {
             super(config.Game.ATLAS, playerCharacter, 0, 0, true);
@@ -56,11 +60,13 @@ module objects {
         public Attack() {
             // Attack position for 250ms then go back
             this.gotoAndPlay(`${this._playerCharacter}Attack`);
+            config.Game.SOUND_MANAGER.PlaySound(`${this._playerCharacter}Attack`, 0.15);
         }
 
         public Hit() {
             // Attack position for 250ms then go back.
             this.gotoAndPlay(`${this._playerCharacter}Hurt`);
+            config.Game.SOUND_MANAGER.PlaySound(`${this._playerCharacter}Hit`, 0.15);
         }
 
         // PUBLIC METHODS

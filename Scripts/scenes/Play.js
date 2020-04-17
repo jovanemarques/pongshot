@@ -79,6 +79,7 @@ var scenes;
             this._powerUp.forEach(function (pu, index) {
                 if (managers.Collision.squaredRadiusCheck(pu, e)) {
                     _this._activatePowerUp(pu, e.Player);
+                    config.Game.SOUND_MANAGER.PlaySound("itemHit", 0.15);
                     _this.removeChild(pu);
                     delete _this._powerUp[index];
                     result = true;
@@ -122,7 +123,7 @@ var scenes;
         // PUBLIC METHODS
         Play.prototype.Start = function () {
             // Background
-            this._background = new objects.Background(config.Game.ASSETS.getResult("forestBackground"));
+            this._background = new objects.Background(config.Game.ASSETS.getResult("playBackground"));
             // Create the players
             this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
             this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);

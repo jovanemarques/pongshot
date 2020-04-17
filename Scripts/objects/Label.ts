@@ -23,7 +23,7 @@ module objects {
 
         public setText(newText: string) {
             this.text = newText;
-            // this.regX = this.getBounds().width * 0.5;
+            this.regX = this.getBounds().width * 0.5;
             // this.regY = this.getMeasuredLineHeight() * 0.5;
         }
     }
