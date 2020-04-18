@@ -67,7 +67,7 @@ module scenes {
             this._spellScrollItem = new objects.Image("spellScroll", 700, 315, true);
             this._spellScrollLabel = new objects.Label('2x Atack Power (15s)' , "30px", "Pixel", "#FFFFFF", 750, 300, false);
             this._bootsItem = new objects.Image("boots", 700, 365, true);
-            this._bootsLabel = new objects.Label('0.5 Attack Speed' , "30px", "Pixel", "#FFFFFF", 750, 350, false);
+            this._bootsLabel = new objects.Label('2x Attack Speed (15s)' , "30px", "Pixel", "#FFFFFF", 750, 350, false);
             this._trapItem = new objects.Image("trap", 700, 415, true);
             this._trapLabel = new objects.Label('Trap enemy (5s)' , "30px", "Pixel", "#FFFFFF", 750, 400, false);
             this._itemHpItem = new objects.Image("itemHp", 700, 465, true);
