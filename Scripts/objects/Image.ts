@@ -1,8 +1,18 @@
 module objects {
     export class Image extends GameObject {
         // constructor
-        constructor(imageName: string = "placeholder", x: number = 0, y: number = 0, isCentered: boolean = false) {
+        constructor(
+            imageName: string = "placeholder",
+            x: number = 0,
+            y: number = 0,
+            isCentered: boolean = false,
+            scale: number = 1,
+            mirror: boolean = false
+        ) {
             super(config.Game.ATLAS, imageName, x, y, isCentered);
+
+            this.scaleX = mirror ? scale * -1 : scale;
+            this.scaleY = scale;
 
             this.Start();
         }
