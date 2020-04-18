@@ -337,6 +337,10 @@ let Game = (function () {
                 console.log("switch to Start Scene");
                 currentScene = new scenes.Start();
                 break;
+            case scenes.State.HOWTO:
+                console.log("switch to Howto Scene");
+                currentScene = new scenes.Howto();
+                break;
             case scenes.State.PLAY:
                 console.log("switch to Play Scene");
                 currentScene = new scenes.Play();
